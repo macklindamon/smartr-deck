@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Presenter View — Smartr Deck</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;font-family:'Manrope',system-ui,sans-serif;background:#111318;color:#fff}
+
+.presenter{display:grid;grid-template-columns:1fr 420px;grid-template-rows:1fr auto;height:100vh;gap:0}
+
+/* ── Left: Slide previews ─────────────────────────── */
+.previews{display:flex;flex-direction:column;gap:16px;padding:20px 24px;overflow:hidden}
+.preview-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.35);margin-bottom:4px}
+
+.preview-current{flex:3;position:relative;border-radius:12px;overflow:hidden;border:2px solid rgba(94,36,194,.5);background:#000}
+.preview-current iframe{width:1720px;height:980px;border:none;transform-origin:0 0;pointer-events:none}
+
+.preview-next-wrap{flex:1.2;display:flex;flex-direction:column;gap:4px}
+.preview-next{flex:1;position:relative;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.1);background:#000}
+.preview-next iframe{width:1720px;height:980px;border:none;transform-origin:0 0;pointer-events:none}
+.preview-next-label{position:absolute;top:8px;left:10px;font-size:11px;font-weight:700;color:rgba(255,255,255,.5);z-index:2;background:rgba(0,0,0,.6);padding:2px 8px;border-radius:4px}
+.end-of-deck{display:flex;align-items:center;justify-content:center;height:100%;color:rgba(255,255,255,.25);font-size:18px;font-weight:600}
+
+/* ── Right: Notes panel ───────────────────────────── */
+.notes-panel{display:flex;flex-direction:column;background:#1a1c22;border-left:1px solid rgba(255,255,255,.06);overflow:hidden}
+
+.panel-header{padding:20px 24px 16px;border-bottom:1px solid rgba(255,255,255,.06)}
+.slide-title{font-size:20px;font-weight:800;line-height:1.2;color:#fff;margin-bottom:4px}
+.slide-counter{font-size:13px;font-weight:600;color:rgba(255,255,255,.35)}
+
+.timer-bar{display:flex;align-items:center;gap:16px;padding:12px 24px;border-bottom:1px solid rgba(255,255,255,.06);background:rgba(0,0,0,.2)}
+.timer-clock{font-size:32px;font-weight:800;font-variant-numeric:tabular-nums;color:rgba(255,255,255,.8);letter-spacing:.02em}
+.timer-controls{display:flex;gap:8px}
+.timer-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.6);cursor:pointer;padding:6px 14px;border-radius:8px;font-size:12px;font-weight:700;font-family:inherit;transition:all .2s}
+.timer-btn:hover{background:rgba(94,36,194,.3);color:#fff;border-color:rgba(94,36,194,.5)}
+.wall-clock{font-size:13px;color:rgba(255,255,255,.3);font-weight:600;margin-left:auto;font-variant-numeric:tabular-nums}
+
+.slide-timer{font-size:18px;font-weight:700;font-variant-numeric:tabular-nums;color:rgba(255,255,255,.5);padding:4px 12px;border-radius:8px;transition:color .3s,background .3s}
+.slide-timer.over{color:#fff;background:rgba(229,0,77,.25)}
+.slide-timer.over.flash{animation:timerFlash 1s ease-in-out infinite}
+@keyframes timerFlash{0%,100%{background:rgba(229,0,77,.15);color:#ff4d6d}50%{background:rgba(229,0,77,.45);color:#fff}}
+
+.notes-content{flex:1;overflow-y:auto;padding:20px 24px;line-height:1.7}
+.notes-content h3{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(94,36,194,.8);margin-bottom:12px}
+.notes-text{font-size:16px;font-weight:500;color:rgba(255,255,255,.7);white-space:pre-wrap}
+.notes-text p{margin-bottom:12px}
+.notes-text strong{color:rgba(255,255,255,.9);font-weight:700}
+.notes-text em{color:rgba(163,245,199,.8);font-style:normal;font-weight:600}
+
+/* ── Bottom nav ───────────────────────────────────── */
+.bottom-nav{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:16px;padding:14px 24px;background:#0d0e12;border-top:1px solid rgba(255,255,255,.06)}
+.nav-btn{
+  background:rgba(94,36,194,.2);border:1px solid rgba(94,36,194,.3);color:#fff;
+  cursor:pointer;padding:10px 28px;border-radius:10px;font-size:14px;font-weight:700;font-family:inherit;
+  transition:all .2s;display:flex;align-items:center;gap:8px;
+}
+.nav-btn:hover{background:rgba(94,36,194,.4);border-color:rgba(94,36,194,.6)}
+.nav-btn:active{transform:scale(.97)}
+.nav-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.nav-btn.secondary{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.1);color:rgba(255,255,255,.6)}
+.nav-btn.secondary:hover{background:rgba(255,255,255,.12);color:#fff}
+.nav-counter{font-size:16px;font-weight:800;color:rgba(255,255,255,.5);min-width:80px;text-align:center;font-variant-numeric:tabular-nums}
+
+/* ── Scrollbar ────────────────────────────────────── */
+.notes-content::-webkit-scrollbar{width:6px}
+.notes-content::-webkit-scrollbar-track{background:transparent}
+.notes-content::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:3px}
+.notes-content::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.2)}
+</style>
+</head>
+<body>
+
+<div class="presenter" role="application" aria-label="Presenter view">
+
+  <!-- Left: Slide previews -->
+  <div class="previews" role="region" aria-label="Slide previews">
+    <div>
+      <div class="preview-label" id="currentSlideLabel">Current Slide</div>
+      <div class="preview-current" id="previewCurrent" role="img" aria-labelledby="currentSlideLabel">
+        <iframe id="iframeCurrent" src="deck.html?embed" title="Current slide preview" aria-hidden="true" tabindex="-1"></iframe>
+      </div>
+    </div>
+    <div class="preview-next-wrap">
+      <div class="preview-label" id="nextSlideLabel">Next Slide</div>
+      <div class="preview-next" id="previewNext" role="img" aria-labelledby="nextSlideLabel">
+        <iframe id="iframeNext" src="deck.html?embed" title="Next slide preview" aria-hidden="true" tabindex="-1"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: Notes + Timer -->
+  <div class="notes-panel" role="region" aria-label="Speaker notes and timer">
+    <div class="panel-header">
+      <div class="slide-title" id="slideTitle" role="heading" aria-level="1">Shaping the Future of Global Mobility Platforms</div>
+      <div class="slide-counter" id="slideCounter">Slide 1 of 15</div>
+    </div>
+
+    <div class="timer-bar" role="region" aria-label="Presentation timer">
+      <div class="timer-clock" id="timerClock" aria-label="Elapsed time" role="timer">00:00:00</div>
+      <div class="timer-controls" role="group" aria-label="Timer controls">
+        <button class="timer-btn" id="timerToggle" aria-label="Start timer">Start</button>
+        <button class="timer-btn" id="timerReset" aria-label="Reset timer">Reset</button>
+      </div>
+      <div class="slide-timer" id="slideTimer" title="Time on current slide" aria-label="Time on current slide" role="timer">Slide 0:00</div>
+      <div class="wall-clock" id="wallClock" aria-label="Current time"></div>
+    </div>
+
+    <div class="notes-content" role="region" aria-label="Speaker notes">
+      <h3>Speaker Notes</h3>
+      <div class="notes-text" id="notesText" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <!-- Bottom navigation -->
+  <nav class="bottom-nav" role="toolbar" aria-label="Slide navigation">
+    <button class="nav-btn secondary" id="btnFirst" aria-label="Go to first slide" title="First slide (Home)">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="11 17 6 12 11 7"/><polyline points="18 17 13 12 18 7"/></svg>
+      First
+    </button>
+    <button class="nav-btn" id="btnPrev" aria-label="Previous slide" title="Previous slide (←)">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      Previous
+    </button>
+    <div class="nav-counter" id="navCounter" role="status" aria-live="polite">1 / 17</div>
+    <button class="nav-btn" id="btnNext" aria-label="Next slide" title="Next slide (→)">
+      Next
+      <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+    <button class="nav-btn secondary" id="btnLast" aria-label="Go to last slide" title="Last slide (End)">
+      Last
+      <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+    </button>
+  </nav>
+
+</div>
+
+<script>
+(function(){
+  // ═══ SPEAKER NOTES ═══
+  // Edit these to match your talking points for each slide.
+  const NOTES = {
+    1: `<p><strong>Opening — set the scene.</strong></p>
+<p>Welcome everyone. Today I want to share a product vision for turning ECA's world class data into the intelligence platform that global organisations need.</p>
+<p><em>Key message:</em> This isn't about building more features — it's about building the right platform.</p>`,
+
+    2: `<p><strong>Why this matters now.</strong></p>
+<p>Global mobility is becoming exponentially more complex — more countries, more regulations, more assignment types. Companies are struggling to keep up.</p>
+<p><em>Action:</em> Point out the map — highlight the scale of the problem. Over 200 countries, each with unique tax, immigration, and cost-of-living considerations.</p>
+<p><em>Transition:</em> So what do customers actually tell us they need?</p>`,
+
+    3: `<p><strong>Customer insight — anchor everything in real needs.</strong></p>
+<p>Customers don't just want data — they want <em>answers</em>. They want to make confident decisions quickly, reduce risk, and justify costs to leadership.</p>
+<p>These insights come from customer interviews, support tickets, and CS feedback loops.</p>
+<p><em>Transition:</em> The good news is we already have the foundation to deliver this.</p>`,
+
+    4: `<p><strong>ECA's three powerful assets.</strong></p>
+<p>We have three things competitors can't easily replicate: world class data, deep domain expertise, and a trusted brand.</p>
+<p>The job of the platform is to make these assets <em>accessible, composable, and scalable</em>.</p>
+<p><em>Transition:</em> Let me show you the vision for how we bring this together.</p>`,
+
+    5: `<p><strong>The platform vision.</strong></p>
+<p>A unified platform for global mobility intelligence. Not a collection of tools — a single, coherent experience.</p>
+<p><em>Action:</em> Walk through each quadrant and explain how they connect.</p>
+<p><em>Transition:</em> This doesn't happen overnight. Here's the evolution plan.</p>`,
+
+    6: `<p><strong>Three-stage evolution.</strong></p>
+<p>Stage 1: Consolidate and stabilise. Stage 2: Connect and automate. Stage 3: Intelligence and prediction.</p>
+<p><em>Action:</em> Emphasise that each stage delivers customer value — we don't wait until stage 3 to show results.</p>
+<p><em>Transition:</em> And AI runs through all three stages.</p>`,
+
+    7: `<p><strong>AI as embedded intelligence.</strong></p>
+<p>AI should not be a feature checkbox. It should be woven into every interaction — search, recommendations, anomaly detection, cost prediction.</p>
+<p><em>Action:</em> Give specific examples: auto-classifying assignment types, predicting cost overruns, flagging compliance risks before they happen.</p>
+<p><em>Transition:</em> Now — who do we build this for first?</p>`,
+
+    8: `<p><strong>ICP & market segmentation.</strong></p>
+<p>We can't serve everyone equally. Talk through the ideal customer profile (ICP) and why we start with mid-to-large enterprises running 50+ assignments.</p>
+<p>These customers have budget, urgency, and the complexity that makes our platform indispensable.</p>
+<p><em>Transition:</em> Focus means saying no. Here's what we double down on — and what we stop.</p>`,
+
+    9: `<p><strong>Differentiation — double down on strengths, cut what doesn't compound.</strong></p>
+<p><em>Action:</em> Walk through the "keep doing" column: data depth, compliance accuracy, trusted advisory.</p>
+<p><em>Action:</em> Walk through the "stop" column: bespoke reports that don't scale, manual data entry workflows, one-off integrations.</p>
+<p><em>Transition:</em> This raises the question: how do we run discovery while keeping delivery on track?</p>`,
+
+    10: `<p><strong>Discovery and delivery — in parallel.</strong></p>
+<p>The dual-track model. Discovery teams explore problems; delivery teams ship solutions. They run on different cadences but feed into each other.</p>
+<p><em>Action:</em> Show how weekly discovery syncs feed the sprint backlog. Emphasise that this avoids the "big bang" redesign trap.</p>
+<p><em>Transition:</em> But how do we decide what gets built?</p>`,
+
+    11: `<p><strong>Prioritisation framework.</strong></p>
+<p><em>Action:</em> Walk through the 2×2 matrix: impact vs. effort. Explain each quadrant — Quick Wins, Strategic Bets, Fill-ins, Say No.</p>
+<p><em>Key message:</em> Every request gets scored the same way. No politics, just data.</p>
+<p><em>Transition:</em> But what happens when something urgent lands on your desk?</p>`,
+
+    12: `<p><strong>Handling urgent requests.</strong></p>
+<p><em>Action:</em> Walk through the four-step escalation flow: Classify → Size → Trade-off → Commit.</p>
+<p><em>Key message:</em> No unscored work enters a sprint. Every request goes through the same lens — regardless of who asks.</p>
+<p><em>Transition:</em> Of course, Sales and CS have a big voice in what comes in. Here's how we partner.</p>`,
+
+    13: `<p><strong>Sales & CS partnership.</strong></p>
+<p>Partner — don't be an order-taker. Sales and CS surface problems; product determines solutions.</p>
+<p>Weekly sync + shared Slack channel for real time signal. Quarterly review of top customer themes.</p>
+<p><em>Transition:</em> To know if this is all working, we need the right metrics.</p>`,
+
+    14: `<p><strong>Six metrics that prove product value.</strong></p>
+<p><em>Action:</em> Walk through each metric and why it matters. Tie back to business outcomes — retention, expansion, efficiency.</p>
+<p><em>Action:</em> Emphasise leading indicators (activation, engagement) over lagging ones (revenue).</p>
+<p><em>Transition:</em> There are also risks we need to be honest about.</p>`,
+
+    15: `<p><strong>Risks & trade-offs in a PE environment.</strong></p>
+<p>Be candid. PE cycles demand speed — but cutting corners on platform foundations creates tech debt that compounds.</p>
+<p><em>Action:</em> Walk through each risk card and the proposed mitigation.</p>
+<p><em>Transition:</em> With those risks understood, let me walk you through the 12-month execution roadmap.</p>`,
+
+    16: `<p><strong>12-Month Execution Roadmap.</strong></p>
+<p>Walk through Q1–Q4: Foundation &amp; Quick Wins (retain enterprise, churn &lt;8%), Insight Layer (NRR +8pp, AI upsell), Platform Expansion (land mid-market, +40 logos), Intelligence Suite (LTV +35%, NRR &gt;115%).</p>
+<p><em>Action:</em> Emphasise each quarter maps to ICP and revenue impact. Highlight the three trade-off calls at the bottom: platform over bespoke, retention before acquisition, every quarter ships value.</p>
+<p><em>Transition:</em> Now let me close with the overarching goal.</p>`,
+
+    17: `<p><strong>Closing — rally the room.</strong></p>
+<p>Repeat the key message: Build the platform organisations rely on to manage global mobility.</p>
+<p><em>Action:</em> End with energy and conviction. Thank the audience. Open for questions.</p>`
+  };
+
+  const TITLES = {
+    1: 'Shaping the Future of Global Mobility Platforms',
+    2: 'Global Mobility is Becoming More Complex',
+    3: 'What Customers Really Want',
+    4: "ECA's Three Powerful Assets",
+    5: 'A Unified Platform for Global Mobility Intelligence',
+    6: 'The Platform Evolves in Three Stages',
+    7: 'AI: Embedded Intelligence, Not a Feature',
+    8: 'Who We Target First and Why',
+    9: 'Double Down on Strengths, Stop What Doesn\'t Compound',
+    10: 'Discovery and Delivery Run in Parallel',
+    11: 'How We Prioritise',
+    12: 'Handling Urgent Requests',
+    13: 'Partner with Sales & CS',
+    14: 'Six Metrics That Prove Product Value',
+    15: 'Key Risks & Trade-offs in a Fast PE Cycle',
+    16: '12-Month Execution Roadmap',
+    17: 'The Goal'
+  };
+
+  // ═══ STATE ═══
+  let currentSlide = 0;
+  let totalSlides = 15;
+  const channel = new BroadcastChannel('smartr-deck');
+
+  // ═══ DOM REFS ═══
+  const iframeCurrent = document.getElementById('iframeCurrent');
+  const iframeNext = document.getElementById('iframeNext');
+  const slideTitle = document.getElementById('slideTitle');
+  const slideCounter = document.getElementById('slideCounter');
+  const notesText = document.getElementById('notesText');
+  const navCounter = document.getElementById('navCounter');
+  const previewCurrent = document.getElementById('previewCurrent');
+  const previewNext = document.getElementById('previewNext');
+
+  // ═══ SCALE IFRAMES ═══
+  function scaleIframes(){
+    const cw = previewCurrent.clientWidth;
+    const ch = previewCurrent.clientHeight;
+    const scale = Math.min(cw / 1720, ch / 980);
+    iframeCurrent.style.transform = `scale(${scale})`;
+
+    const nw = previewNext.clientWidth;
+    const nh = previewNext.clientHeight;
+    const nscale = Math.min(nw / 1720, nh / 980);
+    iframeNext.style.transform = `scale(${nscale})`;
+  }
+  window.addEventListener('resize', scaleIframes);
+
+  // ═══ UPDATE UI ═══
+  function updatePresenter(){
+    const num = currentSlide + 1;
+    slideTitle.textContent = TITLES[num] || `Slide ${num}`;
+    slideCounter.textContent = `Slide ${num} of ${totalSlides}`;
+    navCounter.textContent = `${num} / ${totalSlides}`;
+    notesText.innerHTML = NOTES[num] || '<p style="color:rgba(255,255,255,.3)">No notes for this slide. Edit presenter.html to add your script.</p>';
+
+    // Tell iframes to navigate
+    sendToIframe(iframeCurrent, currentSlide);
+    if (currentSlide + 1 < totalSlides) {
+      iframeNext.style.display = '';
+      previewNext.querySelector('.end-of-deck')?.remove();
+      sendToIframe(iframeNext, currentSlide + 1);
+    } else {
+      iframeNext.style.display = 'none';
+      if (!previewNext.querySelector('.end-of-deck')) {
+        const eod = document.createElement('div');
+        eod.className = 'end-of-deck';
+        eod.textContent = 'End of presentation';
+        previewNext.appendChild(eod);
+      }
+    }
+  }
+
+  function sendToIframe(iframe, slideIndex){
+    try {
+      iframe.contentWindow.postMessage({type:'smartr-goto', index: slideIndex}, '*');
+    } catch(e) {}
+  }
+
+  // ═══ NAVIGATION ═══
+  function goTo(index){
+    if (index < 0 || index >= totalSlides) return;
+    currentSlide = index;
+    channel.postMessage({type: 'goto', index: currentSlide});
+    updatePresenter();
+    startSlideTimer();
+  }
+
+  document.getElementById('btnPrev').addEventListener('click', () => goTo(currentSlide - 1));
+  document.getElementById('btnNext').addEventListener('click', () => goTo(currentSlide + 1));
+  document.getElementById('btnFirst').addEventListener('click', () => goTo(0));
+  document.getElementById('btnLast').addEventListener('click', () => goTo(totalSlides - 1));
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') { e.preventDefault(); goTo(currentSlide + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'Backspace') { e.preventDefault(); goTo(currentSlide - 1); }
+    if (e.key === 'Home') { e.preventDefault(); goTo(0); }
+    if (e.key === 'End') { e.preventDefault(); goTo(totalSlides - 1); }
+  });
+
+  // ═══ BROADCAST CHANNEL — receive state from main deck ═══
+  channel.onmessage = e => {
+    if (e.data.type === 'slide') {
+      const changed = currentSlide !== e.data.current;
+      currentSlide = e.data.current;
+      totalSlides = e.data.total;
+      updatePresenter();
+      if (changed) startSlideTimer();
+    }
+  };
+
+  // Request current state from main deck
+  setTimeout(() => channel.postMessage({type: 'requestState'}), 300);
+
+  // ═══ TIMER ═══
+  let timerSeconds = 0;
+  let timerRunning = false;
+  let timerInterval = null;
+  const timerClock = document.getElementById('timerClock');
+  const wallClock = document.getElementById('wallClock');
+
+  function formatTime(s){
+    const h = Math.floor(s / 3600);
+    const m = Math.floor((s % 3600) / 60);
+    const sec = s % 60;
+    return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
+  }
+
+  function tickTimer(){
+    timerSeconds++;
+    timerClock.textContent = formatTime(timerSeconds);
+  }
+
+  document.getElementById('timerToggle').addEventListener('click', function(){
+    if (timerRunning) {
+      clearInterval(timerInterval);
+      timerRunning = false;
+      this.textContent = 'Resume';
+    } else {
+      timerInterval = setInterval(tickTimer, 1000);
+      timerRunning = true;
+      this.textContent = 'Pause';
+    }
+  });
+
+  document.getElementById('timerReset').addEventListener('click', () => {
+    clearInterval(timerInterval);
+    timerRunning = false;
+    timerSeconds = 0;
+    timerClock.textContent = '00:00:00';
+    document.getElementById('timerToggle').textContent = 'Start';
+  });
+
+  // ═══ PER-SLIDE TIMER ═══
+  // Budget per slide in seconds (customise as needed)
+  const SLIDE_BUDGETS = {
+    1: 90,   // Title / opener
+    2: 120,  // Global complexity — map slide
+    3: 90,   // Customer insight
+    4: 90,   // Three assets
+    5: 120,  // Platform vision
+    6: 90,   // Roadmap stages
+    7: 150,  // AI features — lots of detail
+    8: 90,   // Market focus
+    9: 90,   // Differentiation
+    10: 90,  // Dual-track
+    11: 120, // Governance
+    12: 90,  // Partnering model
+    13: 120, // Measurement
+    14: 120, // PE context
+    15: 90,  // Leadership pillars
+    16: 90,  // Leadership pillars
+    17: 60   // Close
+  };
+  const DEFAULT_BUDGET = 90;
+
+  let slideTimerSeconds = 0;
+  let slideTimerInterval = null;
+  const slideTimerEl = document.getElementById('slideTimer');
+
+  function formatSlideTime(s){
+    const m = Math.floor(s / 60);
+    const sec = s % 60;
+    return `${m}:${String(sec).padStart(2,'0')}`;
+  }
+
+  function tickSlideTimer(){
+    slideTimerSeconds++;
+    const num = currentSlide + 1;
+    const budget = SLIDE_BUDGETS[num] || DEFAULT_BUDGET;
+    slideTimerEl.textContent = `Slide ${formatSlideTime(slideTimerSeconds)}`;
+    if (slideTimerSeconds > budget) {
+      slideTimerEl.classList.add('over','flash');
+    } else if (slideTimerSeconds > budget * 0.8) {
+      slideTimerEl.classList.add('over');
+      slideTimerEl.classList.remove('flash');
+    }
+  }
+
+  function resetSlideTimer(){
+    slideTimerSeconds = 0;
+    slideTimerEl.textContent = 'Slide 0:00';
+    slideTimerEl.classList.remove('over','flash');
+  }
+
+  function startSlideTimer(){
+    clearInterval(slideTimerInterval);
+    resetSlideTimer();
+    slideTimerInterval = setInterval(tickSlideTimer, 1000);
+  }
+
+  // Hook into navigation — reset slide timer on every slide change
+  const origGoTo = goTo;
+
+  // Wall clock
+  function updateWallClock(){
+    const now = new Date();
+    wallClock.textContent = now.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+  }
+  updateWallClock();
+  setInterval(updateWallClock, 10000);
+
+  // ═══ IFRAME postMessage HANDLER ═══
+  // The iframes also listen on BroadcastChannel, but we send postMessage too
+  // so they work even if BroadcastChannel has a race condition
+  window.addEventListener('message', e => {
+    // If an iframe reports ready, re-send its slide
+    if (e.data.type === 'smartr-ready') {
+      updatePresenter();
+    }
+  });
+
+  // ═══ INIT ═══
+  // Wait for iframes to load, then scale & navigate
+  let iframesReady = 0;
+  function onIframeLoad(){
+    iframesReady++;
+    scaleIframes();
+    if (iframesReady >= 2) {
+      // Both loaded — inject a postMessage listener into each iframe
+      updatePresenter();
+    }
+  }
+  iframeCurrent.addEventListener('load', onIframeLoad);
+  iframeNext.addEventListener('load', onIframeLoad);
+
+  // Initial scale
+  requestAnimationFrame(scaleIframes);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,416 @@
+============================================================
+SMARTR DECK — FULL SLIDE CONTENT
+============================================================
+
+————————————————————————————————————————————————————————————
+SLIDE 1
+————————————————————————————————————————————————————————————
+
+Product Director Discussion 
+ Shaping the Future of Global Mobility Platforms 
+ A product vision for turning ECA’s world class data into the intelligence platform that global organisations need. 
+ Damon Macklin 
+ Active Assignments 
+ 2,847 
+ Compliance Score 
+ 94.2 % 
+ Cost Index — London → Singapore 
+ Platform Revenue 
+ £ 14.2 M 
+ ↑ 12.6% YoY 
+ Countries Covered 
+ 214 
+ Assignment Volume (7d) 
+ Users Online 
+ 1,284 
+ New assignment: Tokyo → London 
+ LIVE DATA
+
+————————————————————————————————————————————————————————————
+SLIDE 2
+————————————————————————————————————————————————————————————
+
+[Map labels: New York, London, Dubai, Singapore, Tokyo, São Paulo, Sydney, Nairobi]
+
+Global mobility is becoming more complex . 
+ Compliance 
+ Regulations across 190+ jurisdictions 
+ Employee Experience 
+ Supporting people through relocation 
+ Cost Control 
+ Managing global relocation spend 
+ Global Visibility 
+ Seeing the full picture, everywhere 
+ Yet most systems were designed for administration, not intelligence.
+
+————————————————————————————————————————————————————————————
+SLIDE 3
+————————————————————————————————————————————————————————————
+
+Customer Insight 
+ What customers really want 
+ Organisations aren't buying mobility software. They need: 
+ Confidence in Decisions 
+ Real time data and benchmarks that remove guesswork from mobility choices 
+ Compliance Without Friction 
+ Automated regulatory checks across 190+ jurisdictions, built into the workflow 
+ Global Cost Visibility 
+ See the full financial picture of any relocation, anywhere, before committing 
+ Predictable Outcomes 
+ Forecast driven planning that turns each assignment into a known quantity
+
+————————————————————————————————————————————————————————————
+SLIDE 4
+————————————————————————————————————————————————————————————
+
+The Opportunity 
+ ECA already owns three powerful assets 
+ World Class Mobility Data Decades of global cost-of-living, hardship, and salary benchmark data 
+ Deep Enterprise Relationships Trusted partnerships with global organisations 
+ Trusted Global Expertise Domain authority recognised across 200+ countries 
+ ECA Platform — Dashboard 
+ 0 Active Assignments 
+ 0% Compliance 
+ £0M Total Spend 
+ London → Singapore +12% 
+ New York → Dubai +8% 
+ Tokyo → Sydney -3%
+
+————————————————————————————————————————————————————————————
+SLIDE 5
+————————————————————————————————————————————————————————————
+
+Platform Vision 
+ A unified platform for global mobility intelligence 
+ Not just tracking moves — helping organisations answer critical questions: 
+ Where should we relocate talent? 
+ Location intelligence across 200+ countries 
+ What will it cost? 
+ Real time cost modelling and benchmarks 
+ What compliance risks exist? 
+ Proactive regulatory risk monitoring 
+ How do we optimise globally? 
+ AI driven workforce strategy decisions 
+ Global Mobility Platform
+
+————————————————————————————————————————————————————————————
+SLIDE 6
+————————————————————————————————————————————————————————————
+
+Platform Roadmap 
+ The platform evolves in three stages 
+ System of Record 
+ Tracking assignments and compliance 
+ System of Insight 
+ Using global mobility data to inform decisions 
+ System of Intelligence 
+ AI driven recommendations for workforce strategy
+
+————————————————————————————————————————————————————————————
+SLIDE 7
+————————————————————————————————————————————————————————————
+
+AI should not be a feature. It should be embedded intelligence. 
+ 65% 
+ Predict Costs 
+ Forecast relocation costs with data driven models 
+ 75% 
+ Identify Risks 
+ Surface compliance risks before they materialise 
+ 80% 
+ Recommend 
+ Optimal move strategies powered by historical data 
+ 85% 
+ Generate Insights 
+ Policy insights from global mobility data 
+ × 
+ Predict Costs ● 
+ AI powered cost forecasting gives organisations a complete financial picture before any relocation commitment is made. 
+ Navigation 
+ Cost Predictor 
+ Scenario Builder 
+ Budget Tracker 
+ Historical Analysis 
+ Export Reports 
+ London → Singapore — Senior Manager 
+ £142,800 Predicted Total 
+ £18,400 Tax Equalisation 
+ £32,600 Housing Delta 
+ 94% Confidence 
+ Component Estimate vs Benchmark Status 
+ COLA Adjustment £24,200 +8% Above 
+ Housing & Utilities £32,600 -3% Below 
+ School Fees £28,400 +2% On Track 
+ Tax Equalisation £18,400 +12% Review 
+ × 
+ Identify Risks ● 
+ Proactive compliance scanning surfaces regulatory, tax, and immigration risks before they become problems. 
+ Navigation 
+ Risk Dashboard 
+ Country Alerts 
+ Immigration Tracker 
+ Tax Compliance 
+ Audit Trail 
+ Active Risk Monitor — 847 Assignments 
+ 12 Critical Risks 
+ 38 Warnings 
+ 797 Compliant 
+ 94.1% Score 
+ Assignment Location Risk Type Severity Action 
+ J. Chen UK → UAE Visa expiry in 21 days Critical Renew → 
+ M. Santos BR → DE Tax threshold breach Critical Review → 
+ A. Patel IN → SG PE rule at 160/183 days Warning Monitor → 
+ S. Müller DE → US Social security gap Warning Resolve → 
+ × 
+ Recommend ● 
+ AI powered recommendations suggest optimal relocation strategies based on historical patterns and organisational policy. 
+ Navigation 
+ Recommendations 
+ Scenario Comparison 
+ Policy Engine 
+ Location Analysis 
+ Approval Workflow 
+ London → Singapore — 3 Scenarios 
+ ★ Recommended 
+ Standard Package 
+ £142K 
+ Balanced cost & employee experience. Best retention outcomes based on 230 similar moves. 
+ Option B 
+ Premium Package 
+ £198K 
+ Full support with executive housing. Higher cost but 96% satisfaction rate. 
+ Option C 
+ Lean Package 
+ £97K 
+ Cost-optimised. Suitable for short-term or experienced relocators. 
+ × 
+ Generate Insights ● 
+ Turn global mobility data into actionable intelligence with AI generated reports and trend analysis. 
+ Navigation 
+ Insight Dashboard 
+ Trend Analysis 
+ Policy Impact 
+ Benchmarking 
+ AI Reports 
+ AI Insights — Q1 2026 
+ 23 Insights Generated 
+ £1.2M Savings Identified 
+ 7 Policy Gaps Found 
+ 89% Actionability 
+ APAC housing costs up 14% YoY Recommend reviewing Singapore and Tokyo housing allowances against updated benchmarks. 
+ Tax equalisation overspend in EMEA 3 assignments in DE→UK corridor show £48K above policy limit. Switch to hypothetical tax approach. 
+ Short-term assignment ROI declining Assignments under 6 months yield 22% less business impact. Consider remote-first for these.
+
+————————————————————————————————————————————————————————————
+SLIDE 8
+————————————————————————————————————————————————————————————
+
+Market Focus 
+ Who we target first and why 
+ In a PE cycle, focus beats breadth. We concentrate on segments with highest LTV and fastest path to NRR growth. 
+ Enterprise Multinationals 500+ assignees, complex corridors, highest ARPA. They need intelligence, not just admin. 
+ Mid-Market Growth 50–500 assignees. Scaling internationally, price-sensitive but high growth potential. 
+ RMCs & Consultancies Channel partners who embed our data into their services. Extends reach without direct sales cost. 
+ Consultancies & RMCs 
+ Mid-Market 50–500 
+ Enterprise 500+
+
+————————————————————————————————————————————————————————————
+SLIDE 9
+————————————————————————————————————————————————————————————
+
+Differentiation 
+ Double down on strengths. Stop what doesn't compound. 
+ Double Down 
+ Proprietary data moat No competitor has 40 years of global cost-of-living data 
+ Compliance intelligence Embed regulatory logic into the workflow — not bolted on 
+ AI on top of real data Models trained on actual mobility outcomes, not generic LLMs 
+ API-first platform Let HRIS & relocation tools consume our intelligence layer 
+ Stop Doing 
+ Bespoke client builds that don't scale 
+ Replicating generic HRIS features 
+ Manual report generation for each client 
+ Maintaining legacy on-prem deployments 
+ Feature parity with broad HR platforms
+
+————————————————————————————————————————————————————————————
+SLIDE 10
+————————————————————————————————————————————————————————————
+
+Dual-Track 
+ Discovery and delivery run in parallel 
+ Validation doesn't slow us down — it prevents us building the wrong thing. Timeboxed discovery feeds a continuous delivery engine. 
+ Continuous Discovery 
+ Weekly user interviews 2–3 sessions/week with enterprise mobility managers 
+ Prototype → test in 5 days Figma prototypes validated before a single line of code 
+ Usage analytics & signals Behavioural data reveals what users do, not just what they say 
+ Continuous Delivery 
+ 2-week sprint cycles Ship incremental value every sprint — no 6-month bets 
+ Feature flags & gradual rollout Derisk releases with controlled exposure to real users 
+ Outcome reviews every 6 weeks Measure impact against hypothesis — kill or scale features
+
+————————————————————————————————————————————————————————————
+SLIDE 11
+————————————————————————————————————————————————————————————
+
+Governance 
+ How we prioritise — and handle urgent requests 
+ Quick Wins 
+ High value, low effort. Ship immediately. 
+ Strategic Bets 
+ High value, high effort. Plan & resource carefully. 
+ Fill-ins 
+ Low value, low effort. Only if spare capacity. 
+ Say No 
+ Low value, high effort. Decline with data. 
+ Low Effort 
+ High Effort 
+ High Value 
+ Low Value 
+ Urgent Client Requests 
+ "Our biggest customer needs X by Friday" — here's how we handle it: 
+ 1 
+ Classify 
+ Revenue impact? Churn risk? Scope? 
+ → 
+ 2 
+ Size 
+ Can we solve with config, not code? 
+ → 
+ 3 
+ Trade-off 
+ What gets displaced? Make it visible. 
+ → 
+ 4 
+ Commit 
+ If yes: timebox it. If no: propose alternative. 
+ Rule: No unscored work enters a sprint. Every request goes through the same lens — regardless of who asks.
+
+————————————————————————————————————————————————————————————
+SLIDE 12
+————————————————————————————————————————————————————————————
+
+Partnering Model 
+ Partner with Sales & CS — without becoming an order-taker 
+ Product 
+ Sales 
+ CS 
+ Customer Advisory Board 8–10 enterprise customers, quarterly sessions. Structured input, not ad-hoc asks. 
+ Shared Feedback Taxonomy Every request tagged: revenue at risk, frequency, segment, effort. No "CS said so" prioritisation. 
+ Monthly Roadmap Review Sales & CS see what's coming, why, and what's been deprioritised — with the reasoning. 
+ "Say No" with Evidence Every declined request paired with data: segment fit, strategic alignment, opportunity cost.
+
+————————————————————————————————————————————————————————————
+SLIDE 13
+————————————————————————————————————————————————————————————
+
+Measurement 
+ Six metrics that prove product value 
+ NRR 
+ Net Revenue Retention 
+ Target: 115%+. Expansion from data tiers & AI upsell. 
+ DAU/MAU 
+ Adoption Depth 
+ Target: 40%+. Users returning daily means real value. 
+ TTV 
+ Time to Value 
+ Target: <14 days. From signup to first meaningful insight. 
+ <8% 
+ Logo Churn 
+ Stickiness through embedded workflows + data dependency. 
+ CTS 
+ Cost to Serve 
+ Target: -20% YoY. Automation reduces manual support burden. 
+ FVR 
+ Feature Value Ratio 
+ % of shipped features with >10% adoption after 30 days. 
+ Daily 
+ Team standup, incident triage, deploy review 
+ Weekly 
+ Discovery sync, metric check-in, sprint planning 
+ Bi-weekly 
+ Sprint demo, stakeholder review, retrospective 
+ Monthly 
+ Roadmap review with Sales/CS, board metric pack 
+ Quarterly 
+ OKR reset, strategy review, advisory board session
+
+————————————————————————————————————————————————————————————
+SLIDE 14
+————————————————————————————————————————————————————————————
+
+PE Context 
+ Key risks & trade-offs in a fast PE cycle 
+ Speed vs Quality 
+ I bias toward shipping fast with feature flags. But never compromise on data integrity — for ECA, wrong data costs trust permanently. 
+ Platform vs Bespoke 
+ Every custom client build creates tech debt that slows the whole platform. I'll ring-fence 80%+ of engineering for scalable features. 
+ Growth vs Margin 
+ AI and data services improve both. Invest in self serve and automation early to drive revenue while reducing cost to serve. 
+ New vs Existing 
+ NRR is the PE metric. I'll protect expansion revenue from existing accounts over net new feature development in Year 1. 
+ Build vs Buy vs Partner 
+ Build the intelligence layer — it's the moat. Buy/partner for commodity features (auth, notifications, integrations). 
+ Migration Risk 
+ Moving from legacy to the new platform will cause friction. I'll run parallel for key accounts and migrate in cohorts, not a big bang. 
+ Every trade-off is documented, visible, and reversible .
+
+————————————————————————————————————————————————————————————
+SLIDE 15
+————————————————————————————————————————————————————————————
+
+For customers this means 
+ Faster Decisions 
+ Real time data for confident decision making 
+ Reduced Risk 
+ Proactive compliance management 
+ Lower Cost 
+ Optimised operational spend across moves 
+ Better Experience 
+ Employee relocation that feels supported
+
+————————————————————————————————————————————————————————————
+SLIDE 16
+————————————————————————————————————————————————————————————
+
+A stronger platform drives 
+ £8M 
+ Year 1 
+ £11M 
+ Year 2 
+ £16M 
+ Year 3 
+ £22M 
+ Year 4 
+ Higher product stickiness 
+ Increased subscription value 
+ New data services revenue 
+ AI driven premium capabilities 
+ Experience and revenue grow together .
+
+————————————————————————————————————————————————————————————
+SLIDE 17
+————————————————————————————————————————————————————————————
+
+Leadership Approach 
+ Product leadership must balance 
+ 01 
+ Strategy 
+ Setting the long-term platform direction 
+ 02 
+ Execution 
+ Delivering incremental value consistently 
+ 03 
+ Customer Insight 
+ Staying close to user needs and pain 
+ 04 
+ Technical Reality 
+ Grounding ambition in what's achievable 
+ Turning product ambition into delivered value .
+
+————————————————————————————————————————————————————————————
+SLIDE 18
+————————————————————————————————————————————————————————————
+
+Build the platform organisations rely on to manage global mobility in an increasingly complex world . 
+ Damon Macklin · Product Director
