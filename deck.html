@@ -386,7 +386,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Manrope',system-ui
 }
 .detail-close:hover{background:var(--pink);color:#fff}
 .detail-panel h2{font-size:40px;font-weight:800;color:var(--text-dark);margin-bottom:12px}
-.detail-panel .detail-sub{font-size:20px;color:var(--text-body);margin-bottom:40px;max-width:700px}
+.detail-panel .detail-sub{font-size:20px;color:var(--text-body);margin-bottom:40px;max-width:700px;text-align:center;margin-left:auto;margin-right:auto}
 .detail-panel .mock-ui{
   background:var(--off-white);border-radius:16px;padding:36px;
   display:grid;grid-template-columns:280px 1fr;gap:36px;
@@ -2674,12 +2674,19 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Manrope',system-ui
     }
   }
 
+  function broadcastState(){
+    if(!isEmbedMode){
+      channel.postMessage({type: 'slide', current: current, total: total});
+    }
+  }
+
   function navigateNext(){
     if(current===popupSlideIndex){
       const maxSub=popupOrder.length*2-1;
       if(popupSubstep<maxSub){
         popupSubstep++;
         applyPopupSubstep();
+        broadcastState();
         return;
       } else {
         closeAllPopups();
@@ -2696,6 +2703,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Manrope',system-ui
       if(popupSubstep>0){
         popupSubstep--;
         applyPopupSubstep();
+        broadcastState();
         return;
       } else {
         closeAllPopups();
@@ -2793,6 +2801,12 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Manrope',system-ui
   channel.onmessage = (e) => {
     if(e.data.type === 'goto'){
       goTo(e.data.index);
+    }
+    if(e.data.type === 'next'){
+      navigateNext();
+    }
+    if(e.data.type === 'prev'){
+      navigatePrev();
     }
     if(e.data.type === 'requestState'){
       channel.postMessage({type: 'slide', current: current, total: total});
@@ -2907,6 +2921,44 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Manrope',system-ui
   navEl.addEventListener('mouseenter',()=>{clearTimeout(navTimer);navEl.classList.remove('nav-hidden')});
   navEl.addEventListener('mouseleave',resetNavTimer);
   resetNavTimer();
+
+  // ═══ REMOTE CONTROL — SSE relay for phone remote ═══
+  if(!isEmbedMode){
+    let sseSource;
+    function connectSSE(){
+      try {
+        sseSource = new EventSource(window.location.origin + '/sse');
+        sseSource.onmessage = (e) => {
+          try {
+            const data = JSON.parse(e.data);
+            if(data.type === 'cmd'){
+              if(data.action === 'next') navigateNext();
+              else if(data.action === 'prev') navigatePrev();
+              else if(data.action === 'goto' && typeof data.index === 'number') goTo(data.index);
+            }
+          } catch(_){}
+        };
+        sseSource.onerror = () => {
+          sseSource.close();
+          setTimeout(connectSSE, 3000);
+        };
+      } catch(_){}
+    }
+    connectSSE();
+
+    // Report state changes to the relay server
+    const origUpdateUI = updateUI;
+    updateUI = function(){
+      origUpdateUI();
+      try {
+        fetch(window.location.origin + '/state', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({current: current, total: total}),
+        }).catch(()=>{});
+      } catch(_){}
+    };
+  }
 })();
 </script>
 </body>

@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<title>Notes — Smartr Deck</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html,body{
+  width:100%;height:100%;overflow:hidden;
+  font-family:'Manrope',system-ui,sans-serif;
+  background:#0d0f13;color:#fff;
+  -webkit-user-select:none;user-select:none;
+}
+
+.app{display:flex;flex-direction:column;height:100dvh}
+
+/* ── Top bar ── */
+.topbar{
+  flex:0 0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 20px;
+  background:rgba(255,255,255,.04);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.topbar-left{display:flex;align-items:center;gap:10px}
+.slide-badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:36px;height:28px;padding:0 10px;
+  border-radius:8px;background:rgba(94,36,194,.35);
+  font-size:13px;font-weight:800;color:#c4b5fd;
+}
+.slide-title{font-size:13px;font-weight:600;color:rgba(255,255,255,.45);line-height:1.3}
+.status{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:rgba(255,255,255,.25)}
+.status-dot{width:7px;height:7px;border-radius:50%;background:#444;transition:background .3s}
+.status-dot.connected{background:#4ade80}
+
+/* ── Slide timer ── */
+.slide-timer{
+  font-size:13px;font-weight:700;font-variant-numeric:tabular-nums;
+  color:rgba(255,255,255,.45);padding:3px 10px;border-radius:6px;
+  transition:color .3s,background .3s;
+}
+.slide-timer.over{color:#fff;background:rgba(229,0,77,.25)}
+.slide-timer.over.flash{animation:timerFlash 1s ease-in-out infinite}
+@keyframes timerFlash{0%,100%{background:rgba(229,0,77,.15);color:#ff4d6d}50%{background:rgba(229,0,77,.45);color:#fff}}
+
+/* ── Scroll container ── */
+.notes-scroll{
+  flex:1;overflow-y:auto;overflow-x:hidden;
+  scroll-behavior:auto;
+  -webkit-overflow-scrolling:touch;
+  padding:32px 24px 60vh;
+}
+
+/* ── Note blocks ── */
+.note-block{
+  margin-bottom:48px;
+  padding:20px 24px;
+  border-radius:14px;
+  border-left:3px solid rgba(94,36,194,.3);
+  background:rgba(255,255,255,.02);
+  transition:border-color .4s, background .4s;
+}
+.note-block.active{
+  border-left-color:#7c3aed;
+  background:rgba(94,36,194,.08);
+}
+.note-num{
+  font-size:11px;font-weight:800;text-transform:uppercase;
+  letter-spacing:.1em;color:rgba(255,255,255,.2);margin-bottom:10px;
+}
+.note-block.active .note-num{color:#a78bfa}
+.note-body{font-size:17px;line-height:1.65;color:rgba(255,255,255,.72)}
+.note-body p{margin-bottom:10px}
+.note-body p:last-child{margin-bottom:0}
+.note-body strong{color:#fff;font-weight:700}
+.note-body em{color:#a78bfa;font-style:italic}
+.note-body ul{margin:8px 0 8px 20px}
+.note-body li{margin-bottom:4px}
+
+/* ── Speed control ── */
+.speed-bar{
+  flex:0 0 auto;
+  display:flex;align-items:center;gap:14px;
+  padding:14px 20px;
+  background:rgba(255,255,255,.03);
+  border-top:1px solid rgba(255,255,255,.06);
+}
+.speed-label{font-size:12px;font-weight:700;color:rgba(255,255,255,.3);white-space:nowrap}
+.speed-slider{
+  flex:1;-webkit-appearance:none;appearance:none;
+  height:6px;border-radius:3px;
+  background:rgba(255,255,255,.1);outline:none;
+}
+.speed-slider::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;
+  width:22px;height:22px;border-radius:50%;
+  background:#7c3aed;border:2px solid #0d0f13;
+  cursor:pointer;
+}
+.speed-slider::-moz-range-thumb{
+  width:22px;height:22px;border-radius:50%;
+  background:#7c3aed;border:2px solid #0d0f13;
+  cursor:pointer;
+}
+.speed-val{
+  min-width:32px;text-align:center;
+  font-size:14px;font-weight:800;color:#c4b5fd;
+}
+.pause-btn{
+  width:36px;height:36px;border-radius:10px;
+  border:1.5px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.04);
+  color:#fff;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .15s;
+}
+.pause-btn:active{background:rgba(94,36,194,.3)}
+.pause-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── Nav buttons ── */
+.nav-row{
+  flex:0 0 auto;
+  display:flex;gap:10px;
+  padding:0 20px 14px;
+}
+.nav-btn{
+  flex:1;height:52px;border-radius:14px;
+  border:1.5px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.04);
+  color:#fff;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  font-family:inherit;font-size:13px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.06em;
+  transition:all .15s;
+  -webkit-tap-highlight-color:transparent;
+}
+.nav-btn:active{transform:scale(.97);background:rgba(94,36,194,.3);border-color:rgba(94,36,194,.5)}
+.nav-btn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+
+.reset-btn{
+  width:28px;height:28px;border-radius:8px;
+  border:1.5px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.04);
+  color:rgba(255,255,255,.5);cursor:pointer;
+  font-size:14px;line-height:1;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .15s;
+  -webkit-tap-highlight-color:transparent;
+}
+.reset-btn:active{background:rgba(94,36,194,.3);color:#c4b5fd}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="slide-badge" id="badge">1</span>
+      <span class="slide-title" id="title">—</span>
+    </div>
+    <div class="status">
+      <span class="slide-timer" id="slideTimer">0:00</span>
+      <button class="reset-btn" id="resetTimer" title="Reset timer">↺</button>
+      <span class="status-dot" id="dot"></span>
+      <span id="status-text">connecting</span>
+    </div>
+  </div>
+
+  <!-- Notes -->
+  <div class="notes-scroll" id="scroll"></div>
+
+  <!-- Nav controls -->
+  <div class="nav-row">
+    <button class="nav-btn" id="btnPrev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Prev</button>
+    <button class="nav-btn" id="btnNext">Next<svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></button>
+  </div>
+
+  <!-- Speed control -->
+  <div class="speed-bar">
+    <span class="speed-label">SCROLL</span>
+    <input type="range" class="speed-slider" id="speed" min="0" max="10" step="1" value="4">
+    <span class="speed-val" id="speed-val">4</span>
+    <button class="pause-btn" id="pause" title="Pause / Resume auto-scroll">
+      <svg id="pause-icon" viewBox="0 0 24 24"><line x1="10" y1="6" x2="10" y2="18"/><line x1="14" y1="6" x2="14" y2="18"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+// ═══ NOTES (same source as presenter.html) ═══
+const NOTES = {
+  1: `<ul>
+<li>I'm Damon Macklin — product vision for the future of global mobility platforms</li>
+<li>Behind me: what a modern mobility platform should feel like — live data, real-time compliance, cost indices</li>
+<li>ECA needs to go from world-class data to a world-class <strong>intelligence platform</strong></li>
+</ul>
+<p><em>→ Let me walk you through how.</em></p>`,
+
+  2: `<ul>
+<li>Mobility is more complex every year — compliance across <strong>190+ jurisdictions</strong></li>
+<li>Four pressures: compliance, employee experience, cost control, global visibility</li>
+<li>Most systems built for <strong>administration, not intelligence</strong> — that's the gap</li>
+</ul>
+<p><em>→ So what do customers actually want?</em></p>`,
+
+  3: `<ul>
+<li>They're not buying software — they're buying <strong>confidence</strong></li>
+<li>Confidence in decisions, compliance without friction, full cost visibility, predictable outcomes</li>
+<li>Forecast-driven planning that turns every assignment into a known quantity</li>
+</ul>
+<p><em>→ The good news — ECA already has the foundation.</em></p>`,
+
+  4: `<ul>
+<li><strong>Data moat</strong> — decades of cost-of-living, hardship, salary benchmarks</li>
+<li><strong>Enterprise relationships</strong> — deep trust built over years</li>
+<li><strong>Domain expertise</strong> — recognised across 200+ countries</li>
+<li>Opportunity: connect these into a platform that turns data into decisions</li>
+</ul>
+<p><em>→ Here's the vision for bringing this together.</em></p>`,
+
+  5: `<ul>
+<li>Unified platform for <strong>global mobility intelligence</strong></li>
+<li>Four pillars: location intelligence, cost modelling, risk monitoring, AI-driven strategy</li>
+<li>Not tracking moves — helping answer: where, what cost, what risks, how to optimise</li>
+</ul>
+<p><em>→ This doesn't happen overnight — here's the evolution.</em></p>`,
+
+  6: `<ul>
+<li><strong>Stage 1:</strong> System of Record — track assignments &amp; compliance</li>
+<li><strong>Stage 2:</strong> System of Insight — data informs decisions</li>
+<li><strong>Stage 3:</strong> System of Intelligence — AI drives recommendations</li>
+<li>Each stage builds on the last, each delivers standalone value</li>
+</ul>
+<p><em>→ And AI runs through all three stages.</em></p>`,
+
+  7: `<ul>
+<li>AI is not a feature — it's <strong>embedded intelligence</strong> across the platform</li>
+<li><strong>Cost prediction</strong> — full financial picture before commitment (London→Singapore £142K, 94% confidence)</li>
+<li><strong>Risk identification</strong> — surface compliance issues before they're problems (847 assignments, real-time flags)</li>
+<li><strong>Recommendations</strong> — optimal move strategies from historical data</li>
+<li><strong>Insight generation</strong> — actionable intelligence automatically</li>
+<li><em>Action:</em> Walk through each popup demo</li>
+</ul>
+<p><em>→ Who do we build this for first?</em></p>`,
+
+  8: `<ul>
+<li>PE cycle = <strong>focus beats breadth</strong></li>
+<li><strong>Enterprise</strong> (500+ assignees) — need intelligence, not admin, highest ARPA</li>
+<li><strong>Mid-market</strong> (50–500) — scaling internationally, high growth potential</li>
+<li><strong>RMCs &amp; consultancies</strong> — channel partners, extend reach without direct sales cost</li>
+</ul>
+<p><em>→ Focus means saying no. Here's what we double down on — and stop.</em></p>`,
+
+  9: `<ul>
+<li><strong>Double down:</strong> proprietary data moat (40 years), compliance in workflow, AI on real outcomes, API-first</li>
+<li><strong>Stop:</strong> bespoke builds, replicating HRIS features, manual reports, legacy on-prem</li>
+<li>Differentiation = compound what's unique, cut what doesn't scale</li>
+</ul>
+<p><em>→ How do we run discovery while keeping delivery on track?</em></p>`,
+
+  10: `<ul>
+<li>Discovery &amp; delivery run <strong>in parallel</strong> — validation prevents building the wrong thing</li>
+<li><strong>Discovery:</strong> weekly interviews, prototype→test in 5 days, usage analytics</li>
+<li><strong>Delivery:</strong> 2-week sprints, feature flags, outcome reviews every 6 weeks → kill or scale</li>
+</ul>
+<p><em>→ But how do we decide what gets built?</em></p>`,
+
+  11: `<ul>
+<li><strong>Q1</strong> Foundation — data consolidation, compliance v1, UX parity → churn &lt;8%, TTV &lt;14d</li>
+<li><strong>Q2</strong> Insight — cost prediction, risk dash, analytics v2 → NRR +8pp, AI upsell</li>
+<li><strong>Q3</strong> Expansion — mid-market self-serve, public API, recs beta → +40 logos</li>
+<li><strong>Q4</strong> Intelligence — AI GA, predictive modelling, RMC channel → LTV +35%, NRR &gt;115%</li>
+<li>Key calls: platform over bespoke Q1–Q2, retention before acquisition until Q3</li>
+</ul>
+<p><em>→ Let's look at how we prioritise what ships next.</em></p>`,
+
+  12: `<ul>
+<li>Every request scored on two axes: <strong>value vs effort</strong></li>
+<li>High value + low effort → ship now</li>
+<li>High value + high effort → plan carefully</li>
+<li>Low value + low effort → fill-ins only</li>
+<li>Low value + high effort → <strong>say no, with data</strong></li>
+</ul>
+<p><em>→ And when urgent requests land…</em></p>`,
+
+  13: `<ul>
+<li>"Our biggest customer needs X by Friday" — same lens every time:</li>
+<li><strong>Classify</strong> revenue impact → <strong>Size</strong> config or code → <strong>Trade-off</strong> what gets displaced → <strong>Commit</strong> or propose alternative</li>
+<li>Rule: <strong>no unscored work enters a sprint</strong>, regardless of who asks</li>
+</ul>
+<p><em>→ Sales and CS have a big voice. Here's how we partner.</em></p>`,
+
+  14: `<ul>
+<li>Partner closely with Sales &amp; CS — <strong>not an order-taker</strong></li>
+<li><strong>Advisory Board:</strong> 8–10 enterprise customers, quarterly</li>
+<li><strong>Shared taxonomy:</strong> every request tagged by revenue risk, frequency, segment, effort</li>
+<li><strong>Monthly roadmap review:</strong> what's coming, why, what's deprioritised — with reasoning</li>
+<li><strong>Say no with evidence:</strong> segment fit, strategic alignment, opportunity cost</li>
+</ul>
+<p><em>→ To know if this is working, we need the right metrics.</em></p>`,
+
+  15: `<ul>
+<li><strong>NRR</strong> 115%+ — expansion via data tiers &amp; AI upsell</li>
+<li><strong>DAU/MAU</strong> 40%+ — users returning daily = real value</li>
+<li><strong>TTV</strong> &lt;14 days — signup to first insight</li>
+<li><strong>Churn</strong> &lt;8% — stickiness through embedded workflows</li>
+<li><strong>Cost to Serve</strong> −20% YoY — automation reduces burden</li>
+<li><strong>Feature Value Ratio</strong> — % of features with &gt;10% adoption at 30 days</li>
+<li>Cadence: daily standups → weekly syncs → bi-weekly demos → monthly reviews → quarterly OKRs</li>
+</ul>
+<p><em>→ There are risks we need to be honest about.</em></p>`,
+
+  16: `<ul>
+<li><strong>Speed vs quality</strong> — ship fast with flags, never compromise data integrity</li>
+<li><strong>Platform vs bespoke</strong> — 80%+ engineering on scalable features</li>
+<li><strong>Growth vs margin</strong> — AI improves both; invest self-serve early</li>
+<li><strong>New vs existing</strong> — protect NRR / expansion revenue in Year 1</li>
+<li><strong>Build vs buy</strong> — build intelligence layer (moat), buy commodity</li>
+<li><strong>Migration</strong> — parallel for key accounts, cohort migration, no big bang</li>
+<li>Every trade-off documented, visible, reversible</li>
+</ul>
+<p><em>→ Let me close with a final thought.</em></p>`,
+
+  17: `<ul>
+<li>Build the platform organisations rely on for global mobility in an increasingly complex world</li>
+<li>Thank you — happy to take questions</li>
+</ul>`
+};
+
+const TITLES = {
+  1: 'Title — Dashboard',
+  2: 'Global Complexity',
+  3: 'Customer Insight',
+  4: "ECA's Three Assets",
+  5: 'Platform Vision',
+  6: 'Three Stages',
+  7: 'AI & Embedded Intelligence',
+  8: 'Market Focus',
+  9: 'Differentiation',
+  10: 'Dual-Track Discovery & Delivery',
+  11: '12-Month Roadmap',
+  12: 'Prioritisation',
+  13: 'Handling Urgent Requests',
+  14: 'Partner with Sales & CS',
+  15: 'Measurement — Six Metrics',
+  16: 'PE Risks & Trade-offs',
+  17: 'Close'
+};
+
+// ═══ BUILD NOTE BLOCKS ═══
+const scrollEl = document.getElementById('scroll');
+const totalSlides = Object.keys(NOTES).length;
+
+Object.keys(NOTES).forEach(k => {
+  const div = document.createElement('div');
+  div.className = 'note-block';
+  div.id = 'note-' + k;
+  div.innerHTML = `<div class="note-num">Slide ${k}</div><div class="note-body">${NOTES[k]}</div>`;
+  scrollEl.appendChild(div);
+});
+
+// ═══ STATE ═══
+let currentSlide = 1;
+let scrollSpeed = 4;
+let paused = false;
+let scrollRAF = null;
+let _syncing = false;
+let _lastGoto = 0;
+
+const badgeEl   = document.getElementById('badge');
+const titleEl   = document.getElementById('title');
+const dotEl     = document.getElementById('dot');
+const statusEl  = document.getElementById('status-text');
+const speedEl   = document.getElementById('speed');
+const speedValEl= document.getElementById('speed-val');
+const pauseBtn  = document.getElementById('pause');
+const pauseIcon = document.getElementById('pause-icon');
+
+// ═══ PER-SLIDE TIMER ═══
+const SLIDE_BUDGETS = {
+  1: 90,   2: 120,  3: 90,   4: 90,   5: 120,
+  6: 90,   7: 150,  8: 90,   9: 90,   10: 120,
+  11: 120, 12: 90,  13: 120, 14: 120, 15: 60,
+  16: 60,  17: 45
+};
+const DEFAULT_BUDGET = 90;
+const slideTimerEl = document.getElementById('slideTimer');
+let slideTimerSeconds = 0;
+let slideTimerInterval = null;
+
+function formatSlideTime(s) {
+  const m = Math.floor(s / 60);
+  return `${m}:${String(s % 60).padStart(2, '0')}`;
+}
+
+function tickSlideTimer() {
+  slideTimerSeconds++;
+  const budget = SLIDE_BUDGETS[currentSlide] || DEFAULT_BUDGET;
+  slideTimerEl.textContent = formatSlideTime(slideTimerSeconds);
+  if (slideTimerSeconds > budget) {
+    slideTimerEl.classList.add('over', 'flash');
+  } else if (slideTimerSeconds > budget * 0.8) {
+    slideTimerEl.classList.add('over');
+    slideTimerEl.classList.remove('flash');
+  }
+}
+
+function resetSlideTimer(broadcast) {
+  slideTimerSeconds = 0;
+  slideTimerEl.textContent = '0:00';
+  slideTimerEl.classList.remove('over', 'flash');
+  clearInterval(slideTimerInterval);
+  slideTimerInterval = setInterval(tickSlideTimer, 1000);
+  if (broadcast) sendCmd('resetTimer');
+}
+
+// ═══ SLIDE SYNC VIA SSE ═══
+function connectSSE() {
+  const es = new EventSource('/sse');
+  es.onopen = () => {
+    dotEl.classList.add('connected');
+    statusEl.textContent = 'connected';
+  };
+  es.onmessage = (e) => {
+    try {
+      const d = JSON.parse(e.data);
+      if (d.type === 'state') {
+        const newSlide = (d.current ?? 0) + 1;
+        if (newSlide !== currentSlide) {
+          currentSlide = newSlide;
+          updateActive();
+          scrollToSlide(currentSlide);
+          resetSlideTimer();
+        }
+      } else if (d.type === 'cmd') {
+        if (d.action === 'goto' && d.index != null) {
+          if (Date.now() - _lastGoto < 500) { /* skip own echo */ }
+          else {
+            const newSlide = d.index + 1;
+            if (newSlide !== currentSlide) {
+              currentSlide = newSlide;
+              updateActive(); scrollToSlide(currentSlide); resetSlideTimer();
+            }
+          }
+        } else if (d.action === 'speed' && d.value != null) {
+          _syncing = true;
+          scrollSpeed = d.value;
+          speedEl.value = scrollSpeed;
+          speedValEl.textContent = scrollSpeed;
+          _syncing = false;
+        } else if (d.action === 'pause' && d.value != null) {
+          _syncing = true;
+          paused = d.value;
+          updatePauseIcon();
+          _syncing = false;
+        } else if (d.action === 'scrollpct' && d.value != null) {
+          setScrollPct(d.value);
+        } else if (d.action === 'resetTimer') {
+          resetSlideTimer(false);
+        }
+      }
+    } catch(_){}
+  };
+  es.onerror = () => {
+    dotEl.classList.remove('connected');
+    statusEl.textContent = 'reconnecting';
+  };
+}
+
+function updateActive() {
+  document.querySelectorAll('.note-block').forEach(el => el.classList.remove('active'));
+  const el = document.getElementById('note-' + currentSlide);
+  if (el) el.classList.add('active');
+  badgeEl.textContent = currentSlide;
+  titleEl.textContent = TITLES[currentSlide] || '';
+}
+
+function scrollToSlide(num) {
+  const el = document.getElementById('note-' + num);
+  if (!el) return;
+  const container = scrollEl;
+  const targetTop = el.offsetTop - 32;
+  container.scrollTo({ top: targetTop, behavior: 'smooth' });
+}
+
+// ═══ AUTO-SCROLL ═══
+function startAutoScroll() {
+  if (scrollRAF) cancelAnimationFrame(scrollRAF);
+  let lastTime = null;
+  function tick(ts) {
+    if (lastTime === null) lastTime = ts;
+    const dt = ts - lastTime;
+    lastTime = ts;
+    if (!paused && scrollSpeed > 0) {
+      // Speed 1 = ~10px/s, Speed 10 = ~100px/s
+      const px = (scrollSpeed * 10) * (dt / 1000);
+      scrollEl.scrollTop += px;
+    }
+    scrollRAF = requestAnimationFrame(tick);
+  }
+  scrollRAF = requestAnimationFrame(tick);
+}
+
+// ═══ SPEED CONTROL ═══
+speedEl.addEventListener('input', () => {
+  scrollSpeed = parseInt(speedEl.value, 10);
+  speedValEl.textContent = scrollSpeed;
+  if (!_syncing) sendCmd('speed', undefined, scrollSpeed);
+});
+
+// ═══ PAUSE / RESUME ═══
+function updatePauseIcon() {
+  if (paused) {
+    pauseIcon.innerHTML = '<polygon points="6,4 20,12 6,20" fill="currentColor" stroke="none"/>';
+  } else {
+    pauseIcon.innerHTML = '<line x1="10" y1="6" x2="10" y2="18"/><line x1="14" y1="6" x2="14" y2="18"/>';
+  }
+}
+
+pauseBtn.addEventListener('click', () => {
+  paused = !paused;
+  updatePauseIcon();
+  if (!_syncing) sendCmd('pause', undefined, paused);
+});
+
+// ═══ TOUCH: tap to pause, swipe to manual scroll ═══
+let touchActive = false;
+scrollEl.addEventListener('touchstart', () => { touchActive = true; }, { passive: true });
+scrollEl.addEventListener('touchend', () => {
+  touchActive = false;
+  // Send final scroll position on release
+  broadcastScrollPos();
+}, { passive: true });
+
+const _paused = () => paused || touchActive;
+
+// ═══ SCROLL POSITION SYNC ═══
+let _scrollSyncing = false;
+let _scrollThrottle = null;
+
+function getScrollPct() {
+  const max = scrollEl.scrollHeight - scrollEl.clientHeight;
+  return max > 0 ? scrollEl.scrollTop / max : 0;
+}
+
+function setScrollPct(pct) {
+  const max = scrollEl.scrollHeight - scrollEl.clientHeight;
+  _scrollSyncing = true;
+  scrollEl.scrollTop = pct * max;
+  setTimeout(() => { _scrollSyncing = false; }, 100);
+}
+
+function broadcastScrollPos() {
+  if (_syncing || _scrollSyncing) return;
+  sendCmd('scrollpct', undefined, getScrollPct());
+}
+
+scrollEl.addEventListener('scroll', () => {
+  if (!touchActive || _scrollSyncing || _syncing) return;
+  if (!_scrollThrottle) {
+    _scrollThrottle = setTimeout(() => {
+      broadcastScrollPos();
+      _scrollThrottle = null;
+    }, 120);
+  }
+}, { passive: true });
+
+// Re-implement tick with touch awareness
+function startAutoScrollFinal() {
+  if (scrollRAF) cancelAnimationFrame(scrollRAF);
+  let lastTime = null;
+  function tick(ts) {
+    if (lastTime === null) lastTime = ts;
+    const dt = ts - lastTime;
+    lastTime = ts;
+    if (!_paused() && scrollSpeed > 0) {
+      const px = (10 + 5 * Math.pow(scrollSpeed, 1.7)) * (dt / 1000);
+      scrollEl.scrollTop += px;
+    }
+    scrollRAF = requestAnimationFrame(tick);
+  }
+  scrollRAF = requestAnimationFrame(tick);
+}
+
+// ═══ SLIDE CONTROLS ═══
+function sendCmd(action, index, value) {
+  fetch(window.location.origin + '/cmd', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action, index, value }),
+  }).catch(() => {});
+}
+
+function goToCard(num) {
+  const total = Object.keys(NOTES).length;
+  if (num < 1 || num > total) return;
+  currentSlide = num;
+  updateActive();
+  scrollToSlide(currentSlide);
+  resetSlideTimer();
+  _lastGoto = Date.now();
+  sendCmd('goto', currentSlide - 1);
+}
+
+document.getElementById('btnPrev').addEventListener('click', () => goToCard(currentSlide - 1));
+document.getElementById('btnNext').addEventListener('click', () => goToCard(currentSlide + 1));
+document.getElementById('resetTimer').addEventListener('click', () => resetSlideTimer(true));
+
+// ═══ INIT ═══
+updateActive();
+scrollToSlide(1);
+connectSSE();
+resetSlideTimer();
+startAutoScrollFinal();
+</script>
+</body>
+</html>

@@ -44,9 +44,19 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Manrope',system-ui
 @keyframes timerFlash{0%,100%{background:rgba(229,0,77,.15);color:#ff4d6d}50%{background:rgba(229,0,77,.45);color:#fff}}
 
 .notes-content{flex:1;overflow-y:auto;padding:20px 24px;line-height:1.7}
-.notes-content h3{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(94,36,194,.8);margin-bottom:12px}
-.notes-text{font-size:16px;font-weight:500;color:rgba(255,255,255,.7);white-space:pre-wrap}
+.notes-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.notes-header h3{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(94,36,194,.8);margin:0}
+.notes-actions{display:flex;gap:6px}
+.notes-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.5);cursor:pointer;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;font-family:inherit;transition:all .2s}
+.notes-btn:hover{background:rgba(94,36,194,.3);color:#fff;border-color:rgba(94,36,194,.5)}
+.notes-saved{font-size:11px;color:rgba(163,245,199,.6);font-weight:600;opacity:0;transition:opacity .3s}
+.notes-saved.show{opacity:1}
+.notes-text{font-size:16px;font-weight:500;color:rgba(255,255,255,.7);white-space:pre-wrap;outline:none;min-height:60px;border-radius:6px;padding:4px 2px;transition:background .2s}
+.notes-text:focus{background:rgba(255,255,255,.04)}
+.notes-text:empty::before{content:'Click here to add notes…';color:rgba(255,255,255,.2);pointer-events:none}
 .notes-text p{margin-bottom:12px}
+.notes-text ul{margin:8px 0 12px 20px;list-style:disc}
+.notes-text li{margin-bottom:6px}
 .notes-text strong{color:rgba(255,255,255,.9);font-weight:700}
 .notes-text em{color:rgba(163,245,199,.8);font-style:normal;font-weight:600}
 
@@ -109,8 +119,16 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Manrope',system-ui
     </div>
 
     <div class="notes-content" role="region" aria-label="Speaker notes">
-      <h3>Speaker Notes</h3>
-      <div class="notes-text" id="notesText" aria-live="polite"></div>
+      <div class="notes-header">
+        <h3>Speaker Notes</h3>
+        <div class="notes-actions">
+          <span class="notes-saved" id="notesSaved">Saved</span>
+          <button class="notes-btn" id="btnDownloadNotes" title="Download all notes as JSON">Export</button>
+          <button class="notes-btn" id="btnUploadNotes" title="Load notes from JSON file">Import</button>
+          <input type="file" id="notesFileInput" accept=".json" style="display:none">
+        </div>
+      </div>
+      <div class="notes-text" id="notesText" contenteditable="true" aria-live="polite"></div>
     </div>
   </div>
 
@@ -124,7 +142,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Manrope',system-ui
       <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
       Previous
     </button>
-    <div class="nav-counter" id="navCounter" role="status" aria-live="polite">1 / 17</div>
+    <div class="nav-counter" id="navCounter" role="status" aria-live="polite">1 / 18</div>
     <button class="nav-btn" id="btnNext" aria-label="Next slide" title="Next slide (→)">
       Next
       <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
@@ -140,90 +158,96 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Manrope',system-ui
 <script>
 (function(){
   // ═══ SPEAKER NOTES ═══
-  // Edit these to match your talking points for each slide.
-  const NOTES = {
-    1: `<p><strong>Opening — set the scene.</strong></p>
-<p>Welcome everyone. Today I want to share a product vision for turning ECA's world class data into the intelligence platform that global organisations need.</p>
-<p><em>Key message:</em> This isn't about building more features — it's about building the right platform.</p>`,
+  // Default notes — editable live in the presenter UI.
+  // Edits auto-save to localStorage and can be exported/imported as JSON.
+  const DEFAULT_NOTES = {
+    1: `<p><strong>Opening — Title / Dashboard</strong></p>
+<p>Good morning / afternoon. I'm Damon Macklin, and I'm here to share a product vision for shaping the future of global mobility platforms.</p>
+<p>What you're seeing behind me is a glimpse of what a modern mobility platform should feel like — live data, real-time compliance scores, assignment volumes, cost indices updating as we speak. This is where I believe ECA needs to go: from world-class data to a world-class intelligence platform.</p>
+<p><em>Transition:</em> Let me walk you through how.</p>`,
 
-    2: `<p><strong>Why this matters now.</strong></p>
-<p>Global mobility is becoming exponentially more complex — more countries, more regulations, more assignment types. Companies are struggling to keep up.</p>
-<p><em>Action:</em> Point out the map — highlight the scale of the problem. Over 200 countries, each with unique tax, immigration, and cost-of-living considerations.</p>
-<p><em>Transition:</em> So what do customers actually tell us they need?</p>`,
+    2: `<p><strong>Global Complexity</strong></p>
+<p>Global mobility is becoming more complex every year. Organisations are navigating compliance across 190-plus jurisdictions, trying to control costs, support the employee experience, and maintain visibility across every corridor — from New York to Dubai, London to Singapore, São Paulo to Tokyo.</p>
+<p>Yet most systems in this space were designed for administration, not intelligence. That's the gap.</p>
+<p><em>Transition:</em> So what do customers actually want?</p>`,
 
-    3: `<p><strong>Customer insight — anchor everything in real needs.</strong></p>
-<p>Customers don't just want data — they want <em>answers</em>. They want to make confident decisions quickly, reduce risk, and justify costs to leadership.</p>
-<p>These insights come from customer interviews, support tickets, and CS feedback loops.</p>
-<p><em>Transition:</em> The good news is we already have the foundation to deliver this.</p>`,
+    3: `<p><strong>Customer Insight</strong></p>
+<p>They're not buying mobility software. They're buying <em>confidence</em> — confidence in decisions backed by real-time data. They want compliance built into the workflow, not bolted on afterward. They need full cost visibility before they commit to a move. And they want predictable outcomes — forecast-driven planning that turns every assignment into a known quantity.</p>
+<p><em>Transition:</em> The good news is ECA already has the foundation.</p>`,
 
-    4: `<p><strong>ECA's three powerful assets.</strong></p>
-<p>We have three things competitors can't easily replicate: world class data, deep domain expertise, and a trusted brand.</p>
-<p>The job of the platform is to make these assets <em>accessible, composable, and scalable</em>.</p>
-<p><em>Transition:</em> Let me show you the vision for how we bring this together.</p>`,
+    4: `<p><strong>The Opportunity — ECA's Three Assets</strong></p>
+<p>ECA already owns three powerful assets. First: decades of world-class mobility data — cost-of-living, hardship, salary benchmarks — this is a genuine data moat. Second: deep enterprise relationships and trust built over years. Third: domain expertise recognised across 200-plus countries.</p>
+<p>The opportunity is to connect these assets into a single platform that turns data into decisions.</p>
+<p><em>Transition:</em> Here's the vision for how we bring this together.</p>`,
 
-    5: `<p><strong>The platform vision.</strong></p>
-<p>A unified platform for global mobility intelligence. Not a collection of tools — a single, coherent experience.</p>
-<p><em>Action:</em> Walk through each quadrant and explain how they connect.</p>
+    5: `<p><strong>Platform Vision</strong></p>
+<p>A unified platform for global mobility intelligence. Not just tracking moves — helping organisations answer the critical questions. Where should we relocate talent? What will it actually cost? What compliance risks exist right now? And how do we optimise our workforce strategy globally?</p>
+<p>Each of these becomes a core pillar of the platform — location intelligence, cost modelling, risk monitoring, and AI-driven strategy.</p>
 <p><em>Transition:</em> This doesn't happen overnight. Here's the evolution plan.</p>`,
 
-    6: `<p><strong>Three-stage evolution.</strong></p>
-<p>Stage 1: Consolidate and stabilise. Stage 2: Connect and automate. Stage 3: Intelligence and prediction.</p>
-<p><em>Action:</em> Emphasise that each stage delivers customer value — we don't wait until stage 3 to show results.</p>
+    6: `<p><strong>Platform Roadmap — Three Stages</strong></p>
+<p>The platform evolves in three stages. First, we become a reliable system of record — tracking assignments and compliance accurately. Then we move to a system of insight — using mobility data to actively inform decisions. And ultimately, a system of intelligence — where AI drives recommendations for workforce strategy.</p>
+<p>Each stage builds on the last, and each stage delivers standalone value.</p>
 <p><em>Transition:</em> And AI runs through all three stages.</p>`,
 
-    7: `<p><strong>AI as embedded intelligence.</strong></p>
-<p>AI should not be a feature checkbox. It should be woven into every interaction — search, recommendations, anomaly detection, cost prediction.</p>
-<p><em>Action:</em> Give specific examples: auto-classifying assignment types, predicting cost overruns, flagging compliance risks before they happen.</p>
+    7: `<p><strong>AI &amp; Embedded Intelligence</strong></p>
+<p>AI should not be a feature you tick off a list. It should be embedded intelligence that runs through the entire platform.</p>
+<p>Cost prediction — giving organisations a complete financial picture before any commitment. Risk identification — surfacing compliance issues before they become problems. Recommendations — optimal move strategies drawn from historical data. And insight generation — turning our global data into actionable intelligence automatically.</p>
+<p><em>Action:</em> Walk through each popup — the cost predictor modelling a London-to-Singapore senior manager move at £142K with 94% confidence, the risk monitor tracking 847 assignments and flagging critical visa and tax issues in real time.</p>
 <p><em>Transition:</em> Now — who do we build this for first?</p>`,
 
-    8: `<p><strong>ICP & market segmentation.</strong></p>
-<p>We can't serve everyone equally. Talk through the ideal customer profile (ICP) and why we start with mid-to-large enterprises running 50+ assignments.</p>
-<p>These customers have budget, urgency, and the complexity that makes our platform indispensable.</p>
+    8: `<p><strong>Market Focus</strong></p>
+<p>In a PE cycle, focus beats breadth. We concentrate on three segments with the highest lifetime value and fastest path to net revenue retention growth.</p>
+<p>Enterprise multinationals with 500-plus assignees — they need intelligence, not admin. Mid-market companies scaling internationally — high growth potential. And RMCs and consultancies as channel partners who embed our data into their own services, extending reach without direct sales cost.</p>
 <p><em>Transition:</em> Focus means saying no. Here's what we double down on — and what we stop.</p>`,
 
-    9: `<p><strong>Differentiation — double down on strengths, cut what doesn't compound.</strong></p>
-<p><em>Action:</em> Walk through the "keep doing" column: data depth, compliance accuracy, trusted advisory.</p>
-<p><em>Action:</em> Walk through the "stop" column: bespoke reports that don't scale, manual data entry workflows, one-off integrations.</p>
-<p><em>Transition:</em> This raises the question: how do we run discovery while keeping delivery on track?</p>`,
+    9: `<p><strong>Differentiation</strong></p>
+<p>Differentiation means doubling down on what compounds and stopping what doesn't. We double down on our proprietary data moat — no competitor has 40 years of global cost-of-living data. We embed compliance intelligence into the workflow. We build AI on top of real mobility outcomes, not generic models. And we go API-first so HRIS and relocation tools can consume our intelligence layer.</p>
+<p>Equally important is what we <em>stop</em> doing: bespoke client builds that don't scale, replicating generic HRIS features, manual report generation, and maintaining legacy on-prem deployments.</p>
+<p><em>Transition:</em> How do we run discovery while keeping delivery on track?</p>`,
 
-    10: `<p><strong>Discovery and delivery — in parallel.</strong></p>
-<p>The dual-track model. Discovery teams explore problems; delivery teams ship solutions. They run on different cadences but feed into each other.</p>
-<p><em>Action:</em> Show how weekly discovery syncs feed the sprint backlog. Emphasise that this avoids the "big bang" redesign trap.</p>
+    10: `<p><strong>Dual-Track — Discovery &amp; Delivery</strong></p>
+<p>Discovery and delivery run in parallel. Validation doesn't slow us down — it prevents us building the wrong thing.</p>
+<p>On the discovery side: weekly user interviews, rapid prototype testing in five days, and usage analytics that reveal what users actually do. On the delivery side: two-week sprint cycles shipping incremental value, feature flags for controlled rollout, and outcome reviews every six weeks where we measure impact against our hypotheses and decide to kill or scale.</p>
 <p><em>Transition:</em> But how do we decide what gets built?</p>`,
 
-    11: `<p><strong>Prioritisation framework.</strong></p>
-<p><em>Action:</em> Walk through the 2×2 matrix: impact vs. effort. Explain each quadrant — Quick Wins, Strategic Bets, Fill-ins, Say No.</p>
-<p><em>Key message:</em> Every request gets scored the same way. No politics, just data.</p>
-<p><em>Transition:</em> But what happens when something urgent lands on your desk?</p>`,
+    11: `<p><strong>Governance &amp; Prioritisation</strong></p>
+<p>Prioritisation follows a clear framework. High value, low effort — ship immediately. High value, high effort — plan and resource carefully. Low value, low effort — fill-ins only if there's spare capacity. Low value, high effort — we say no, with data.</p>
+<p>And when that urgent client request lands — "our biggest customer needs X by Friday" — we run it through the same lens: classify the revenue impact, size whether it's config or code, make the trade-off visible, and commit or propose an alternative.</p>
+<p><em>Key message:</em> No unscored work enters a sprint, regardless of who asks.</p>
+<p><em>Transition:</em> Sales and CS have a big voice. Here's how we partner.</p>`,
 
-    12: `<p><strong>Handling urgent requests.</strong></p>
-<p><em>Action:</em> Walk through the four-step escalation flow: Classify → Size → Trade-off → Commit.</p>
-<p><em>Key message:</em> No unscored work enters a sprint. Every request goes through the same lens — regardless of who asks.</p>
-<p><em>Transition:</em> Of course, Sales and CS have a big voice in what comes in. Here's how we partner.</p>`,
-
-    13: `<p><strong>Sales & CS partnership.</strong></p>
-<p>Partner — don't be an order-taker. Sales and CS surface problems; product determines solutions.</p>
-<p>Weekly sync + shared Slack channel for real time signal. Quarterly review of top customer themes.</p>
+    12: `<p><strong>Partnering with Sales &amp; CS</strong></p>
+<p>I believe in partnering closely with Sales and CS — without becoming an order-taker. That means structured input through a Customer Advisory Board with 8–10 enterprise customers meeting quarterly. A shared feedback taxonomy where every request is tagged by revenue at risk, frequency, segment, and effort. Monthly roadmap reviews so Sales and CS see what's coming, why, and what's been deprioritised — with the reasoning. And every declined request is paired with data: segment fit, strategic alignment, opportunity cost.</p>
 <p><em>Transition:</em> To know if this is all working, we need the right metrics.</p>`,
 
-    14: `<p><strong>Six metrics that prove product value.</strong></p>
-<p><em>Action:</em> Walk through each metric and why it matters. Tie back to business outcomes — retention, expansion, efficiency.</p>
-<p><em>Action:</em> Emphasise leading indicators (activation, engagement) over lagging ones (revenue).</p>
+    13: `<p><strong>Measurement — Six Key Metrics</strong></p>
+<p>Six metrics prove product value. Net Revenue Retention targeting 115-plus percent through data tier and AI upsell expansion. Adoption depth — DAU over MAU above 40%, meaning users are coming back daily. Time to Value under 14 days from signup to first meaningful insight. Logo churn below 8%. Cost to Serve declining 20% year on year through automation. And Feature Value Ratio — the percentage of shipped features with more than 10% adoption after 30 days.</p>
+<p>These aren't just reported quarterly. There's a clear cadence — daily standups, weekly discovery syncs, bi-weekly sprint demos, monthly roadmap reviews, and quarterly OKR resets.</p>
 <p><em>Transition:</em> There are also risks we need to be honest about.</p>`,
 
-    15: `<p><strong>Risks & trade-offs in a PE environment.</strong></p>
-<p>Be candid. PE cycles demand speed — but cutting corners on platform foundations creates tech debt that compounds.</p>
-<p><em>Action:</em> Walk through each risk card and the proposed mitigation.</p>
-<p><em>Transition:</em> With those risks understood, let me walk you through the 12-month execution roadmap.</p>`,
+    14: `<p><strong>PE Context — Risks &amp; Trade-offs</strong></p>
+<p>Let me be direct about the key risks and trade-offs in a PE-backed cycle. Speed versus quality — I bias toward shipping fast with feature flags, but never compromise on data integrity. For ECA, wrong data costs trust permanently. Platform versus bespoke — I'll ring-fence 80% or more of engineering for scalable features. Growth versus margin — AI and data services improve both; invest in self-serve early. New versus existing — NRR is the PE metric, so I'll protect expansion revenue over net-new development in year one. Build versus buy — build the intelligence layer, it's the moat; buy commodity features. And migration risk — we run parallel for key accounts and migrate in cohorts, not a big bang.</p>
+<p><em>Key message:</em> Every trade-off is documented, visible, and reversible.</p>
+<p><em>Transition:</em> So what does this all mean for customers?</p>`,
 
-    16: `<p><strong>12-Month Execution Roadmap.</strong></p>
-<p>Walk through Q1–Q4: Foundation &amp; Quick Wins (retain enterprise, churn &lt;8%), Insight Layer (NRR +8pp, AI upsell), Platform Expansion (land mid-market, +40 logos), Intelligence Suite (LTV +35%, NRR &gt;115%).</p>
-<p><em>Action:</em> Emphasise each quarter maps to ICP and revenue impact. Highlight the three trade-off calls at the bottom: platform over bespoke, retention before acquisition, every quarter ships value.</p>
-<p><em>Transition:</em> Now let me close with the overarching goal.</p>`,
+    15: `<p><strong>Customer Outcomes</strong></p>
+<p>For customers, this all translates into four outcomes: faster decisions powered by real-time data, reduced risk through proactive compliance management, lower cost from optimised operational spend across moves, and a better experience — relocation that feels genuinely supported.</p>
+<p><em>Transition:</em> And for the business…</p>`,
 
-    17: `<p><strong>Closing — rally the room.</strong></p>
-<p>Repeat the key message: Build the platform organisations rely on to manage global mobility.</p>
-<p><em>Action:</em> End with energy and conviction. Thank the audience. Open for questions.</p>`
+    16: `<p><strong>Revenue Growth</strong></p>
+<p>A stronger platform drives revenue growth. £8 million in year one, growing to £11 million, then £16 million, and £22 million by year four — fuelled by higher product stickiness, increased subscription value, new data services revenue, and AI-driven premium capabilities.</p>
+<p><em>Key message:</em> Experience and revenue grow together.</p>
+<p><em>Transition:</em> Let me close with how I lead through this.</p>`,
+
+    17: `<p><strong>Leadership Approach</strong></p>
+<p>My leadership approach balances four things: strategy — setting the long-term platform direction; execution — delivering incremental value consistently; customer insight — staying close to user needs and pain; and technical reality — grounding ambition in what's achievable.</p>
+<p><em>Key message:</em> The job is turning product ambition into delivered value.</p>
+<p><em>Transition:</em> Which brings me to the closing thought.</p>`,
+
+    18: `<p><strong>Close</strong></p>
+<p>The mission is clear: build the platform that organisations rely on to manage global mobility in an increasingly complex world.</p>
+<p>Thank you. I'm happy to take questions.</p>`
   };
 
   const TITLES = {
@@ -237,18 +261,34 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Manrope',system-ui
     8: 'Who We Target First and Why',
     9: 'Double Down on Strengths, Stop What Doesn\'t Compound',
     10: 'Discovery and Delivery Run in Parallel',
-    11: 'How We Prioritise',
-    12: 'Handling Urgent Requests',
-    13: 'Partner with Sales & CS',
-    14: 'Six Metrics That Prove Product Value',
-    15: 'Key Risks & Trade-offs in a Fast PE Cycle',
-    16: '12-Month Execution Roadmap',
-    17: 'The Goal'
+    11: 'How We Prioritise — and Handle Urgent Requests',
+    12: 'Partner with Sales & CS',
+    13: 'Six Metrics That Prove Product Value',
+    14: 'Key Risks & Trade-offs in a Fast PE Cycle',
+    15: 'For Customers This Means',
+    16: 'A Stronger Platform Drives Revenue Growth',
+    17: 'Leadership Approach',
+    18: 'The Mission'
   };
+
+  // ═══ LOAD SAVED NOTES ═══
+  const STORAGE_KEY = 'smartr-deck-notes';
+  let NOTES = Object.assign({}, DEFAULT_NOTES);
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      Object.keys(parsed).forEach(k => { NOTES[k] = parsed[k]; });
+    }
+  } catch(e) { console.warn('Could not load saved notes', e); }
+
+  function saveNotesToStorage(){
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(NOTES)); } catch(e) {}
+  }
 
   // ═══ STATE ═══
   let currentSlide = 0;
-  let totalSlides = 15;
+  let totalSlides = 18;
   const channel = new BroadcastChannel('smartr-deck');
 
   // ═══ DOM REFS ═══
@@ -281,7 +321,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Manrope',system-ui
     slideTitle.textContent = TITLES[num] || `Slide ${num}`;
     slideCounter.textContent = `Slide ${num} of ${totalSlides}`;
     navCounter.textContent = `${num} / ${totalSlides}`;
-    notesText.innerHTML = NOTES[num] || '<p style="color:rgba(255,255,255,.3)">No notes for this slide. Edit presenter.html to add your script.</p>';
+    notesText.innerHTML = NOTES[num] || '';
 
     // Tell iframes to navigate
     sendToIframe(iframeCurrent, currentSlide);
@@ -307,23 +347,39 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Manrope',system-ui
   }
 
   // ═══ NAVIGATION ═══
+  function saveInlineNotes(){
+    const num = currentSlide + 1;
+    const html = notesText.innerHTML.trim();
+    NOTES[num] = html;
+    saveNotesToStorage();
+  }
+
   function goTo(index){
     if (index < 0 || index >= totalSlides) return;
+    saveInlineNotes();
     currentSlide = index;
     channel.postMessage({type: 'goto', index: currentSlide});
     updatePresenter();
     startSlideTimer();
   }
 
-  document.getElementById('btnPrev').addEventListener('click', () => goTo(currentSlide - 1));
-  document.getElementById('btnNext').addEventListener('click', () => goTo(currentSlide + 1));
+  document.getElementById('btnPrev').addEventListener('click', () => navigatePrev());
+  document.getElementById('btnNext').addEventListener('click', () => navigateNext());
   document.getElementById('btnFirst').addEventListener('click', () => goTo(0));
   document.getElementById('btnLast').addEventListener('click', () => goTo(totalSlides - 1));
 
-  // Keyboard navigation
+  // Keyboard navigation (disabled while editing notes inline)
+  function navigateNext(){
+    channel.postMessage({type: 'next'});
+  }
+  function navigatePrev(){
+    channel.postMessage({type: 'prev'});
+  }
+
   document.addEventListener('keydown', e => {
-    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') { e.preventDefault(); goTo(currentSlide + 1); }
-    if (e.key === 'ArrowLeft' || e.key === 'Backspace') { e.preventDefault(); goTo(currentSlide - 1); }
+    if (notesText.contains(document.activeElement) || e.target === notesText) return;
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') { e.preventDefault(); navigateNext(); }
+    if (e.key === 'ArrowLeft' || e.key === 'Backspace') { e.preventDefault(); navigatePrev(); }
     if (e.key === 'Home') { e.preventDefault(); goTo(0); }
     if (e.key === 'End') { e.preventDefault(); goTo(totalSlides - 1); }
   });
@@ -393,14 +449,15 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Manrope',system-ui
     7: 150,  // AI features — lots of detail
     8: 90,   // Market focus
     9: 90,   // Differentiation
-    10: 90,  // Dual-track
-    11: 120, // Governance
+    10: 120, // Dual-track
+    11: 120, // Governance & urgent requests
     12: 90,  // Partnering model
     13: 120, // Measurement
     14: 120, // PE context
-    15: 90,  // Leadership pillars
-    16: 90,  // Leadership pillars
-    17: 60   // Close
+    15: 60,  // Customer outcomes
+    16: 60,  // Revenue growth
+    17: 90,  // Leadership approach
+    18: 45   // Close
   };
   const DEFAULT_BUDGET = 90;
 
@@ -458,6 +515,59 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Manrope',system-ui
     if (e.data.type === 'smartr-ready') {
       updatePresenter();
     }
+  });
+
+  // ═══ INLINE EDITABLE NOTES ═══
+  const notesSaved = document.getElementById('notesSaved');
+  let saveTimeout = null;
+
+  function flashSaved(){
+    notesSaved.classList.add('show');
+    clearTimeout(saveTimeout);
+    saveTimeout = setTimeout(() => notesSaved.classList.remove('show'), 1500);
+  }
+
+  // Auto-save on every edit (debounced)
+  let typingTimeout = null;
+  notesText.addEventListener('input', () => {
+    clearTimeout(typingTimeout);
+    typingTimeout = setTimeout(() => {
+      saveInlineNotes();
+      flashSaved();
+    }, 800);
+  });
+
+  // ═══ EXPORT / IMPORT NOTES ═══
+  document.getElementById('btnDownloadNotes').addEventListener('click', () => {
+    saveInlineNotes();
+    const blob = new Blob([JSON.stringify(NOTES, null, 2)], {type: 'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'presenter-notes.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  const fileInput = document.getElementById('notesFileInput');
+  document.getElementById('btnUploadNotes').addEventListener('click', () => fileInput.click());
+  fileInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const parsed = JSON.parse(reader.result);
+        Object.keys(parsed).forEach(k => { NOTES[k] = parsed[k]; });
+        saveNotesToStorage();
+        updatePresenter();
+        flashSaved();
+      } catch(err) {
+        alert('Invalid notes file. Expected a JSON object with slide numbers as keys.');
+      }
+    };
+    reader.readAsText(file);
+    fileInput.value = '';
   });
 
   // ═══ INIT ═══

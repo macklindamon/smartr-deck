@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<title>Remote — Smartr Deck</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html,body{
+  width:100%;height:100%;overflow:hidden;
+  font-family:'Manrope',system-ui,sans-serif;
+  background:#111318;color:#fff;
+  -webkit-user-select:none;user-select:none;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+
+.remote{
+  display:flex;flex-direction:column;
+  height:100dvh;padding:16px;gap:12px;
+}
+
+/* ── Header ── */
+.header{text-align:center;padding:12px 0 4px}
+.header h1{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.35)}
+.slide-info{margin-top:8px}
+.slide-num{font-size:56px;font-weight:800;line-height:1;color:#fff}
+.slide-total{font-size:18px;font-weight:600;color:rgba(255,255,255,.3);margin-left:2px}
+.slide-title{font-size:15px;font-weight:600;color:rgba(255,255,255,.5);margin-top:6px;line-height:1.3;min-height:40px}
+
+/* ── Connection status ── */
+.status{
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  font-size:12px;font-weight:600;color:rgba(255,255,255,.3);
+}
+.status-dot{width:8px;height:8px;border-radius:50%;background:#444;transition:background .3s}
+.status-dot.connected{background:#4ade80}
+.status-dot.disconnected{background:#ef4444;animation:pulse 1.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ── Nav area ── */
+.nav-area{
+  flex:1;display:grid;grid-template-columns:1fr 1fr;gap:12px;
+  min-height:0;
+}
+
+.nav-btn{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  border-radius:16px;border:2px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.04);
+  font-family:inherit;color:#fff;cursor:pointer;
+  transition:all .15s;gap:8px;
+  -webkit-tap-highlight-color:transparent;
+}
+.nav-btn:active{transform:scale(.96);background:rgba(94,36,194,.3);border-color:rgba(94,36,194,.5)}
+.nav-btn svg{width:48px;height:48px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:.6}
+.nav-btn span{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;opacity:.5}
+
+/* ── Bottom row ── */
+.bottom-row{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;
+}
+.small-btn{
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  padding:14px;border-radius:12px;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.04);
+  font-family:inherit;font-size:13px;font-weight:700;
+  color:rgba(255,255,255,.4);cursor:pointer;
+  transition:all .15s;
+}
+.small-btn:active{background:rgba(255,255,255,.1);color:#fff}
+.small-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+</style>
+</head>
+<body>
+
+<div class="remote">
+  <div class="header">
+    <h1>Smartr Deck Remote</h1>
+    <div class="slide-info">
+      <span class="slide-num" id="slideNum">1</span>
+      <span class="slide-total" id="slideTotal">/ 18</span>
+      <div class="slide-title" id="slideTitle">Connecting…</div>
+    </div>
+  </div>
+
+  <div class="status">
+    <span class="status-dot" id="statusDot"></span>
+    <span id="statusText">Connecting…</span>
+  </div>
+
+  <div class="nav-area">
+    <button class="nav-btn" id="btnPrev" aria-label="Previous slide">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      <span>Prev</span>
+    </button>
+    <button class="nav-btn" id="btnNext" aria-label="Next slide">
+      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      <span>Next</span>
+    </button>
+  </div>
+
+  <div class="bottom-row">
+    <button class="small-btn" id="btnFirst" aria-label="First slide">
+      <svg viewBox="0 0 24 24"><polyline points="11 17 6 12 11 7"/><polyline points="18 17 13 12 18 7"/></svg>
+      First
+    </button>
+    <button class="small-btn" id="btnLast" aria-label="Last slide">
+      Last
+      <svg viewBox="0 0 24 24"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+(function(){
+  const TITLES = {
+    1: 'Shaping the Future of Global Mobility Platforms',
+    2: 'Global Mobility is Becoming More Complex',
+    3: 'What Customers Really Want',
+    4: "ECA's Three Powerful Assets",
+    5: 'A Unified Platform for Global Mobility Intelligence',
+    6: 'The Platform Evolves in Three Stages',
+    7: 'AI: Embedded Intelligence, Not a Feature',
+    8: 'Who We Target First and Why',
+    9: "Double Down on Strengths",
+    10: 'Discovery and Delivery Run in Parallel',
+    11: 'How We Prioritise',
+    12: 'Partner with Sales & CS',
+    13: 'Six Metrics That Prove Product Value',
+    14: 'Key Risks & Trade-offs',
+    15: 'For Customers This Means',
+    16: 'Revenue Growth',
+    17: 'Leadership Approach',
+    18: 'The Mission'
+  };
+
+  const slideNum   = document.getElementById('slideNum');
+  const slideTotal = document.getElementById('slideTotal');
+  const slideTitle = document.getElementById('slideTitle');
+  const statusDot  = document.getElementById('statusDot');
+  const statusText = document.getElementById('statusText');
+
+  let state = { current: 0, total: 18 };
+  let connected = false;
+
+  // ── SSE connection ──
+  let evtSource;
+  function connect() {
+    const base = window.location.origin;
+    evtSource = new EventSource(base + '/sse');
+
+    evtSource.onopen = () => {
+      connected = true;
+      statusDot.className = 'status-dot connected';
+      statusText.textContent = 'Connected';
+    };
+
+    evtSource.onmessage = (e) => {
+      try {
+        const data = JSON.parse(e.data);
+        if (data.type === 'state') {
+          state.current = data.current;
+          state.total = data.total;
+          updateUI();
+        }
+      } catch (_) {}
+    };
+
+    evtSource.onerror = () => {
+      connected = false;
+      statusDot.className = 'status-dot disconnected';
+      statusText.textContent = 'Reconnecting…';
+      evtSource.close();
+      setTimeout(connect, 2000);
+    };
+  }
+
+  function updateUI() {
+    const num = state.current + 1;
+    slideNum.textContent = num;
+    slideTotal.textContent = '/ ' + state.total;
+    slideTitle.textContent = TITLES[num] || 'Slide ' + num;
+  }
+
+  // ── Send commands ──
+  function sendCmd(action, index) {
+    const base = window.location.origin;
+    fetch(base + '/cmd', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action, index }),
+    }).catch(() => {});
+  }
+
+  // ── Button handlers ──
+  document.getElementById('btnPrev').addEventListener('click',  () => sendCmd('prev'));
+  document.getElementById('btnNext').addEventListener('click',  () => sendCmd('next'));
+  document.getElementById('btnFirst').addEventListener('click', () => sendCmd('goto', 0));
+  document.getElementById('btnLast').addEventListener('click',  () => sendCmd('goto', state.total - 1));
+
+  // ── Swipe ──
+  let touchStartX = 0;
+  document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  document.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 60) {
+      dx < 0 ? sendCmd('next') : sendCmd('prev');
+    }
+  }, { passive: true });
+
+  // ── Volume button support (works on some Android devices) ──
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'VolumeDown') sendCmd('next');
+    if (e.key === 'ArrowLeft' || e.key === 'VolumeUp') sendCmd('prev');
+  });
+
+  // ── Prevent sleep on iOS/Android ──
+  let wakeLock = null;
+  async function requestWakeLock() {
+    try {
+      if ('wakeLock' in navigator) {
+        wakeLock = await navigator.wakeLock.request('screen');
+      }
+    } catch (_) {}
+  }
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') requestWakeLock();
+  });
+  requestWakeLock();
+
+  connect();
+  updateUI();
+})();
+</script>
+
+</body>
+</html>
