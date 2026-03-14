@@ -628,7 +628,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Manrope',system-ui
 .metric-card .metric-mini{display:flex;align-items:flex-end;justify-content:center;gap:4px;height:36px;margin-top:14px}
 .metric-card .metric-mini span{display:block;width:8px;border-radius:4px;transition:height .5s var(--ease)}
 @keyframes audioWave{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.35)}}
-[data-slide="15"] .metric-mini span.wave{animation:audioWave var(--wave-dur,.8s) var(--wave-del,0s) ease-in-out infinite;transform-origin:bottom}
+[data-slide="14"] .metric-mini span.wave{animation:audioWave var(--wave-dur,.8s) var(--wave-del,0s) ease-in-out infinite;transform-origin:bottom}
 
 /* ── Cadence timeline ──────────────────────────────── */
 .cadence-row{display:flex;align-items:flex-start;gap:0;margin-top:48px;width:100%;max-width:1680px;position:relative}
@@ -667,7 +667,10 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Manrope',system-ui
 .esc-step p{font-size:13px;font-weight:500;max-width:140px;line-height:1.35}
 .theme-dark .esc-step h4{color:#fff}
 .theme-dark .esc-step p{color:rgba(255,255,255,.45)}
+.theme-white .esc-step h4{color:var(--navy)}
+.theme-white .esc-step p{color:var(--text-body)}
 .esc-arrow{font-size:20px;color:var(--purple-light);margin:0 6px;padding-top:0}
+.theme-white .esc-arrow{color:var(--purple)}
 
 /* ── Kill / stop items ─────────────────────────────── */
 .stop-item{position:relative;padding:22px 24px;border-radius:20px;display:flex;align-items:center;gap:14px}
@@ -1435,53 +1438,12 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Manrope',system-ui
 </section>
 
 <!-- ═══════════════════════════════════════════════════ -->
-<!-- SLIDE 5 — Platform Vision (question cards)         -->
-<!-- ═══════════════════════════════════════════════════ -->
-<section class="slide theme-white" data-slide="5">
-  <div class="deco purple" style="width:500px;height:500px;bottom:-200px;left:-200px"></div>
-  <div class="deco pink" style="width:300px;height:300px;top:-100px;right:-80px"></div>
-  <div class="slide-inner">
-    <div class="label-tag anim" data-delay="50">Platform Vision</div>
-    <h2 class="slide-heading anim" data-delay="100">A unified platform for<br><span class="accent-purple">global mobility intelligence</span></h2>
-    <p class="body-text anim" data-delay="250" style="text-align:center;margin-top:16px;max-width:760px">Not just tracking moves. Helping organisations answer critical questions:</p>
-
-    <div class="card-grid cols-4" style="margin-top:48px;max-width:1680px">
-      <div class="card border-pink anim" data-delay="400" style="text-align:center;padding:44px 28px">
-        <div class="icon pink-bg" style="margin:0 auto 20px;width:72px;height:72px;border-radius:50%"><i data-lucide="map-pin"></i></div>
-        <h3 style="line-height:1.35">Where should we relocate talent?</h3>
-      </div>
-      <div class="card border-teal anim" data-delay="550" style="text-align:center;padding:44px 28px">
-        <div class="icon teal-bg" style="margin:0 auto 20px;width:72px;height:72px;border-radius:50%"><i data-lucide="pound-sterling"></i></div>
-        <h3 style="line-height:1.35">What will it cost?</h3>
-      </div>
-      <div class="card border-purple anim" data-delay="700" style="text-align:center;padding:44px 28px">
-        <div class="icon purple-bg" style="margin:0 auto 20px;width:72px;height:72px;border-radius:50%"><i data-lucide="shield"></i></div>
-        <h3 style="line-height:1.35">What compliance risks exist?</h3>
-      </div>
-      <div class="card border-lime anim" data-delay="850" style="text-align:center;padding:44px 28px">
-        <div class="icon lime-bg" style="margin:0 auto 20px;width:72px;height:72px;border-radius:50%"><i data-lucide="globe"></i></div>
-        <h3 style="line-height:1.35">How do we optimise globally?</h3>
-      </div>
-    </div>
-
-    <div class="anim" data-delay="1000" style="margin-top:44px;display:flex;align-items:center;justify-content:center;gap:0;width:100%;max-width:1680px">
-      <div style="flex:1;height:2px;background:linear-gradient(90deg,transparent,var(--purple-light))"></div>
-      <div class="platform-badge">
-        <span style="font-size:15px;font-weight:800;letter-spacing:.08em;text-transform:uppercase">Global Mobility Platform</span>
-      </div>
-      <div style="flex:1;height:2px;background:linear-gradient(90deg,var(--purple-light),transparent)"></div>
-    </div>
-  </div>
-  <div class="slide-logo"><svg width="80" height="31" viewBox="0 0 80 31" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M64.375 24.18C59.55 24.18 55.625 20.2864 55.625 15.5C55.625 10.7136 59.55 6.82 64.375 6.82C69.2 6.82 73.125 10.7136 73.125 15.5C73.125 20.2864 69.2 24.18 64.375 24.18ZM7.39375 12.555C8.6125 9.2132 11.8417 6.82 15.625 6.82C16.7542 6.82 17.8312 7.03493 18.8229 7.42347C21.1542 8.33487 23 10.2114 23.8563 12.555H7.39375ZM80 0.628267H74.8104L73.1417 2.66807C71.8146 1.77527 70.3438 1.0788 68.7687 0.622067C67.375 0.217 65.9021 0 64.375 0C62.8479 0 61.375 0.217 59.9833 0.622067C56.875 1.52313 54.1667 3.35833 52.1896 5.80113C50.0396 8.4568 48.7521 11.8296 48.7521 15.5C48.7521 20.2864 44.8271 24.18 40.0021 24.18C35.1771 24.18 31.2521 20.2864 31.2521 15.5C31.2521 10.7136 35.1771 6.82 40.0021 6.82C42.0917 6.82 44.0125 7.5516 45.5187 8.76887L49.8583 3.47407C48.2667 2.1886 46.4167 1.209 44.3937 0.622067C43 0.217 41.5271 0 40.0021 0C38.4771 0 37.0021 0.217 35.6104 0.622067C32.5 1.52313 29.7938 3.35833 27.8167 5.80113C25.8396 3.35833 23.1312 1.52313 20.0208 0.622067C19.6292 0.5084 19.2313 0.4092 18.8271 0.326533C17.7938 0.113667 16.725 0.00206667 15.6292 0.00206667C14.1042 0.00206667 12.6292 0.219067 11.2375 0.624133C4.74167 2.5048 0 8.45267 0 15.5C0 22.5473 4.78333 28.5469 11.3167 30.4027C12.6854 30.7913 14.1292 31 15.625 31C16.7208 31 17.7896 30.8884 18.8229 30.6755C19.1979 30.597 19.5687 30.5081 19.9312 30.4048C21.9812 29.822 23.8583 28.8362 25.4688 27.5363L21.1333 22.2373C20.4417 22.7953 19.6625 23.25 18.8208 23.5786C17.8292 23.9671 16.7521 24.1821 15.6229 24.1821C11.8396 24.1821 8.61042 21.7889 7.39167 18.4471H24.6542C25.1437 20.9705 26.2479 23.2748 27.8083 25.2009C27.8083 25.203 27.8125 25.2051 27.8146 25.2071C29.8104 27.6685 32.5458 29.512 35.6896 30.4048C37.0583 30.7933 38.5021 31.0021 39.9979 31.0021C41.4938 31.0021 42.9375 30.7933 44.3062 30.4048C47.4521 29.512 50.1896 27.6644 52.1854 25.2009C54.1813 27.6665 56.9208 29.512 60.0646 30.4048C61.4333 30.7933 62.8771 31.0021 64.3729 31.0021C65.8687 31.0021 67.3125 30.7933 68.6813 30.4048C70.2812 29.9501 71.7771 29.2495 73.1229 28.3443L74.8083 30.4048H79.9979V15.7521V0.628267H80Z" fill="#E5004D"/></svg></div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════ -->
 <!-- SLIDE 6 — Platform Evolution (timeline + mini UIs) -->
 <!-- ═══════════════════════════════════════════════════ -->
 <section class="slide theme-dark" data-slide="6">
   <div class="deco purple" style="width:500px;height:500px;top:-200px;left:-150px"></div>
   <div class="slide-inner">
-    <div class="label-tag anim" data-delay="50">Platform Roadmap</div>
+    <div class="label-tag anim" data-delay="50">Platform Horizons</div>
     <h2 class="slide-heading anim" data-delay="100" style="color:#fff">The platform evolves in<br><span class="accent-purple">three stages</span></h2>
     <div class="timeline">
       <div class="timeline-stage anim" data-delay="400" data-lit="700">
@@ -1571,49 +1533,115 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Manrope',system-ui
   <div class="slide-logo"><svg width="80" height="31" viewBox="0 0 80 31" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M64.375 24.18C59.55 24.18 55.625 20.2864 55.625 15.5C55.625 10.7136 59.55 6.82 64.375 6.82C69.2 6.82 73.125 10.7136 73.125 15.5C73.125 20.2864 69.2 24.18 64.375 24.18ZM7.39375 12.555C8.6125 9.2132 11.8417 6.82 15.625 6.82C16.7542 6.82 17.8312 7.03493 18.8229 7.42347C21.1542 8.33487 23 10.2114 23.8563 12.555H7.39375ZM80 0.628267H74.8104L73.1417 2.66807C71.8146 1.77527 70.3438 1.0788 68.7687 0.622067C67.375 0.217 65.9021 0 64.375 0C62.8479 0 61.375 0.217 59.9833 0.622067C56.875 1.52313 54.1667 3.35833 52.1896 5.80113C50.0396 8.4568 48.7521 11.8296 48.7521 15.5C48.7521 20.2864 44.8271 24.18 40.0021 24.18C35.1771 24.18 31.2521 20.2864 31.2521 15.5C31.2521 10.7136 35.1771 6.82 40.0021 6.82C42.0917 6.82 44.0125 7.5516 45.5187 8.76887L49.8583 3.47407C48.2667 2.1886 46.4167 1.209 44.3937 0.622067C43 0.217 41.5271 0 40.0021 0C38.4771 0 37.0021 0.217 35.6104 0.622067C32.5 1.52313 29.7938 3.35833 27.8167 5.80113C25.8396 3.35833 23.1312 1.52313 20.0208 0.622067C19.6292 0.5084 19.2313 0.4092 18.8271 0.326533C17.7938 0.113667 16.725 0.00206667 15.6292 0.00206667C14.1042 0.00206667 12.6292 0.219067 11.2375 0.624133C4.74167 2.5048 0 8.45267 0 15.5C0 22.5473 4.78333 28.5469 11.3167 30.4027C12.6854 30.7913 14.1292 31 15.625 31C16.7208 31 17.7896 30.8884 18.8229 30.6755C19.1979 30.597 19.5687 30.5081 19.9312 30.4048C21.9812 29.822 23.8583 28.8362 25.4688 27.5363L21.1333 22.2373C20.4417 22.7953 19.6625 23.25 18.8208 23.5786C17.8292 23.9671 16.7521 24.1821 15.6229 24.1821C11.8396 24.1821 8.61042 21.7889 7.39167 18.4471H24.6542C25.1437 20.9705 26.2479 23.2748 27.8083 25.2009C27.8083 25.203 27.8125 25.2051 27.8146 25.2071C29.8104 27.6685 32.5458 29.512 35.6896 30.4048C37.0583 30.7933 38.5021 31.0021 39.9979 31.0021C41.4938 31.0021 42.9375 30.7933 44.3062 30.4048C47.4521 29.512 50.1896 27.6644 52.1854 25.2009C54.1813 27.6665 56.9208 29.512 60.0646 30.4048C61.4333 30.7933 62.8771 31.0021 64.3729 31.0021C65.8687 31.0021 67.3125 30.7933 68.6813 30.4048C70.2812 29.9501 71.7771 29.2495 73.1229 28.3443L74.8083 30.4048H79.9979V15.7521V0.628267H80Z" fill="#E5004D"/></svg></div>
 </section>
 
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SLIDE 5 — Platform Vision (question cards)         -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="slide theme-white" data-slide="5">
+  <div class="deco purple" style="width:500px;height:500px;bottom:-200px;left:-200px"></div>
+  <div class="deco pink" style="width:300px;height:300px;top:-100px;right:-80px"></div>
+  <div class="slide-inner">
+    <div class="label-tag anim" data-delay="50">Platform Vision</div>
+    <h2 class="slide-heading anim" data-delay="100">A unified platform for<br><span class="accent-purple">global mobility intelligence</span></h2>
+    <p class="body-text anim" data-delay="250" style="text-align:center;margin-top:16px;max-width:760px">Not just tracking moves. Helping organisations answer critical questions:</p>
+
+    <div class="card-grid cols-4" style="margin-top:48px;max-width:1680px">
+      <div class="card border-pink anim" data-delay="400" style="text-align:center;padding:44px 28px">
+        <div class="icon pink-bg" style="margin:0 auto 20px;width:72px;height:72px;border-radius:50%"><i data-lucide="map-pin"></i></div>
+        <h3 style="line-height:1.35">Where should we relocate talent?</h3>
+      </div>
+      <div class="card border-teal anim" data-delay="550" style="text-align:center;padding:44px 28px">
+        <div class="icon teal-bg" style="margin:0 auto 20px;width:72px;height:72px;border-radius:50%"><i data-lucide="pound-sterling"></i></div>
+        <h3 style="line-height:1.35">What will it cost?</h3>
+      </div>
+      <div class="card border-purple anim" data-delay="700" style="text-align:center;padding:44px 28px">
+        <div class="icon purple-bg" style="margin:0 auto 20px;width:72px;height:72px;border-radius:50%"><i data-lucide="shield"></i></div>
+        <h3 style="line-height:1.35">What compliance risks exist?</h3>
+      </div>
+      <div class="card border-lime anim" data-delay="850" style="text-align:center;padding:44px 28px">
+        <div class="icon lime-bg" style="margin:0 auto 20px;width:72px;height:72px;border-radius:50%"><i data-lucide="globe"></i></div>
+        <h3 style="line-height:1.35">How do we optimise globally?</h3>
+      </div>
+    </div>
+
+    <div class="anim" data-delay="1000" style="margin-top:44px;display:flex;align-items:center;justify-content:center;gap:0;width:100%;max-width:1680px">
+      <div style="flex:1;height:2px;background:linear-gradient(90deg,transparent,var(--purple-light))"></div>
+      <div class="platform-badge">
+        <span style="font-size:15px;font-weight:800;letter-spacing:.08em;text-transform:uppercase">Global Mobility Platform</span>
+      </div>
+      <div style="flex:1;height:2px;background:linear-gradient(90deg,var(--purple-light),transparent)"></div>
+    </div>
+  </div>
+  <div class="slide-logo"><svg width="80" height="31" viewBox="0 0 80 31" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M64.375 24.18C59.55 24.18 55.625 20.2864 55.625 15.5C55.625 10.7136 59.55 6.82 64.375 6.82C69.2 6.82 73.125 10.7136 73.125 15.5C73.125 20.2864 69.2 24.18 64.375 24.18ZM7.39375 12.555C8.6125 9.2132 11.8417 6.82 15.625 6.82C16.7542 6.82 17.8312 7.03493 18.8229 7.42347C21.1542 8.33487 23 10.2114 23.8563 12.555H7.39375ZM80 0.628267H74.8104L73.1417 2.66807C71.8146 1.77527 70.3438 1.0788 68.7687 0.622067C67.375 0.217 65.9021 0 64.375 0C62.8479 0 61.375 0.217 59.9833 0.622067C56.875 1.52313 54.1667 3.35833 52.1896 5.80113C50.0396 8.4568 48.7521 11.8296 48.7521 15.5C48.7521 20.2864 44.8271 24.18 40.0021 24.18C35.1771 24.18 31.2521 20.2864 31.2521 15.5C31.2521 10.7136 35.1771 6.82 40.0021 6.82C42.0917 6.82 44.0125 7.5516 45.5187 8.76887L49.8583 3.47407C48.2667 2.1886 46.4167 1.209 44.3937 0.622067C43 0.217 41.5271 0 40.0021 0C38.4771 0 37.0021 0.217 35.6104 0.622067C32.5 1.52313 29.7938 3.35833 27.8167 5.80113C25.8396 3.35833 23.1312 1.52313 20.0208 0.622067C19.6292 0.5084 19.2313 0.4092 18.8271 0.326533C17.7938 0.113667 16.725 0.00206667 15.6292 0.00206667C14.1042 0.00206667 12.6292 0.219067 11.2375 0.624133C4.74167 2.5048 0 8.45267 0 15.5C0 22.5473 4.78333 28.5469 11.3167 30.4027C12.6854 30.7913 14.1292 31 15.625 31C16.7208 31 17.7896 30.8884 18.8229 30.6755C19.1979 30.597 19.5687 30.5081 19.9312 30.4048C21.9812 29.822 23.8583 28.8362 25.4688 27.5363L21.1333 22.2373C20.4417 22.7953 19.6625 23.25 18.8208 23.5786C17.8292 23.9671 16.7521 24.1821 15.6229 24.1821C11.8396 24.1821 8.61042 21.7889 7.39167 18.4471H24.6542C25.1437 20.9705 26.2479 23.2748 27.8083 25.2009C27.8083 25.203 27.8125 25.2051 27.8146 25.2071C29.8104 27.6685 32.5458 29.512 35.6896 30.4048C37.0583 30.7933 38.5021 31.0021 39.9979 31.0021C41.4938 31.0021 42.9375 30.7933 44.3062 30.4048C47.4521 29.512 50.1896 27.6644 52.1854 25.2009C54.1813 27.6665 56.9208 29.512 60.0646 30.4048C61.4333 30.7933 62.8771 31.0021 64.3729 31.0021C65.8687 31.0021 67.3125 30.7933 68.6813 30.4048C70.2812 29.9501 71.7771 29.2495 73.1229 28.3443L74.8083 30.4048H79.9979V15.7521V0.628267H80Z" fill="#E5004D"/></svg></div>
+</section>
+
 
 <!-- SLIDE 7 — AI (purple + donut charts)               -->
 <!-- ═══════════════════════════════════════════════════ -->
 <section class="slide theme-purple" data-slide="7">
   <div class="deco pink" style="width:400px;height:400px;bottom:-150px;right:-100px;opacity:.08"></div>
   <div class="slide-inner">
+    <div class="label-tag anim" data-delay="50">Platform Vision</div>
     <h2 class="slide-heading anim" data-delay="100" style="color:#fff">AI should not be a feature.<br><span style="color:var(--lime)">It should be embedded intelligence.</span></h2>
     <div class="card-grid cols-4" style="margin-top:52px;max-width:1680px">
       <div class="card anim clickable" data-delay="400" data-detail="predict-costs">
-        <div class="donut-wrap">
-          <svg width="160" height="160" viewBox="0 0 160 160"><circle cx="80" cy="80" r="54" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="10"/><circle class="donut-ring" cx="80" cy="80" r="54" fill="none" stroke="var(--lime)" stroke-width="10" style="--target:103"/></svg>
-          <div class="donut-center" style="color:#fff">65%</div>
+        <div style="width:100%;padding:14px 16px;border-radius:12px;background:rgba(255,255,255,.06);margin-bottom:16px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+            <div style="width:8px;height:8px;border-radius:50%;background:var(--lime)"></div>
+            <span style="font-size:11px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em">Cost Forecast</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:6px">
+            <span style="font-size:28px;font-weight:800;color:#fff">&pound;142K</span>
+            <span style="font-size:13px;font-weight:600;color:var(--lime)">94% confidence</span>
+          </div>
+          <div style="height:6px;border-radius:3px;background:rgba(255,255,255,.08);overflow:hidden"><div style="width:94%;height:100%;border-radius:3px;background:var(--lime)"></div></div>
         </div>
-        <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--lime);margin-bottom:2px">&#9679; Live Now</div>
         <h3>Predict Costs</h3>
-        <p>Forecast relocation costs with data driven models</p>
+        <p>Cost predictions appear the moment a relocation is initiated</p>
       </div>
       <div class="card anim clickable" data-delay="550" data-detail="identify-risks">
-        <div class="donut-wrap">
-          <svg width="160" height="160" viewBox="0 0 160 160"><circle cx="80" cy="80" r="54" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="10"/><circle class="donut-ring" cx="80" cy="80" r="54" fill="none" stroke="var(--pink)" stroke-width="10" style="--target:75"/></svg>
-          <div class="donut-center" style="color:#fff">75%</div>
+        <div style="width:100%;padding:14px 16px;border-radius:12px;background:rgba(255,255,255,.06);margin-bottom:16px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+            <div style="width:8px;height:8px;border-radius:50%;background:var(--pink)"></div>
+            <span style="font-size:11px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em">Risk Monitor</span>
+          </div>
+          <div style="display:flex;gap:8px;margin-bottom:8px">
+            <div style="flex:1;padding:6px 0;border-radius:8px;background:rgba(229,0,77,.15);text-align:center"><span style="font-size:20px;font-weight:800;color:var(--pink)">12</span><div style="font-size:10px;color:rgba(255,255,255,.45);margin-top:2px">Critical</div></div>
+            <div style="flex:1;padding:6px 0;border-radius:8px;background:rgba(255,180,0,.12);text-align:center"><span style="font-size:20px;font-weight:800;color:#ffb400">38</span><div style="font-size:10px;color:rgba(255,255,255,.45);margin-top:2px">Warning</div></div>
+            <div style="flex:1;padding:6px 0;border-radius:8px;background:rgba(163,245,199,.1);text-align:center"><span style="font-size:20px;font-weight:800;color:#4ade80">797</span><div style="font-size:10px;color:rgba(255,255,255,.45);margin-top:2px">Clear</div></div>
+          </div>
         </div>
-        <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--pink);margin-bottom:2px">&#9679; H1 2026</div>
         <h3>Identify Risks</h3>
-        <p>Surface compliance risks before they materialise</p>
+        <p>Compliance risks are flagged automatically &mdash; before anyone asks</p>
       </div>
       <div class="card anim clickable" data-delay="700" data-detail="recommend">
-        <div class="donut-wrap">
-          <svg width="160" height="160" viewBox="0 0 160 160"><circle cx="80" cy="80" r="54" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="10"/><circle class="donut-ring" cx="80" cy="80" r="54" fill="none" stroke="var(--teal)" stroke-width="10" style="--target:60"/></svg>
-          <div class="donut-center" style="color:#fff">80%</div>
+        <div style="width:100%;padding:14px 16px;border-radius:12px;background:rgba(255,255,255,.06);margin-bottom:16px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+            <div style="width:8px;height:8px;border-radius:50%;background:var(--teal)"></div>
+            <span style="font-size:11px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em">Smart Recommendation</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;align-items:center;gap:8px"><div style="width:16px;height:16px;border-radius:50%;border:2px solid var(--teal);display:flex;align-items:center;justify-content:center"><div style="width:8px;height:8px;border-radius:50%;background:var(--teal)"></div></div><span style="font-size:13px;font-weight:700;color:#fff">Standard &pound;142K</span><span style="font-size:11px;color:var(--teal);font-weight:600">&#9733; Best fit</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><div style="width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,.15)"></div><span style="font-size:13px;color:rgba(255,255,255,.5)">Premium &pound;198K</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><div style="width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,.15)"></div><span style="font-size:13px;color:rgba(255,255,255,.5)">Lean &pound;97K</span></div>
+          </div>
         </div>
-        <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--teal);margin-bottom:2px">&#9679; H2 2026</div>
         <h3>Recommend</h3>
-        <p>Optimal move strategies powered by historical data</p>
+        <p>Package recommendations ready before you open the case</p>
       </div>
       <div class="card anim clickable" data-delay="850" data-detail="generate-insights">
-        <div class="donut-wrap">
-          <svg width="160" height="160" viewBox="0 0 160 160"><circle cx="80" cy="80" r="54" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="10"/><circle class="donut-ring" cx="80" cy="80" r="54" fill="none" stroke="var(--purple-light)" stroke-width="10" style="--target:45"/></svg>
-          <div class="donut-center" style="color:#fff">85%</div>
+        <div style="width:100%;padding:14px 16px;border-radius:12px;background:rgba(255,255,255,.06);margin-bottom:16px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+            <div style="width:8px;height:8px;border-radius:50%;background:var(--purple-light)"></div>
+            <span style="font-size:11px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em">AI Insights</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="display:flex;align-items:center;gap:8px"><div style="width:6px;height:6px;border-radius:50%;background:var(--pink);flex-shrink:0"></div><span style="font-size:12px;color:rgba(255,255,255,.7)">APAC housing +14% YoY</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><div style="width:6px;height:6px;border-radius:50%;background:var(--lime);flex-shrink:0"></div><span style="font-size:12px;color:rgba(255,255,255,.7)">Tax EQ overspend &pound;48K</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><div style="width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0"></div><span style="font-size:12px;color:rgba(255,255,255,.7)">&lt;6mo assignments declining</span></div>
+          </div>
         </div>
-        <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--purple-light);margin-bottom:2px">&#9679; H2 2026+</div>
         <h3>Generate Insights</h3>
-        <p>Policy insights from global mobility data</p>
+        <p>Trends and savings surface without a single query</p>
       </div>
     </div>
 
@@ -1622,7 +1650,8 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Manrope',system-ui
     <div class="detail-panel">
       <button class="detail-close" aria-label="Close">&times;</button>
       <h2>Predict Costs <span style="color:var(--lime)">&#9679;</span></h2>
-      <p class="detail-sub">AI powered cost forecasting gives organisations a complete financial picture before any relocation commitment is made.</p>
+      <p class="detail-sub">Cost predictions are embedded directly into the initiation workflow &mdash; no prompt, no query, no separate tool. The moment a move is created, the numbers are already there.</p>
+      <blockquote style="margin:0 0 20px;padding:14px 20px;border-left:3px solid var(--lime);background:rgba(163,245,199,.06);border-radius:0 10px 10px 0;font-style:normal;font-size:16px;line-height:1.6;color:var(--text-body)"><strong>Priya, HR Business Partner</strong> opens a new relocation initiation for London &rarr; Singapore. The predicted cost breakdown is already waiting &mdash; populated from 230 similar historic moves, adjusted for today&rsquo;s rates, housing indices, and school fees. She reviews, adjusts one line, and approves. She never typed a question.</blockquote>
       <div class="mock-ui">
         <div class="mock-sidebar">
           <div style="font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px">Navigation</div>
@@ -1666,7 +1695,8 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Manrope',system-ui
     <div class="detail-panel">
       <button class="detail-close" aria-label="Close">&times;</button>
       <h2>Identify Risks <span style="color:var(--pink)">&#9679;</span></h2>
-      <p class="detail-sub">Proactive compliance scanning surfaces regulatory, tax, and immigration risks before they become problems.</p>
+      <p class="detail-sub">Risk alerts are woven into everyday workflows &mdash; they surface inside dashboards, assignment records, and approval queues without anyone having to search for them.</p>
+      <blockquote style="margin:0 0 20px;padding:14px 20px;border-left:3px solid var(--pink);background:rgba(229,0,77,.04);border-radius:0 10px 10px 0;font-style:normal;font-size:16px;line-height:1.6;color:var(--text-body)"><strong>James, Compliance Lead</strong> starts his day. His dashboard already highlights 12 critical items &mdash; visa expiries, PE triggers, tax threshold breaches &mdash; ranked by urgency with recommended next actions. The system monitored 847 assignments overnight. James didn&rsquo;t run a report or ask a question. The risks were waiting for him.</blockquote>
       <div class="mock-ui">
         <div class="mock-sidebar">
           <div style="font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px">Navigation</div>
@@ -1700,7 +1730,8 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Manrope',system-ui
     <div class="detail-panel">
       <button class="detail-close" aria-label="Close">&times;</button>
       <h2>Recommend <span style="color:var(--teal)">&#9679;</span></h2>
-      <p class="detail-sub">AI powered recommendations suggest optimal relocation strategies based on historical patterns and organisational policy.</p>
+      <p class="detail-sub">When an assignment is created, optimal package scenarios are pre-built from historical patterns and policy rules &mdash; the advisor reviews and refines, they don&rsquo;t start from scratch.</p>
+      <blockquote style="margin:0 0 20px;padding:14px 20px;border-left:3px solid var(--teal);background:rgba(0,207,186,.06);border-radius:0 10px 10px 0;font-style:normal;font-size:16px;line-height:1.6;color:var(--text-body)"><strong>Laura, Mobility Advisor</strong> creates a London &rarr; Singapore assignment for a senior engineer. Three package scenarios are already modelled &mdash; ranked by cost, retention outcomes, and policy alignment. She selects &ldquo;Standard,&rdquo; tweaks the housing tier, and sends for approval. The AI did the heavy lifting before she arrived.</blockquote>
       <div class="mock-ui">
         <div class="mock-sidebar">
           <div style="font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px">Navigation</div>
@@ -1741,7 +1772,8 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Manrope',system-ui
     <div class="detail-panel">
       <button class="detail-close" aria-label="Close">&times;</button>
       <h2>Generate Insights <span style="color:var(--purple)">&#9679;</span></h2>
-      <p class="detail-sub">Turn global mobility data into actionable intelligence with AI generated reports and trend analysis.</p>
+      <p class="detail-sub">Insights are generated continuously from live programme data and surfaced inline &mdash; inside dashboards, approvals, and review screens &mdash; not locked behind a report builder.</p>
+      <blockquote style="margin:0 0 20px;padding:14px 20px;border-left:3px solid var(--purple);background:rgba(94,36,194,.05);border-radius:0 10px 10px 0;font-style:normal;font-size:16px;line-height:1.6;color:var(--text-body)"><strong>David, Head of Global Mobility</strong> opens his quarterly review. 23 insights are already waiting &mdash; APAC housing cost spikes, tax EQ overspend in EMEA, declining short-term assignment ROI &mdash; each with a recommended action and projected savings. He didn&rsquo;t ask. The platform delivered.</blockquote>
       <div class="mock-ui">
         <div class="mock-sidebar">
           <div style="font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px">Navigation</div>
@@ -1782,182 +1814,12 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Manrope',system-ui
 </section>
 
 
-<!-- ═══════════════════════════════════════════════════ -->
-<!-- SLIDE 8 — ICP & Market Segmentation                -->
-<!-- ═══════════════════════════════════════════════════ -->
-<section class="slide theme-white" data-slide="8">
-  <div class="deco purple" style="width:450px;height:450px;top:-180px;right:-120px"></div>
-  <div class="deco pink" style="width:250px;height:250px;bottom:-80px;left:-60px"></div>
-  <div class="slide-split">
-    <div class="slide-left" style="flex:.55">
-      <div class="label-tag anim" data-delay="50">Market Focus</div>
-      <h2 class="slide-heading anim" data-delay="100" style="text-align:left">Who we <span class="accent-purple">target first</span> and why</h2>
-      <p class="body-text anim" data-delay="150" style="font-size:30px;font-weight:500;line-height:1.6;color:var(--text-body);margin-top:10px;text-align:left">We land with the segments that feel the most pain, spend the most, and unlock the fastest expansion loops.</p>
-      <div style="margin-top:32px;display:flex;flex-direction:row;gap:24px">
-        <div class="card accent-top anim" data-delay="400" style="width:280px;height:260px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px 20px;box-shadow:0 4px 20px rgba(0,0,0,.08)">
-          <div class="icon purple-bg" style="width:64px;height:64px;display:flex;align-items:center;justify-content:center;margin:0 0 18px 0"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
-          <h3 style="margin:0;font-weight:600;font-size:22px">Enterprise Multinationals</h3>
-        </div>
-        <div class="card anim" data-delay="550" style="width:280px;height:260px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px 20px;border-top:3px solid var(--teal);box-shadow:0 4px 20px rgba(0,0,0,.08)">
-          <div class="icon teal-bg" style="width:64px;height:64px;display:flex;align-items:center;justify-content:center;margin:0 0 18px 0"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
-          <h3 style="margin:0;font-weight:600;font-size:22px">Mid-Market Growth</h3>
-        </div>
-        <div class="card anim" data-delay="700" style="width:280px;height:260px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px 20px;border-top:3px solid var(--pink);box-shadow:0 4px 20px rgba(0,0,0,.08)">
-          <div class="icon pink-bg" style="width:64px;height:64px;display:flex;align-items:center;justify-content:center;margin:0 0 18px 0"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
-          <h3 style="margin:0;font-weight:600;font-size:22px">Consultancies &amp; RMCs <span style="font-weight:400;font-size:15px">(Relocation Management Companies)</span></h3>
-        </div>
-      </div>
-    </div>
-    <div class="slide-right" style="flex:.45;display:flex;align-items:center;justify-content:center">
-      <div class="icp-rings anim scale-in" data-delay="300">
-        <div class="icp-ring r1"><span class="ring-label">Consultancies &amp; RMCs</span></div>
-        <div class="icp-ring r2"><span class="ring-label">Mid-Market 50–500</span></div>
-        <div class="icp-ring r3"><span class="ring-label">Enterprise<br>500+</span></div>
-      </div>
-    </div>
-  </div>
-  <div class="slide-logo"><svg width="80" height="31" viewBox="0 0 80 31" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M64.375 24.18C59.55 24.18 55.625 20.2864 55.625 15.5C55.625 10.7136 59.55 6.82 64.375 6.82C69.2 6.82 73.125 10.7136 73.125 15.5C73.125 20.2864 69.2 24.18 64.375 24.18ZM7.39375 12.555C8.6125 9.2132 11.8417 6.82 15.625 6.82C16.7542 6.82 17.8312 7.03493 18.8229 7.42347C21.1542 8.33487 23 10.2114 23.8563 12.555H7.39375ZM80 0.628267H74.8104L73.1417 2.66807C71.8146 1.77527 70.3438 1.0788 68.7687 0.622067C67.375 0.217 65.9021 0 64.375 0C62.8479 0 61.375 0.217 59.9833 0.622067C56.875 1.52313 54.1667 3.35833 52.1896 5.80113C50.0396 8.4568 48.7521 11.8296 48.7521 15.5C48.7521 20.2864 44.8271 24.18 40.0021 24.18C35.1771 24.18 31.2521 20.2864 31.2521 15.5C31.2521 10.7136 35.1771 6.82 40.0021 6.82C42.0917 6.82 44.0125 7.5516 45.5187 8.76887L49.8583 3.47407C48.2667 2.1886 46.4167 1.209 44.3937 0.622067C43 0.217 41.5271 0 40.0021 0C38.4771 0 37.0021 0.217 35.6104 0.622067C32.5 1.52313 29.7938 3.35833 27.8167 5.80113C25.8396 3.35833 23.1312 1.52313 20.0208 0.622067C19.6292 0.5084 19.2313 0.4092 18.8271 0.326533C17.7938 0.113667 16.725 0.00206667 15.6292 0.00206667C14.1042 0.00206667 12.6292 0.219067 11.2375 0.624133C4.74167 2.5048 0 8.45267 0 15.5C0 22.5473 4.78333 28.5469 11.3167 30.4027C12.6854 30.7913 14.1292 31 15.625 31C16.7208 31 17.7896 30.8884 18.8229 30.6755C19.1979 30.597 19.5687 30.5081 19.9312 30.4048C21.9812 29.822 23.8583 28.8362 25.4688 27.5363L21.1333 22.2373C20.4417 22.7953 19.6625 23.25 18.8208 23.5786C17.8292 23.9671 16.7521 24.1821 15.6229 24.1821C11.8396 24.1821 8.61042 21.7889 7.39167 18.4471H24.6542C25.1437 20.9705 26.2479 23.2748 27.8083 25.2009C27.8083 25.203 27.8125 25.2051 27.8146 25.2071C29.8104 27.6685 32.5458 29.512 35.6896 30.4048C37.0583 30.7933 38.5021 31.0021 39.9979 31.0021C41.4938 31.0021 42.9375 30.7933 44.3062 30.4048C47.4521 29.512 50.1896 27.6644 52.1854 25.2009C54.1813 27.6665 56.9208 29.512 60.0646 30.4048C61.4333 30.7933 62.8771 31.0021 64.3729 31.0021C65.8687 31.0021 67.3125 30.7933 68.6813 30.4048C70.2812 29.9501 71.7771 29.2495 73.1229 28.3443L74.8083 30.4048H79.9979V15.7521V0.628267H80Z" fill="#E5004D"/></svg></div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════ -->
-<!-- SLIDE 9 — Differentiation & What to Stop           -->
-<!-- ═══════════════════════════════════════════════════ -->
-<section class="slide theme-dark" data-slide="9">
-  <div class="deco purple" style="width:500px;height:500px;bottom:-200px;left:-180px"></div>
-  <div class="particle" style="width:5px;height:5px;background:var(--pink);top:20%;right:15%;animation-delay:2s"></div>
-  <div class="particle" style="width:4px;height:4px;background:var(--lime);top:60%;left:10%;animation-delay:5s"></div>
-  <div class="slide-inner">
-    <div class="label-tag anim" data-delay="50">Differentiation</div>
-    <h2 class="slide-heading anim" data-delay="100" style="color:#fff">Double down on strengths.<br><span style="color:var(--pink)">Stop what doesn't compound.</span></h2>
-    <div style="display:flex;gap:56px;margin-top:48px;width:100%;max-width:1680px">
-      <!-- Double Down column -->
-      <div style="flex:1">
-        <div class="anim" data-delay="300" style="display:flex;align-items:center;gap:10px;margin-bottom:20px">
-          <div style="width:12px;height:12px;border-radius:50%;background:var(--lime)"></div>
-          <h3 style="font-size:22px;font-weight:700;color:var(--lime)">Double Down</h3>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:12px">
-          <div class="card anim" data-delay="400" style="padding:22px 24px;display:flex;gap:14px;align-items:center">
-            <div style="width:28px;height:28px;border-radius:50%;background:var(--lime);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#1b1b2f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <h3 style="margin:0">Proprietary data moat</h3>
-          </div>
-          <div class="card anim" data-delay="500" style="padding:22px 24px;display:flex;gap:14px;align-items:center">
-            <div style="width:28px;height:28px;border-radius:50%;background:var(--lime);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#1b1b2f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <h3 style="margin:0">Compliance intelligence</h3>
-          </div>
-          <div class="card anim" data-delay="600" style="padding:22px 24px;display:flex;gap:14px;align-items:center">
-            <div style="width:28px;height:28px;border-radius:50%;background:var(--lime);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#1b1b2f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <h3 style="margin:0">AI on top of real data</h3>
-          </div>
-          <div class="card anim" data-delay="700" style="padding:22px 24px;display:flex;gap:14px;align-items:center">
-            <div style="width:28px;height:28px;border-radius:50%;background:var(--lime);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#1b1b2f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <h3 style="margin:0">API-first platform</h3>
-          </div>
-        </div>
-      </div>
-      <!-- Stop Doing column -->
-      <div style="flex:1">
-        <div class="anim" data-delay="350" style="display:flex;align-items:center;gap:10px;margin-bottom:20px">
-          <div style="width:12px;height:12px;border-radius:50%;background:var(--pink)"></div>
-          <h3 style="font-size:22px;font-weight:700;color:#fff">Stop Doing</h3>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:12px">
-          <div class="stop-item anim" data-delay="500">
-            <div class="stop-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
-            <div><h4>Bespoke client builds that don't scale</h4></div>
-          </div>
-          <div class="stop-item anim" data-delay="600">
-            <div class="stop-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
-            <div><h4>Replicating generic HRIS features</h4></div>
-          </div>
-          <div class="stop-item anim" data-delay="700">
-            <div class="stop-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
-            <div><h4>Manual report generation for each client</h4></div>
-          </div>
-          <div class="stop-item anim" data-delay="800">
-            <div class="stop-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
-            <div><h4>Maintaining legacy on-prem deployments</h4></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="slide-logo"><svg width="80" height="31" viewBox="0 0 80 31" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M64.375 24.18C59.55 24.18 55.625 20.2864 55.625 15.5C55.625 10.7136 59.55 6.82 64.375 6.82C69.2 6.82 73.125 10.7136 73.125 15.5C73.125 20.2864 69.2 24.18 64.375 24.18ZM7.39375 12.555C8.6125 9.2132 11.8417 6.82 15.625 6.82C16.7542 6.82 17.8312 7.03493 18.8229 7.42347C21.1542 8.33487 23 10.2114 23.8563 12.555H7.39375ZM80 0.628267H74.8104L73.1417 2.66807C71.8146 1.77527 70.3438 1.0788 68.7687 0.622067C67.375 0.217 65.9021 0 64.375 0C62.8479 0 61.375 0.217 59.9833 0.622067C56.875 1.52313 54.1667 3.35833 52.1896 5.80113C50.0396 8.4568 48.7521 11.8296 48.7521 15.5C48.7521 20.2864 44.8271 24.18 40.0021 24.18C35.1771 24.18 31.2521 20.2864 31.2521 15.5C31.2521 10.7136 35.1771 6.82 40.0021 6.82C42.0917 6.82 44.0125 7.5516 45.5187 8.76887L49.8583 3.47407C48.2667 2.1886 46.4167 1.209 44.3937 0.622067C43 0.217 41.5271 0 40.0021 0C38.4771 0 37.0021 0.217 35.6104 0.622067C32.5 1.52313 29.7938 3.35833 27.8167 5.80113C25.8396 3.35833 23.1312 1.52313 20.0208 0.622067C19.6292 0.5084 19.2313 0.4092 18.8271 0.326533C17.7938 0.113667 16.725 0.00206667 15.6292 0.00206667C14.1042 0.00206667 12.6292 0.219067 11.2375 0.624133C4.74167 2.5048 0 8.45267 0 15.5C0 22.5473 4.78333 28.5469 11.3167 30.4027C12.6854 30.7913 14.1292 31 15.625 31C16.7208 31 17.7896 30.8884 18.8229 30.6755C19.1979 30.597 19.5687 30.5081 19.9312 30.4048C21.9812 29.822 23.8583 28.8362 25.4688 27.5363L21.1333 22.2373C20.4417 22.7953 19.6625 23.25 18.8208 23.5786C17.8292 23.9671 16.7521 24.1821 15.6229 24.1821C11.8396 24.1821 8.61042 21.7889 7.39167 18.4471H24.6542C25.1437 20.9705 26.2479 23.2748 27.8083 25.2009C27.8083 25.203 27.8125 25.2051 27.8146 25.2071C29.8104 27.6685 32.5458 29.512 35.6896 30.4048C37.0583 30.7933 38.5021 31.0021 39.9979 31.0021C41.4938 31.0021 42.9375 30.7933 44.3062 30.4048C47.4521 29.512 50.1896 27.6644 52.1854 25.2009C54.1813 27.6665 56.9208 29.512 60.0646 30.4048C61.4333 30.7933 62.8771 31.0021 64.3729 31.0021C65.8687 31.0021 67.3125 30.7933 68.6813 30.4048C70.2812 29.9501 71.7771 29.2495 73.1229 28.3443L74.8083 30.4048H79.9979V15.7521V0.628267H80Z" fill="#E5004D"/></svg></div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════ -->
-<!-- SLIDE 10 — Discovery Without Slowing Delivery      -->
-<!-- ═══════════════════════════════════════════════════ -->
-<section class="slide theme-white" data-slide="10">
-  <div class="deco purple" style="width:400px;height:400px;top:-160px;left:-120px"></div>
-  <div class="deco teal" style="width:200px;height:200px;bottom:-60px;right:-50px;background:var(--teal);opacity:.04"></div>
-  <div class="slide-inner">
-    <div class="label-tag anim" data-delay="50">Dual-Track</div>
-    <h2 class="slide-heading anim" data-delay="100">Discovery and delivery run <span class="accent-purple">in parallel</span></h2>
-    <p class="slide-sub anim" data-delay="200" style="font-size:26px;font-weight:500;line-height:1.6;color:var(--text-body);max-width:820px;margin-top:12px">Validation doesn&rsquo;t slow us down. It prevents us building the wrong thing. Timeboxed discovery feeds a continuous delivery engine.</p>
-    <div class="dual-track">
-      <!-- Discovery track -->
-      <div class="track-lane">
-        <div class="track-header anim" data-delay="300">
-          <div class="track-dot" style="background:var(--purple)"></div>
-          <h3 style="color:var(--purple)">Continuous Discovery</h3>
-        </div>
-        <div class="track-items">
-          <div class="track-item anim" data-delay="400">
-            <div class="ti-icon" style="background:var(--purple-pale)"><svg viewBox="0 0 24 24" stroke="var(--purple)"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
-            <div><p>2–3 sessions/week with enterprise mobility managers</p></div>
-          </div>
-          <div class="track-item anim" data-delay="500">
-            <div class="ti-icon" style="background:var(--purple-pale)"><svg viewBox="0 0 24 24" stroke="var(--purple)"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div>
-            <div><p>Figma prototypes validated before a single line of code</p></div>
-          </div>
-          <div class="track-item anim" data-delay="600">
-            <div class="ti-icon" style="background:var(--purple-pale)"><svg viewBox="0 0 24 24" stroke="var(--purple)"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-            <div><p>Behavioural data reveals what users do, not just what they say</p></div>
-          </div>
-        </div>
-        <!-- Divider -->
-        <div class="track-divider">
-          <div class="track-sync-dot anim" data-delay="350"></div>
-          <div class="track-divider-line anim" data-delay="400"></div>
-          <div class="track-sync-dot anim" data-delay="450"></div>
-          <div class="track-divider-line anim" data-delay="500"></div>
-          <div class="track-sync-dot anim" data-delay="550"></div>
-        </div>
-      </div>
-      <!-- Delivery track -->
-      <div class="track-lane">
-        <div class="track-header anim" data-delay="350">
-          <div class="track-dot" style="background:var(--teal)"></div>
-          <h3 style="color:var(--teal)">Continuous Delivery</h3>
-        </div>
-        <div class="track-items">
-          <div class="track-item anim" data-delay="450">
-            <div class="ti-icon" style="background:rgba(0,207,186,.12)"><svg viewBox="0 0 24 24" stroke="var(--teal)"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <div><p>Ship incremental value every sprint. No 6 month bets</p></div>
-          </div>
-          <div class="track-item anim" data-delay="550">
-            <div class="ti-icon" style="background:rgba(0,207,186,.12)"><svg viewBox="0 0 24 24" stroke="var(--teal)"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-            <div><p>Derisk releases with controlled exposure to real users</p></div>
-          </div>
-          <div class="track-item anim" data-delay="650">
-            <div class="ti-icon" style="background:rgba(0,207,186,.12)"><svg viewBox="0 0 24 24" stroke="var(--teal)"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
-            <div><p>Measure impact against hypothesis. Kill or scale features</p></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="slide-logo"><svg width="80" height="31" viewBox="0 0 80 31" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M64.375 24.18C59.55 24.18 55.625 20.2864 55.625 15.5C55.625 10.7136 59.55 6.82 64.375 6.82C69.2 6.82 73.125 10.7136 73.125 15.5C73.125 20.2864 69.2 24.18 64.375 24.18ZM7.39375 12.555C8.6125 9.2132 11.8417 6.82 15.625 6.82C16.7542 6.82 17.8312 7.03493 18.8229 7.42347C21.1542 8.33487 23 10.2114 23.8563 12.555H7.39375ZM80 0.628267H74.8104L73.1417 2.66807C71.8146 1.77527 70.3438 1.0788 68.7687 0.622067C67.375 0.217 65.9021 0 64.375 0C62.8479 0 61.375 0.217 59.9833 0.622067C56.875 1.52313 54.1667 3.35833 52.1896 5.80113C50.0396 8.4568 48.7521 11.8296 48.7521 15.5C48.7521 20.2864 44.8271 24.18 40.0021 24.18C35.1771 24.18 31.2521 20.2864 31.2521 15.5C31.2521 10.7136 35.1771 6.82 40.0021 6.82C42.0917 6.82 44.0125 7.5516 45.5187 8.76887L49.8583 3.47407C48.2667 2.1886 46.4167 1.209 44.3937 0.622067C43 0.217 41.5271 0 40.0021 0C38.4771 0 37.0021 0.217 35.6104 0.622067C32.5 1.52313 29.7938 3.35833 27.8167 5.80113C25.8396 3.35833 23.1312 1.52313 20.0208 0.622067C19.6292 0.5084 19.2313 0.4092 18.8271 0.326533C17.7938 0.113667 16.725 0.00206667 15.6292 0.00206667C14.1042 0.00206667 12.6292 0.219067 11.2375 0.624133C4.74167 2.5048 0 8.45267 0 15.5C0 22.5473 4.78333 28.5469 11.3167 30.4027C12.6854 30.7913 14.1292 31 15.625 31C16.7208 31 17.7896 30.8884 18.8229 30.6755C19.1979 30.597 19.5687 30.5081 19.9312 30.4048C21.9812 29.822 23.8583 28.8362 25.4688 27.5363L21.1333 22.2373C20.4417 22.7953 19.6625 23.25 18.8208 23.5786C17.8292 23.9671 16.7521 24.1821 15.6229 24.1821C11.8396 24.1821 8.61042 21.7889 7.39167 18.4471H24.6542C25.1437 20.9705 26.2479 23.2748 27.8083 25.2009C27.8083 25.203 27.8125 25.2051 27.8146 25.2071C29.8104 27.6685 32.5458 29.512 35.6896 30.4048C37.0583 30.7933 38.5021 31.0021 39.9979 31.0021C41.4938 31.0021 42.9375 30.7933 44.3062 30.4048C47.4521 29.512 50.1896 27.6644 52.1854 25.2009C54.1813 27.6665 56.9208 29.512 60.0646 30.4048C61.4333 30.7933 62.8771 31.0021 64.3729 31.0021C65.8687 31.0021 67.3125 30.7933 68.6813 30.4048C70.2812 29.9501 71.7771 29.2495 73.1229 28.3443L74.8083 30.4048H79.9979V15.7521V0.628267H80Z" fill="#E5004D"/></svg></div>
-</section>
 
 
 <!-- ═══════════════════════════════════════════════════ -->
-
+<!-- SLIDE 8 — 12-Month Execution Roadmap                -->
 <!-- ═══════════════════════════════════════════════════ -->
-<!-- SLIDE 11 — 12-Month Execution Roadmap                -->
-<!-- ═══════════════════════════════════════════════════ -->
-<section class="slide theme-dark" data-slide="11">
+<section class="slide theme-dark" data-slide="8">
   <div class="deco purple" style="width:500px;height:500px;top:-200px;left:-150px"></div>
   <div class="deco pink" style="width:250px;height:250px;bottom:-80px;right:-80px;opacity:.05"></div>
   <div class="particle" style="width:5px;height:5px;background:var(--lime);top:15%;right:18%;animation-delay:1s"></div>
@@ -2021,104 +1883,75 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Manrope',system-ui
 </section>
 
 <!-- ═══════════════════════════════════════════════════ -->
-<!-- SLIDE 12 — Prioritisation & Roadmap Governance     -->
+<!-- SLIDE 9 — Discovery Without Slowing Delivery      -->
 <!-- ═══════════════════════════════════════════════════ -->
-<section class="slide theme-dark" data-slide="12">
-  <div class="deco pink" style="width:350px;height:350px;top:-120px;right:-100px;opacity:.05"></div>
-  <div class="particle" style="width:5px;height:5px;background:var(--purple-light);top:25%;left:8%;animation-delay:1s"></div>
-  <div class="particle" style="width:3px;height:3px;background:var(--teal);top:75%;right:12%;animation-delay:4s"></div>
-  <div class="slide-split">
-    <div class="slide-left" style="flex:0 0 38%;padding:60px 40px 60px 100px">
-      <div class="label-tag anim" data-delay="50" style="width:fit-content">Prioritisation</div>
-      <h2 class="slide-heading anim" data-delay="100" style="color:#fff;text-align:left">What ships <span class="accent-purple">next</span> and why</h2>
-      <p class="anim" data-delay="200" style="font-size:23px;color:rgba(255,255,255,.55);line-height:1.6;margin-top:24px;text-align:left">Every feature request, bug fix and strategic bet is scored on the same two axes: <strong style="color:var(--lime)">value</strong> delivered vs <strong style="color:var(--purple-light)">effort</strong> required.</p>
-      <p class="anim" data-delay="300" style="font-size:23px;color:rgba(255,255,255,.55);line-height:1.6;margin-top:16px;text-align:left">The matrix keeps the team honest: top-left ships fast, bottom-right gets declined with data.</p>
-    </div>
-    <div class="slide-right" style="flex:1;display:flex;align-items:center;justify-content:center;padding:40px 60px 40px 20px">
-      <div class="matrix-wrap anim scale-in" data-delay="400" style="width:100%;max-width:720px">
-        <!-- Y-axis arrow -->
-        <div style="position:absolute;left:-48px;top:0;bottom:40px;display:flex;flex-direction:column;align-items:center;justify-content:center">
-          <svg width="16" height="22" viewBox="0 0 20 28" style="margin-bottom:4px"><polygon points="10,0 20,28 0,28" fill="rgba(255,255,255,.35)"/></svg>
-          <div style="flex:1;width:3px;background:linear-gradient(to bottom,rgba(255,255,255,.35),rgba(255,255,255,.08));border-radius:2px"></div>
-          <span style="font-size:14px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.12em;writing-mode:vertical-lr;transform:rotate(180deg);margin-top:10px">Value</span>
-        </div>
-        <div class="matrix-2x2" style="aspect-ratio:1.4">
-          <div class="matrix-cell" style="background:rgba(163,245,199,.12);padding:28px 22px">
-            <h4 style="color:var(--lime);font-size:24px;margin-bottom:8px">Quick Wins</h4>
-            <p style="color:rgba(255,255,255,.65);font-size:19px;line-height:1.4">High value, low effort.<br>Ship immediately.</p>
-          </div>
-          <div class="matrix-cell" style="background:rgba(94,36,194,.2);padding:28px 22px">
-            <h4 style="color:var(--purple-light);font-size:24px;margin-bottom:8px">Strategic Bets</h4>
-            <p style="color:rgba(255,255,255,.65);font-size:19px;line-height:1.4">High value, high effort.<br>Plan &amp; resource carefully.</p>
-          </div>
-          <div class="matrix-cell" style="background:rgba(255,255,255,.04);padding:28px 22px">
-            <h4 style="color:#fff;font-size:24px;margin-bottom:8px">Fill-ins</h4>
-            <p style="color:#fff;font-size:19px;line-height:1.4">Low value, low effort.<br>Only if spare capacity.</p>
-          </div>
-          <div class="matrix-cell" style="background:rgba(229,0,77,.1);padding:28px 22px">
-            <h4 style="color:#fff;font-size:24px;margin-bottom:8px">Decline</h4>
-            <p style="color:rgba(255,255,255,.55);font-size:19px;line-height:1.4">Low value, high effort.<br>Decline with data.</p>
-          </div>
-        </div>
-        <!-- X-axis arrow -->
-        <div style="display:flex;align-items:center;margin-top:14px;padding:0 4px">
-          <span style="font-size:14px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.12em;margin-right:10px">Effort</span>
-          <div style="flex:1;height:3px;background:linear-gradient(to right,rgba(255,255,255,.08),rgba(255,255,255,.35));border-radius:2px"></div>
-          <svg width="22" height="16" viewBox="0 0 28 20" style="margin-left:4px"><polygon points="28,10 0,20 0,0" fill="rgba(255,255,255,.35)"/></svg>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="slide-logo"><svg width="80" height="31" viewBox="0 0 80 31" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M64.375 24.18C59.55 24.18 55.625 20.2864 55.625 15.5C55.625 10.7136 59.55 6.82 64.375 6.82C69.2 6.82 73.125 10.7136 73.125 15.5C73.125 20.2864 69.2 24.18 64.375 24.18ZM7.39375 12.555C8.6125 9.2132 11.8417 6.82 15.625 6.82C16.7542 6.82 17.8312 7.03493 18.8229 7.42347C21.1542 8.33487 23 10.2114 23.8563 12.555H7.39375ZM80 0.628267H74.8104L73.1417 2.66807C71.8146 1.77527 70.3438 1.0788 68.7687 0.622067C67.375 0.217 65.9021 0 64.375 0C62.8479 0 61.375 0.217 59.9833 0.622067C56.875 1.52313 54.1667 3.35833 52.1896 5.80113C50.0396 8.4568 48.7521 11.8296 48.7521 15.5C48.7521 20.2864 44.8271 24.18 40.0021 24.18C35.1771 24.18 31.2521 20.2864 31.2521 15.5C31.2521 10.7136 35.1771 6.82 40.0021 6.82C42.0917 6.82 44.0125 7.5516 45.5187 8.76887L49.8583 3.47407C48.2667 2.1886 46.4167 1.209 44.3937 0.622067C43 0.217 41.5271 0 40.0021 0C38.4771 0 37.0021 0.217 35.6104 0.622067C32.5 1.52313 29.7938 3.35833 27.8167 5.80113C25.8396 3.35833 23.1312 1.52313 20.0208 0.622067C19.6292 0.5084 19.2313 0.4092 18.8271 0.326533C17.7938 0.113667 16.725 0.00206667 15.6292 0.00206667C14.1042 0.00206667 12.6292 0.219067 11.2375 0.624133C4.74167 2.5048 0 8.45267 0 15.5C0 22.5473 4.78333 28.5469 11.3167 30.4027C12.6854 30.7913 14.1292 31 15.625 31C16.7208 31 17.7896 30.8884 18.8229 30.6755C19.1979 30.597 19.5687 30.5081 19.9312 30.4048C21.9812 29.822 23.8583 28.8362 25.4688 27.5363L21.1333 22.2373C20.4417 22.7953 19.6625 23.25 18.8208 23.5786C17.8292 23.9671 16.7521 24.1821 15.6229 24.1821C11.8396 24.1821 8.61042 21.7889 7.39167 18.4471H24.6542C25.1437 20.9705 26.2479 23.2748 27.8083 25.2009C27.8083 25.203 27.8125 25.2051 27.8146 25.2071C29.8104 27.6685 32.5458 29.512 35.6896 30.4048C37.0583 30.7933 38.5021 31.0021 39.9979 31.0021C41.4938 31.0021 42.9375 30.7933 44.3062 30.4048C47.4521 29.512 50.1896 27.6644 52.1854 25.2009C54.1813 27.6665 56.9208 29.512 60.0646 30.4048C61.4333 30.7933 62.8771 31.0021 64.3729 31.0021C65.8687 31.0021 67.3125 30.7933 68.6813 30.4048C70.2812 29.9501 71.7771 29.2495 73.1229 28.3443L74.8083 30.4048H79.9979V15.7521V0.628267H80Z" fill="#E5004D"/></svg></div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════ -->
-<!-- SLIDE 13 — Handling Urgent Requests                -->
-<!-- ═══════════════════════════════════════════════════ -->
-<section class="slide theme-dark" data-slide="13">
-  <div class="deco purple" style="width:400px;height:400px;bottom:-150px;right:-120px;opacity:.06"></div>
-  <div class="particle" style="width:5px;height:5px;background:var(--lime);top:18%;right:14%;animation-delay:2s"></div>
-  <div class="particle" style="width:4px;height:4px;background:var(--purple-light);top:72%;left:10%;animation-delay:3.5s"></div>
+<section class="slide theme-white" data-slide="9">
+  <div class="deco purple" style="width:400px;height:400px;top:-160px;left:-120px"></div>
+  <div class="deco teal" style="width:200px;height:200px;bottom:-60px;right:-50px;background:var(--teal);opacity:.04"></div>
   <div class="slide-inner">
-    <div class="label-tag anim" data-delay="50">Governance</div>
-    <h2 class="slide-heading anim" data-delay="100" style="color:#fff">Handling <span class="accent-purple">urgent requests</span></h2>
-    <p class="anim" data-delay="200" style="font-size:24px;color:rgba(255,255,255,.55);margin-top:8px;margin-bottom:48px;max-width:780px">&ldquo;Our biggest customer needs X by Friday&rdquo;. Here&rsquo;s how we handle it:</p>
-    <div class="esc-flow" style="justify-content:center;gap:0;margin-top:0;flex-wrap:nowrap;width:100%;max-width:1400px">
-      <div class="esc-step anim" data-delay="300" style="padding:24px 32px">
-        <div class="esc-num" style="background:var(--purple);width:64px;height:64px;font-size:26px;margin-bottom:16px">1</div>
-        <h4 style="font-size:26px;margin-bottom:8px">Classify</h4>
-        <p style="font-size:20px;max-width:220px;line-height:1.4">Revenue impact? Churn risk? Scope?</p>
+    <div class="label-tag anim" data-delay="50">Dual-Track</div>
+    <h2 class="slide-heading anim" data-delay="100">Discovery and delivery run <span class="accent-purple">in parallel</span></h2>
+    <p class="slide-sub anim" data-delay="200" style="font-size:26px;font-weight:500;line-height:1.6;color:var(--text-body);max-width:820px;margin-top:12px">Validation doesn&rsquo;t slow us down. It prevents us building the wrong thing. Timeboxed discovery feeds a continuous delivery engine.</p>
+    <div class="dual-track">
+      <!-- Discovery track -->
+      <div class="track-lane">
+        <div class="track-header anim" data-delay="300">
+          <div class="track-dot" style="background:var(--purple)"></div>
+          <h3 style="color:var(--purple)">Continuous Discovery</h3>
+        </div>
+        <div class="track-items">
+          <div class="track-item anim" data-delay="400">
+            <div class="ti-icon" style="background:var(--purple-pale)"><svg viewBox="0 0 24 24" stroke="var(--purple)"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+            <div><p>2–3 sessions/week with enterprise mobility managers</p></div>
+          </div>
+          <div class="track-item anim" data-delay="500">
+            <div class="ti-icon" style="background:var(--purple-pale)"><svg viewBox="0 0 24 24" stroke="var(--purple)"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div>
+            <div><p>Prototypes validated before a single line of code</p></div>
+          </div>
+          <div class="track-item anim" data-delay="600">
+            <div class="ti-icon" style="background:var(--purple-pale)"><svg viewBox="0 0 24 24" stroke="var(--purple)"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+            <div><p>Behavioural data reveals what users do, not just what they say</p></div>
+          </div>
+        </div>
+        <!-- Divider -->
+        <div class="track-divider">
+          <div class="track-sync-dot anim" data-delay="350"></div>
+          <div class="track-divider-line anim" data-delay="400"></div>
+          <div class="track-sync-dot anim" data-delay="450"></div>
+          <div class="track-divider-line anim" data-delay="500"></div>
+          <div class="track-sync-dot anim" data-delay="550"></div>
+        </div>
       </div>
-      <div class="esc-arrow anim" data-delay="350" style="font-size:36px;margin:0 12px">&rarr;</div>
-      <div class="esc-step anim" data-delay="400" style="padding:24px 32px">
-        <div class="esc-num" style="background:var(--teal);width:64px;height:64px;font-size:26px;margin-bottom:16px">2</div>
-        <h4 style="font-size:26px;margin-bottom:8px">Size</h4>
-        <p style="font-size:20px;max-width:220px;line-height:1.4">Can we solve with config, not code?</p>
+      <!-- Delivery track -->
+      <div class="track-lane">
+        <div class="track-header anim" data-delay="350">
+          <div class="track-dot" style="background:var(--teal)"></div>
+          <h3 style="color:var(--teal)">Continuous Delivery</h3>
+        </div>
+        <div class="track-items">
+          <div class="track-item anim" data-delay="450">
+            <div class="ti-icon" style="background:rgba(0,207,186,.12)"><svg viewBox="0 0 24 24" stroke="var(--teal)"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div><p>Ship incremental value every sprint. No 6 month bets</p></div>
+          </div>
+          <div class="track-item anim" data-delay="550">
+            <div class="ti-icon" style="background:rgba(0,207,186,.12)"><svg viewBox="0 0 24 24" stroke="var(--teal)"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <div><p>Derisk releases with controlled exposure to real users</p></div>
+          </div>
+          <div class="track-item anim" data-delay="650">
+            <div class="ti-icon" style="background:rgba(0,207,186,.12)"><svg viewBox="0 0 24 24" stroke="var(--teal)"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+            <div><p>Measure impact against hypothesis. Kill or scale features</p></div>
+          </div>
+        </div>
       </div>
-      <div class="esc-arrow anim" data-delay="450" style="font-size:36px;margin:0 12px">&rarr;</div>
-      <div class="esc-step anim" data-delay="500" style="padding:24px 32px">
-        <div class="esc-num" style="background:var(--pink);width:64px;height:64px;font-size:26px;margin-bottom:16px">3</div>
-        <h4 style="font-size:26px;margin-bottom:8px">Trade-off</h4>
-        <p style="font-size:20px;max-width:220px;line-height:1.4">What gets displaced? Make it visible.</p>
-      </div>
-      <div class="esc-arrow anim" data-delay="550" style="font-size:36px;margin:0 12px">&rarr;</div>
-      <div class="esc-step anim" data-delay="600" style="padding:24px 32px">
-        <div class="esc-num" style="background:var(--lime);color:var(--navy);width:64px;height:64px;font-size:26px;margin-bottom:16px">4</div>
-        <h4 style="font-size:26px;margin-bottom:8px">Commit</h4>
-        <p style="font-size:20px;max-width:220px;line-height:1.4">If yes: timebox it. If no: propose alternative.</p>
-      </div>
-    </div>
-    <div class="card anim" data-delay="750" style="margin-top:48px;padding:28px 32px;max-width:1000px">
-      <p style="font-size:22px;color:rgba(255,255,255,.65);line-height:1.4"><strong style="color:#fff">Rule:</strong> No unscored work enters a sprint. Every request goes through the same lens. Regardless of who asks.</p>
     </div>
   </div>
   <div class="slide-logo"><svg width="80" height="31" viewBox="0 0 80 31" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M64.375 24.18C59.55 24.18 55.625 20.2864 55.625 15.5C55.625 10.7136 59.55 6.82 64.375 6.82C69.2 6.82 73.125 10.7136 73.125 15.5C73.125 20.2864 69.2 24.18 64.375 24.18ZM7.39375 12.555C8.6125 9.2132 11.8417 6.82 15.625 6.82C16.7542 6.82 17.8312 7.03493 18.8229 7.42347C21.1542 8.33487 23 10.2114 23.8563 12.555H7.39375ZM80 0.628267H74.8104L73.1417 2.66807C71.8146 1.77527 70.3438 1.0788 68.7687 0.622067C67.375 0.217 65.9021 0 64.375 0C62.8479 0 61.375 0.217 59.9833 0.622067C56.875 1.52313 54.1667 3.35833 52.1896 5.80113C50.0396 8.4568 48.7521 11.8296 48.7521 15.5C48.7521 20.2864 44.8271 24.18 40.0021 24.18C35.1771 24.18 31.2521 20.2864 31.2521 15.5C31.2521 10.7136 35.1771 6.82 40.0021 6.82C42.0917 6.82 44.0125 7.5516 45.5187 8.76887L49.8583 3.47407C48.2667 2.1886 46.4167 1.209 44.3937 0.622067C43 0.217 41.5271 0 40.0021 0C38.4771 0 37.0021 0.217 35.6104 0.622067C32.5 1.52313 29.7938 3.35833 27.8167 5.80113C25.8396 3.35833 23.1312 1.52313 20.0208 0.622067C19.6292 0.5084 19.2313 0.4092 18.8271 0.326533C17.7938 0.113667 16.725 0.00206667 15.6292 0.00206667C14.1042 0.00206667 12.6292 0.219067 11.2375 0.624133C4.74167 2.5048 0 8.45267 0 15.5C0 22.5473 4.78333 28.5469 11.3167 30.4027C12.6854 30.7913 14.1292 31 15.625 31C16.7208 31 17.7896 30.8884 18.8229 30.6755C19.1979 30.597 19.5687 30.5081 19.9312 30.4048C21.9812 29.822 23.8583 28.8362 25.4688 27.5363L21.1333 22.2373C20.4417 22.7953 19.6625 23.25 18.8208 23.5786C17.8292 23.9671 16.7521 24.1821 15.6229 24.1821C11.8396 24.1821 8.61042 21.7889 7.39167 18.4471H24.6542C25.1437 20.9705 26.2479 23.2748 27.8083 25.2009C27.8083 25.203 27.8125 25.2051 27.8146 25.2071C29.8104 27.6685 32.5458 29.512 35.6896 30.4048C37.0583 30.7933 38.5021 31.0021 39.9979 31.0021C41.4938 31.0021 42.9375 30.7933 44.3062 30.4048C47.4521 29.512 50.1896 27.6644 52.1854 25.2009C54.1813 27.6665 56.9208 29.512 60.0646 30.4048C61.4333 30.7933 62.8771 31.0021 64.3729 31.0021C65.8687 31.0021 67.3125 30.7933 68.6813 30.4048C70.2812 29.9501 71.7771 29.2495 73.1229 28.3443L74.8083 30.4048H79.9979V15.7521V0.628267H80Z" fill="#E5004D"/></svg></div>
 </section>
 
 <!-- ═══════════════════════════════════════════════════ -->
-<!-- SLIDE 14 — Sales/CS Partnership                    -->
+<!-- SLIDE 10 — Sales/CS Partnership                    -->
 <!-- ═══════════════════════════════════════════════════ -->
-<section class="slide theme-purple" data-slide="14">
+<section class="slide theme-purple" data-slide="10">
   <div class="deco pink" style="width:350px;height:350px;bottom:-150px;left:-100px;opacity:.08"></div>
   <div class="particle" style="width:5px;height:5px;background:var(--lime);top:15%;right:20%;animation-delay:1s"></div>
   <div class="particle" style="width:4px;height:4px;background:var(--purple-light);top:70%;left:15%;animation-delay:3s"></div>
@@ -2174,9 +2007,169 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Manrope',system-ui
 </section>
 
 <!-- ═══════════════════════════════════════════════════ -->
-<!-- SLIDE 15 — Metrics & Operating Cadence             -->
+<!-- SLIDE 11 — Prioritisation & Roadmap Governance     -->
 <!-- ═══════════════════════════════════════════════════ -->
-<section class="slide theme-light" data-slide="15">
+<section class="slide theme-dark" data-slide="11">
+  <div class="deco pink" style="width:350px;height:350px;top:-120px;right:-100px;opacity:.05"></div>
+  <div class="particle" style="width:5px;height:5px;background:var(--purple-light);top:25%;left:8%;animation-delay:1s"></div>
+  <div class="particle" style="width:3px;height:3px;background:var(--teal);top:75%;right:12%;animation-delay:4s"></div>
+  <div class="slide-split">
+    <div class="slide-left" style="flex:0 0 38%;padding:60px 40px 60px 100px">
+      <div class="label-tag anim" data-delay="50" style="width:fit-content">Prioritisation</div>
+      <h2 class="slide-heading anim" data-delay="100" style="color:#fff;text-align:left">What ships <span class="accent-purple">next</span> and why</h2>
+      <p class="anim" data-delay="200" style="font-size:23px;color:rgba(255,255,255,.55);line-height:1.6;margin-top:24px;text-align:left">Every feature request, bug fix and strategic bet is scored on the same two axes: <strong style="color:var(--lime)">value</strong> delivered vs <strong style="color:var(--purple-light)">effort</strong> required.</p>
+      <p class="anim" data-delay="300" style="font-size:23px;color:rgba(255,255,255,.55);line-height:1.6;margin-top:16px;text-align:left">The matrix keeps the team honest: top-left ships fast, bottom-right gets declined with data.</p>
+    </div>
+    <div class="slide-right" style="flex:1;display:flex;align-items:center;justify-content:center;padding:40px 60px 40px 20px">
+      <div class="matrix-wrap anim scale-in" data-delay="400" style="width:100%;max-width:720px">
+        <!-- Y-axis arrow -->
+        <div style="position:absolute;left:-48px;top:0;bottom:40px;display:flex;flex-direction:column;align-items:center;justify-content:center">
+          <svg width="16" height="22" viewBox="0 0 20 28" style="margin-bottom:4px"><polygon points="10,0 20,28 0,28" fill="rgba(255,255,255,.35)"/></svg>
+          <div style="flex:1;width:3px;background:linear-gradient(to bottom,rgba(255,255,255,.35),rgba(255,255,255,.08));border-radius:2px"></div>
+          <span style="font-size:14px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.12em;writing-mode:vertical-lr;transform:rotate(180deg);margin-top:10px">Value</span>
+        </div>
+        <div class="matrix-2x2" style="aspect-ratio:1.4">
+          <div class="matrix-cell" style="background:rgba(163,245,199,.12);padding:28px 22px">
+            <h4 style="color:var(--lime);font-size:24px;margin-bottom:8px">Quick Wins</h4>
+            <p style="color:rgba(255,255,255,.65);font-size:19px;line-height:1.4">High value, low effort.<br>Ship immediately.</p>
+          </div>
+          <div class="matrix-cell" style="background:rgba(94,36,194,.2);padding:28px 22px">
+            <h4 style="color:var(--purple-light);font-size:24px;margin-bottom:8px">Strategic Bets</h4>
+            <p style="color:rgba(255,255,255,.65);font-size:19px;line-height:1.4">High value, high effort.<br>Plan &amp; resource carefully.</p>
+          </div>
+          <div class="matrix-cell" style="background:rgba(255,255,255,.04);padding:28px 22px">
+            <h4 style="color:#fff;font-size:24px;margin-bottom:8px">Fill-ins</h4>
+            <p style="color:#fff;font-size:19px;line-height:1.4">Low value, low effort.<br>Only if spare capacity.</p>
+          </div>
+          <div class="matrix-cell" style="background:rgba(229,0,77,.1);padding:28px 22px">
+            <h4 style="color:#fff;font-size:24px;margin-bottom:8px">Decline</h4>
+            <p style="color:rgba(255,255,255,.55);font-size:19px;line-height:1.4">Low value, high effort.<br>Decline with data.</p>
+          </div>
+        </div>
+        <!-- X-axis arrow -->
+        <div style="display:flex;align-items:center;margin-top:14px;padding:0 4px">
+          <span style="font-size:14px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.12em;margin-right:10px">Effort</span>
+          <div style="flex:1;height:3px;background:linear-gradient(to right,rgba(255,255,255,.08),rgba(255,255,255,.35));border-radius:2px"></div>
+          <svg width="22" height="16" viewBox="0 0 28 20" style="margin-left:4px"><polygon points="28,10 0,20 0,0" fill="rgba(255,255,255,.35)"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-logo"><svg width="80" height="31" viewBox="0 0 80 31" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M64.375 24.18C59.55 24.18 55.625 20.2864 55.625 15.5C55.625 10.7136 59.55 6.82 64.375 6.82C69.2 6.82 73.125 10.7136 73.125 15.5C73.125 20.2864 69.2 24.18 64.375 24.18ZM7.39375 12.555C8.6125 9.2132 11.8417 6.82 15.625 6.82C16.7542 6.82 17.8312 7.03493 18.8229 7.42347C21.1542 8.33487 23 10.2114 23.8563 12.555H7.39375ZM80 0.628267H74.8104L73.1417 2.66807C71.8146 1.77527 70.3438 1.0788 68.7687 0.622067C67.375 0.217 65.9021 0 64.375 0C62.8479 0 61.375 0.217 59.9833 0.622067C56.875 1.52313 54.1667 3.35833 52.1896 5.80113C50.0396 8.4568 48.7521 11.8296 48.7521 15.5C48.7521 20.2864 44.8271 24.18 40.0021 24.18C35.1771 24.18 31.2521 20.2864 31.2521 15.5C31.2521 10.7136 35.1771 6.82 40.0021 6.82C42.0917 6.82 44.0125 7.5516 45.5187 8.76887L49.8583 3.47407C48.2667 2.1886 46.4167 1.209 44.3937 0.622067C43 0.217 41.5271 0 40.0021 0C38.4771 0 37.0021 0.217 35.6104 0.622067C32.5 1.52313 29.7938 3.35833 27.8167 5.80113C25.8396 3.35833 23.1312 1.52313 20.0208 0.622067C19.6292 0.5084 19.2313 0.4092 18.8271 0.326533C17.7938 0.113667 16.725 0.00206667 15.6292 0.00206667C14.1042 0.00206667 12.6292 0.219067 11.2375 0.624133C4.74167 2.5048 0 8.45267 0 15.5C0 22.5473 4.78333 28.5469 11.3167 30.4027C12.6854 30.7913 14.1292 31 15.625 31C16.7208 31 17.7896 30.8884 18.8229 30.6755C19.1979 30.597 19.5687 30.5081 19.9312 30.4048C21.9812 29.822 23.8583 28.8362 25.4688 27.5363L21.1333 22.2373C20.4417 22.7953 19.6625 23.25 18.8208 23.5786C17.8292 23.9671 16.7521 24.1821 15.6229 24.1821C11.8396 24.1821 8.61042 21.7889 7.39167 18.4471H24.6542C25.1437 20.9705 26.2479 23.2748 27.8083 25.2009C27.8083 25.203 27.8125 25.2051 27.8146 25.2071C29.8104 27.6685 32.5458 29.512 35.6896 30.4048C37.0583 30.7933 38.5021 31.0021 39.9979 31.0021C41.4938 31.0021 42.9375 30.7933 44.3062 30.4048C47.4521 29.512 50.1896 27.6644 52.1854 25.2009C54.1813 27.6665 56.9208 29.512 60.0646 30.4048C61.4333 30.7933 62.8771 31.0021 64.3729 31.0021C65.8687 31.0021 67.3125 30.7933 68.6813 30.4048C70.2812 29.9501 71.7771 29.2495 73.1229 28.3443L74.8083 30.4048H79.9979V15.7521V0.628267H80Z" fill="#E5004D"/></svg></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SLIDE 12 — Handling Urgent Requests                -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="slide theme-white" data-slide="12">
+  <div class="deco purple" style="width:400px;height:400px;bottom:-150px;right:-120px"></div>
+  <div class="deco pink" style="width:250px;height:250px;top:-80px;left:-60px"></div>
+  <div class="slide-inner">
+    <div class="label-tag anim" data-delay="50">Governance</div>
+    <h2 class="slide-heading anim" data-delay="100">Handling <span class="accent-purple">urgent requests</span></h2>
+    <p class="anim" data-delay="200" style="font-size:24px;color:var(--text-body);margin-top:8px;margin-bottom:48px;max-width:780px">&ldquo;Our biggest customer needs X by Friday&rdquo;. Here&rsquo;s how we handle it:</p>
+    <div class="esc-flow" style="justify-content:center;gap:0;margin-top:0;flex-wrap:nowrap;width:100%;max-width:1400px">
+      <div class="esc-step anim" data-delay="300" style="padding:24px 32px">
+        <div class="esc-num" style="background:var(--purple);width:64px;height:64px;font-size:26px;margin-bottom:16px">1</div>
+        <h4 style="font-size:26px;margin-bottom:8px">Classify</h4>
+        <p style="font-size:20px;max-width:220px;line-height:1.4">Revenue impact? Churn risk? Scope?</p>
+      </div>
+      <div class="esc-arrow anim" data-delay="350" style="font-size:36px;margin:0 12px">&rarr;</div>
+      <div class="esc-step anim" data-delay="400" style="padding:24px 32px">
+        <div class="esc-num" style="background:var(--teal);width:64px;height:64px;font-size:26px;margin-bottom:16px">2</div>
+        <h4 style="font-size:26px;margin-bottom:8px">Size</h4>
+        <p style="font-size:20px;max-width:220px;line-height:1.4">Can we solve with config, not code?</p>
+      </div>
+      <div class="esc-arrow anim" data-delay="450" style="font-size:36px;margin:0 12px">&rarr;</div>
+      <div class="esc-step anim" data-delay="500" style="padding:24px 32px">
+        <div class="esc-num" style="background:var(--pink);width:64px;height:64px;font-size:26px;margin-bottom:16px">3</div>
+        <h4 style="font-size:26px;margin-bottom:8px">Trade-off</h4>
+        <p style="font-size:20px;max-width:220px;line-height:1.4">What gets displaced? Make it visible.</p>
+      </div>
+      <div class="esc-arrow anim" data-delay="550" style="font-size:36px;margin:0 12px">&rarr;</div>
+      <div class="esc-step anim" data-delay="600" style="padding:24px 32px">
+        <div class="esc-num" style="background:var(--lime);color:var(--navy);width:64px;height:64px;font-size:26px;margin-bottom:16px">4</div>
+        <h4 style="font-size:26px;margin-bottom:8px">Commit</h4>
+        <p style="font-size:20px;max-width:220px;line-height:1.4">If yes: timebox it. If no: propose alternative.</p>
+      </div>
+    </div>
+    <div class="card anim" data-delay="750" style="margin-top:48px;padding:28px 32px;max-width:1000px;background:var(--purple-pale);border:1px solid rgba(94,36,194,.12)">
+      <p style="font-size:22px;color:var(--text-body);line-height:1.4"><strong style="color:var(--purple)">Rule:</strong> No unscored work enters a sprint. Every request goes through the same lens. Regardless of who asks.</p>
+    </div>
+  </div>
+  <div class="slide-logo"><svg width="80" height="31" viewBox="0 0 80 31" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M64.375 24.18C59.55 24.18 55.625 20.2864 55.625 15.5C55.625 10.7136 59.55 6.82 64.375 6.82C69.2 6.82 73.125 10.7136 73.125 15.5C73.125 20.2864 69.2 24.18 64.375 24.18ZM7.39375 12.555C8.6125 9.2132 11.8417 6.82 15.625 6.82C16.7542 6.82 17.8312 7.03493 18.8229 7.42347C21.1542 8.33487 23 10.2114 23.8563 12.555H7.39375ZM80 0.628267H74.8104L73.1417 2.66807C71.8146 1.77527 70.3438 1.0788 68.7687 0.622067C67.375 0.217 65.9021 0 64.375 0C62.8479 0 61.375 0.217 59.9833 0.622067C56.875 1.52313 54.1667 3.35833 52.1896 5.80113C50.0396 8.4568 48.7521 11.8296 48.7521 15.5C48.7521 20.2864 44.8271 24.18 40.0021 24.18C35.1771 24.18 31.2521 20.2864 31.2521 15.5C31.2521 10.7136 35.1771 6.82 40.0021 6.82C42.0917 6.82 44.0125 7.5516 45.5187 8.76887L49.8583 3.47407C48.2667 2.1886 46.4167 1.209 44.3937 0.622067C43 0.217 41.5271 0 40.0021 0C38.4771 0 37.0021 0.217 35.6104 0.622067C32.5 1.52313 29.7938 3.35833 27.8167 5.80113C25.8396 3.35833 23.1312 1.52313 20.0208 0.622067C19.6292 0.5084 19.2313 0.4092 18.8271 0.326533C17.7938 0.113667 16.725 0.00206667 15.6292 0.00206667C14.1042 0.00206667 12.6292 0.219067 11.2375 0.624133C4.74167 2.5048 0 8.45267 0 15.5C0 22.5473 4.78333 28.5469 11.3167 30.4027C12.6854 30.7913 14.1292 31 15.625 31C16.7208 31 17.7896 30.8884 18.8229 30.6755C19.1979 30.597 19.5687 30.5081 19.9312 30.4048C21.9812 29.822 23.8583 28.8362 25.4688 27.5363L21.1333 22.2373C20.4417 22.7953 19.6625 23.25 18.8208 23.5786C17.8292 23.9671 16.7521 24.1821 15.6229 24.1821C11.8396 24.1821 8.61042 21.7889 7.39167 18.4471H24.6542C25.1437 20.9705 26.2479 23.2748 27.8083 25.2009C27.8083 25.203 27.8125 25.2051 27.8146 25.2071C29.8104 27.6685 32.5458 29.512 35.6896 30.4048C37.0583 30.7933 38.5021 31.0021 39.9979 31.0021C41.4938 31.0021 42.9375 30.7933 44.3062 30.4048C47.4521 29.512 50.1896 27.6644 52.1854 25.2009C54.1813 27.6665 56.9208 29.512 60.0646 30.4048C61.4333 30.7933 62.8771 31.0021 64.3729 31.0021C65.8687 31.0021 67.3125 30.7933 68.6813 30.4048C70.2812 29.9501 71.7771 29.2495 73.1229 28.3443L74.8083 30.4048H79.9979V15.7521V0.628267H80Z" fill="#E5004D"/></svg></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SLIDE 13 — Differentiation & What to Stop           -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="slide theme-dark" data-slide="13">
+  <div class="deco purple" style="width:500px;height:500px;bottom:-200px;left:-180px"></div>
+  <div class="particle" style="width:5px;height:5px;background:var(--pink);top:20%;right:15%;animation-delay:2s"></div>
+  <div class="particle" style="width:4px;height:4px;background:var(--lime);top:60%;left:10%;animation-delay:5s"></div>
+  <div class="slide-inner">
+    <div class="label-tag anim" data-delay="50">Differentiation</div>
+    <h2 class="slide-heading anim" data-delay="100" style="color:#fff">Double down on strengths.<br><span style="color:var(--pink)">Stop what doesn't compound.</span></h2>
+    <div style="display:flex;gap:56px;margin-top:48px;width:100%;max-width:1680px">
+      <!-- Double Down column -->
+      <div style="flex:1">
+        <div class="anim" data-delay="300" style="display:flex;align-items:center;gap:10px;margin-bottom:20px">
+          <div style="width:12px;height:12px;border-radius:50%;background:var(--lime)"></div>
+          <h3 style="font-size:22px;font-weight:700;color:var(--lime)">Double Down</h3>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div class="card anim" data-delay="400" style="padding:22px 24px;display:flex;gap:14px;align-items:center">
+            <div style="width:28px;height:28px;border-radius:50%;background:var(--lime);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#1b1b2f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <h3 style="margin:0">Proprietary data moat</h3>
+          </div>
+          <div class="card anim" data-delay="500" style="padding:22px 24px;display:flex;gap:14px;align-items:center">
+            <div style="width:28px;height:28px;border-radius:50%;background:var(--lime);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#1b1b2f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <h3 style="margin:0">Compliance intelligence</h3>
+          </div>
+          <div class="card anim" data-delay="600" style="padding:22px 24px;display:flex;gap:14px;align-items:center">
+            <div style="width:28px;height:28px;border-radius:50%;background:var(--lime);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#1b1b2f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <h3 style="margin:0">AI on top of real data</h3>
+          </div>
+          <div class="card anim" data-delay="700" style="padding:22px 24px;display:flex;gap:14px;align-items:center">
+            <div style="width:28px;height:28px;border-radius:50%;background:var(--lime);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#1b1b2f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <h3 style="margin:0">API-first platform</h3>
+          </div>
+        </div>
+      </div>
+      <!-- Stop Doing column -->
+      <div style="flex:1">
+        <div class="anim" data-delay="350" style="display:flex;align-items:center;gap:10px;margin-bottom:20px">
+          <div style="width:12px;height:12px;border-radius:50%;background:var(--pink)"></div>
+          <h3 style="font-size:22px;font-weight:700;color:#fff">Stop Doing</h3>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div class="stop-item anim" data-delay="500">
+            <div class="stop-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+            <div><h4>Bespoke client builds that don't scale</h4></div>
+          </div>
+          <div class="stop-item anim" data-delay="600">
+            <div class="stop-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+            <div><h4>Replicating generic HRIS features</h4></div>
+          </div>
+          <div class="stop-item anim" data-delay="700">
+            <div class="stop-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+            <div><h4>Manual report generation for each client</h4></div>
+          </div>
+          <div class="stop-item anim" data-delay="800">
+            <div class="stop-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+            <div><h4>Maintaining legacy on-prem deployments</h4></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-logo"><svg width="80" height="31" viewBox="0 0 80 31" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M64.375 24.18C59.55 24.18 55.625 20.2864 55.625 15.5C55.625 10.7136 59.55 6.82 64.375 6.82C69.2 6.82 73.125 10.7136 73.125 15.5C73.125 20.2864 69.2 24.18 64.375 24.18ZM7.39375 12.555C8.6125 9.2132 11.8417 6.82 15.625 6.82C16.7542 6.82 17.8312 7.03493 18.8229 7.42347C21.1542 8.33487 23 10.2114 23.8563 12.555H7.39375ZM80 0.628267H74.8104L73.1417 2.66807C71.8146 1.77527 70.3438 1.0788 68.7687 0.622067C67.375 0.217 65.9021 0 64.375 0C62.8479 0 61.375 0.217 59.9833 0.622067C56.875 1.52313 54.1667 3.35833 52.1896 5.80113C50.0396 8.4568 48.7521 11.8296 48.7521 15.5C48.7521 20.2864 44.8271 24.18 40.0021 24.18C35.1771 24.18 31.2521 20.2864 31.2521 15.5C31.2521 10.7136 35.1771 6.82 40.0021 6.82C42.0917 6.82 44.0125 7.5516 45.5187 8.76887L49.8583 3.47407C48.2667 2.1886 46.4167 1.209 44.3937 0.622067C43 0.217 41.5271 0 40.0021 0C38.4771 0 37.0021 0.217 35.6104 0.622067C32.5 1.52313 29.7938 3.35833 27.8167 5.80113C25.8396 3.35833 23.1312 1.52313 20.0208 0.622067C19.6292 0.5084 19.2313 0.4092 18.8271 0.326533C17.7938 0.113667 16.725 0.00206667 15.6292 0.00206667C14.1042 0.00206667 12.6292 0.219067 11.2375 0.624133C4.74167 2.5048 0 8.45267 0 15.5C0 22.5473 4.78333 28.5469 11.3167 30.4027C12.6854 30.7913 14.1292 31 15.625 31C16.7208 31 17.7896 30.8884 18.8229 30.6755C19.1979 30.597 19.5687 30.5081 19.9312 30.4048C21.9812 29.822 23.8583 28.8362 25.4688 27.5363L21.1333 22.2373C20.4417 22.7953 19.6625 23.25 18.8208 23.5786C17.8292 23.9671 16.7521 24.1821 15.6229 24.1821C11.8396 24.1821 8.61042 21.7889 7.39167 18.4471H24.6542C25.1437 20.9705 26.2479 23.2748 27.8083 25.2009C27.8083 25.203 27.8125 25.2051 27.8146 25.2071C29.8104 27.6685 32.5458 29.512 35.6896 30.4048C37.0583 30.7933 38.5021 31.0021 39.9979 31.0021C41.4938 31.0021 42.9375 30.7933 44.3062 30.4048C47.4521 29.512 50.1896 27.6644 52.1854 25.2009C54.1813 27.6665 56.9208 29.512 60.0646 30.4048C61.4333 30.7933 62.8771 31.0021 64.3729 31.0021C65.8687 31.0021 67.3125 30.7933 68.6813 30.4048C70.2812 29.9501 71.7771 29.2495 73.1229 28.3443L74.8083 30.4048H79.9979V15.7521V0.628267H80Z" fill="#E5004D"/></svg></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SLIDE 14 — Metrics & Operating Cadence             -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="slide theme-light" data-slide="14">
   <div class="deco purple" style="width:500px;height:500px;bottom:-200px;right:-160px"></div>
   <div class="slide-inner">
     <div class="label-tag anim" data-delay="50">Measurement</div>
@@ -2253,9 +2246,9 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Manrope',system-ui
 </section>
 
 <!-- ═══════════════════════════════════════════════════ -->
-<!-- SLIDE 16 — PE Risks & Trade-offs                   -->
+<!-- SLIDE 15 — PE Risks & Trade-offs                   -->
 <!-- ═══════════════════════════════════════════════════ -->
-<section class="slide theme-dark" data-slide="16">
+<section class="slide theme-dark" data-slide="15">
   <div class="deco purple" style="width:500px;height:500px;top:-200px;left:-150px"></div>
   <div class="deco pink" style="width:250px;height:250px;bottom:-80px;right:-80px;opacity:.05"></div>
   <div class="particle" style="width:6px;height:6px;background:var(--purple-light);top:10%;right:25%;animation-delay:0s"></div>
@@ -2305,9 +2298,9 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Manrope',system-ui
 </section>
 
 <!-- ═══════════════════════════════════════════════════ -->
-<!-- SLIDE 17 — The Goal                                 -->
+<!-- SLIDE 16 — The Goal                                 -->
 <!-- ═══════════════════════════════════════════════════ -->
-<section class="slide theme-dark" data-slide="17">
+<section class="slide theme-dark" data-slide="16">
   <div class="deco purple" style="width:600px;height:600px;top:-200px;left:-200px"></div>
   <div class="deco pink" style="width:300px;height:300px;bottom:-120px;right:-100px;opacity:.05"></div>
   <div class="particle" style="width:6px;height:6px;background:var(--purple-light);top:20%;right:15%;animation-delay:0s"></div>
@@ -2349,17 +2342,16 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Manrope',system-ui
     4: 'ECA\'s Three Powerful Assets',
     5: 'A Unified Platform for Global Mobility Intelligence',
     6: 'The Platform Evolves in Three Stages',
-    7: '12-Month Execution Roadmap',
-    8: 'AI: Embedded Intelligence, Not a Feature',
-    9: 'Who We Target First and Why',
-    10: 'Double Down on Strengths, Stop What Doesn\'t Compound',
-    11: 'Discovery and Delivery Run in Parallel',
-    12: 'Prioritisation & Roadmap Governance',
-    13: 'Handling Urgent Requests',
-    14: 'Partner with Sales & CS',
-    15: 'Six Metrics That Prove Product Value',
-    16: 'Key Risks & Trade-offs in a Fast PE Cycle',
-    17: 'The Goal'
+    7: 'AI: Embedded Intelligence, Not a Feature',
+    8: '12-Month Execution Roadmap',
+    9: 'Discovery and Delivery Run in Parallel',
+    10: 'Partner with Sales & CS',
+    11: 'Prioritisation & Roadmap Governance',
+    12: 'Handling Urgent Requests',
+    13: 'Double Down on Strengths, Stop What Doesn\'t Compound',
+    14: 'Six Metrics That Prove Product Value',
+    15: 'Key Risks & Trade-offs in a Fast PE Cycle',
+    16: 'The Goal',
   };
 
   // BroadcastChannel for presenter communication

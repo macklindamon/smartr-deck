@@ -81,7 +81,7 @@ html,body{
     <h1>Smartr Deck Remote</h1>
     <div class="slide-info">
       <span class="slide-num" id="slideNum">1</span>
-      <span class="slide-total" id="slideTotal">/ 18</span>
+      <span class="slide-total" id="slideTotal">/ 16</span>
       <div class="slide-title" id="slideTitle">Connecting…</div>
     </div>
   </div>
@@ -121,20 +121,18 @@ html,body{
     2: 'Global Mobility is Becoming More Complex',
     3: 'What Customers Really Want',
     4: "ECA's Three Powerful Assets",
-    5: 'A Unified Platform for Global Mobility Intelligence',
-    6: 'The Platform Evolves in Three Stages',
+    5: 'The Platform Evolves in Three Stages',
+    6: 'A Unified Platform for Global Mobility Intelligence',
     7: 'AI: Embedded Intelligence, Not a Feature',
-    8: 'Who We Target First and Why',
-    9: "Double Down on Strengths",
-    10: 'Discovery and Delivery Run in Parallel',
-    11: 'How We Prioritise',
-    12: 'Partner with Sales & CS',
-    13: 'Six Metrics That Prove Product Value',
-    14: 'Key Risks & Trade-offs',
-    15: 'For Customers This Means',
-    16: 'Revenue Growth',
-    17: 'Leadership Approach',
-    18: 'The Mission'
+    8: '12-Month Execution Roadmap',
+    9: 'Discovery and Delivery Run in Parallel',
+    10: "Double Down on Strengths",
+    11: 'Partner with Sales & CS',
+    12: 'Prioritisation & Roadmap Governance',
+    13: 'Handling Urgent Requests',
+    14: 'Six Metrics That Prove Product Value',
+    15: 'Key Risks & Trade-offs',
+    16: 'The Goal'
   };
 
   const slideNum   = document.getElementById('slideNum');
@@ -143,7 +141,7 @@ html,body{
   const statusDot  = document.getElementById('statusDot');
   const statusText = document.getElementById('statusText');
 
-  let state = { current: 0, total: 18 };
+  let state = { current: 0, total: 16 };
   let connected = false;
 
   // ── SSE connection ──

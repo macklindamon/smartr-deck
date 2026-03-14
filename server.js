@@ -47,7 +47,22 @@ const MIME = {
 
 // ── SSE clients ───────────────────────────────────────────
 const sseClients = new Set();
-let deckState = { current: 0, total: 18 };
+let deckState = { current: 0, total: 16 };
+
+// ── Notes persistence ─────────────────────────────────────
+const NOTES_FILE = path.join(ROOT, 'notes-saved.json');
+
+function loadSavedNotes() {
+  try {
+    return JSON.parse(fs.readFileSync(NOTES_FILE, 'utf8'));
+  } catch (_) {
+    return null;
+  }
+}
+
+function saveSavedNotes(notes) {
+  fs.writeFileSync(NOTES_FILE, JSON.stringify(notes, null, 2), 'utf8');
+}
 
 function broadcast(data) {
   const msg = `data: ${JSON.stringify(data)}\n\n`;
@@ -82,8 +97,21 @@ const server = http.createServer((req, res) => {
     req.on('end', () => {
       try {
         const cmd = JSON.parse(body);
+        console.log('[cmd]', cmd.action, cmd.index ?? '', cmd.value ?? '', '→', sseClients.size, 'clients');
+        // Update deckState so all clients stay in sync
+        if (cmd.action === 'goto' && cmd.index != null) {
+          deckState.current = cmd.index;
+        } else if (cmd.action === 'next') {
+          deckState.current = Math.min(deckState.current + 1, (deckState.total || 16) - 1);
+        } else if (cmd.action === 'prev') {
+          deckState.current = Math.max(deckState.current - 1, 0);
+        }
         // Relay command to all SSE listeners (deck + presenter + script)
         broadcast({ type: 'cmd', action: cmd.action, index: cmd.index, value: cmd.value });
+        // Broadcast updated state so all clients sync slide position
+        if (cmd.action === 'next' || cmd.action === 'prev' || cmd.action === 'goto') {
+          broadcast({ type: 'state', ...deckState });
+        }
         res.writeHead(200, {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
@@ -138,6 +166,40 @@ const server = http.createServer((req, res) => {
       'Cache-Control': 'no-cache',
     });
     res.end(JSON.stringify({ ip: localIP, port: PORT }));
+    return;
+  }
+
+  // ── GET /notes — return saved notes (or empty) ──
+  if (pathname === '/notes' && req.method === 'GET') {
+    const saved = loadSavedNotes();
+    res.writeHead(200, {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Cache-Control': 'no-cache',
+    });
+    res.end(JSON.stringify(saved || {}));
+    return;
+  }
+
+  // ── POST /notes — save notes and broadcast to SSE clients ──
+  if (pathname === '/notes' && req.method === 'POST') {
+    let body = '';
+    req.on('data', chunk => { body += chunk; });
+    req.on('end', () => {
+      try {
+        const notes = JSON.parse(body);
+        saveSavedNotes(notes);
+        broadcast({ type: 'notes', notes });
+        res.writeHead(200, {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        });
+        res.end('{"ok":true}');
+      } catch (_) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end('{"error":"bad json"}');
+      }
+    });
     return;
   }
 

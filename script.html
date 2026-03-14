@@ -51,6 +51,7 @@ html,body{
   flex:1;overflow-y:auto;overflow-x:hidden;
   scroll-behavior:auto;
   padding:48px 0 60vh;
+  position:relative;
 }
 .notes-inner{max-width:100%;margin:0;padding:0 48px}
 
@@ -208,178 +209,14 @@ kbd{
   </div>
 </div>
 
+<script src="notes.js"></script>
 <script>
-// ═══ NOTES ═══
-const NOTES = {
-  1: `<ul>
-<li>I'm Damon Macklin — product vision for the future of global mobility platforms</li>
-<li>Behind me: what a modern mobility platform should feel like — live data, real-time compliance, cost indices</li>
-<li>ECA needs to go from world-class data to a world-class <strong>intelligence platform</strong></li>
-</ul>
-<p><em>→ Let me walk you through how.</em></p>`,
-
-  2: `<ul>
-<li>Mobility is more complex every year — compliance across <strong>190+ jurisdictions</strong></li>
-<li>Four pressures: compliance, employee experience, cost control, global visibility</li>
-<li>Most systems built for <strong>administration, not intelligence</strong> — that's the gap</li>
-</ul>
-<p><em>→ So what do customers actually want?</em></p>`,
-
-  3: `<ul>
-<li>They're not buying software — they're buying <strong>confidence</strong></li>
-<li>Confidence in decisions, compliance without friction, full cost visibility, predictable outcomes</li>
-<li>Forecast-driven planning that turns every assignment into a known quantity</li>
-</ul>
-<p><em>→ The good news — ECA already has the foundation.</em></p>`,
-
-  4: `<ul>
-<li><strong>Data moat</strong> — decades of cost-of-living, hardship, salary benchmarks</li>
-<li><strong>Enterprise relationships</strong> — deep trust built over years</li>
-<li><strong>Domain expertise</strong> — recognised across 200+ countries</li>
-<li>Opportunity: connect these into a platform that turns data into decisions</li>
-</ul>
-<p><em>→ Here's the vision for bringing this together.</em></p>`,
-
-  5: `<ul>
-<li>Unified platform for <strong>global mobility intelligence</strong></li>
-<li>Four pillars: location intelligence, cost modelling, risk monitoring, AI-driven strategy</li>
-<li>Not tracking moves — helping answer: where, what cost, what risks, how to optimise</li>
-</ul>
-<p><em>→ This doesn't happen overnight — here's the evolution.</em></p>`,
-
-  6: `<ul>
-<li><strong>Stage 1:</strong> System of Record — track assignments &amp; compliance</li>
-<li><strong>Stage 2:</strong> System of Insight — data informs decisions</li>
-<li><strong>Stage 3:</strong> System of Intelligence — AI drives recommendations</li>
-<li>Each stage builds on the last, each delivers standalone value</li>
-</ul>
-<p><em>→ And AI runs through all three stages.</em></p>`,
-
-  7: `<ul>
-<li>AI is not a feature — it's <strong>embedded intelligence</strong> across the platform</li>
-<li><strong>Cost prediction</strong> — full financial picture before commitment (London→Singapore £142K, 94% confidence)</li>
-<li><strong>Risk identification</strong> — surface compliance issues before they're problems (847 assignments, real-time flags)</li>
-<li><strong>Recommendations</strong> — optimal move strategies from historical data</li>
-<li><strong>Insight generation</strong> — actionable intelligence automatically</li>
-<li><em>Action:</em> Walk through each popup demo</li>
-</ul>
-<p><em>→ Who do we build this for first?</em></p>`,
-
-  8: `<ul>
-<li>PE cycle = <strong>focus beats breadth</strong></li>
-<li><strong>Enterprise</strong> (500+ assignees) — need intelligence, not admin, highest ARPA</li>
-<li><strong>Mid-market</strong> (50–500) — scaling internationally, high growth potential</li>
-<li><strong>RMCs &amp; consultancies</strong> — channel partners, extend reach without direct sales cost</li>
-</ul>
-<p><em>→ Focus means saying no. Here's what we double down on — and stop.</em></p>`,
-
-  9: `<ul>
-<li><strong>Double down:</strong> proprietary data moat (40 years), compliance in workflow, AI on real outcomes, API-first</li>
-<li><strong>Stop:</strong> bespoke builds, replicating HRIS features, manual reports, legacy on-prem</li>
-<li>Differentiation = compound what's unique, cut what doesn't scale</li>
-</ul>
-<p><em>→ How do we run discovery while keeping delivery on track?</em></p>`,
-
-  10: `<ul>
-<li>Discovery &amp; delivery run <strong>in parallel</strong> — validation prevents building the wrong thing</li>
-<li><strong>Discovery:</strong> weekly interviews, prototype→test in 5 days, usage analytics</li>
-<li><strong>Delivery:</strong> 2-week sprints, feature flags, outcome reviews every 6 weeks → kill or scale</li>
-</ul>
-<p><em>→ But how do we decide what gets built?</em></p>`,
-
-  11: `<ul>
-<li><strong>Q1</strong> Foundation — data consolidation, compliance v1, UX parity → churn &lt;8%, TTV &lt;14d</li>
-<li><strong>Q2</strong> Insight — cost prediction, risk dash, analytics v2 → NRR +8pp, AI upsell</li>
-<li><strong>Q3</strong> Expansion — mid-market self-serve, public API, recs beta → +40 logos</li>
-<li><strong>Q4</strong> Intelligence — AI GA, predictive modelling, RMC channel → LTV +35%, NRR &gt;115%</li>
-<li>Key calls: platform over bespoke Q1–Q2, retention before acquisition until Q3</li>
-</ul>
-<p><em>→ Let's look at how we prioritise what ships next.</em></p>`,
-
-  12: `<ul>
-<li>Every request scored on two axes: <strong>value vs effort</strong></li>
-<li>High value + low effort → ship now</li>
-<li>High value + high effort → plan carefully</li>
-<li>Low value + low effort → fill-ins only</li>
-<li>Low value + high effort → <strong>say no, with data</strong></li>
-</ul>
-<p><em>→ And when urgent requests land…</em></p>`,
-
-  13: `<ul>
-<li>"Our biggest customer needs X by Friday" — same lens every time:</li>
-<li><strong>Classify</strong> revenue impact → <strong>Size</strong> config or code → <strong>Trade-off</strong> what gets displaced → <strong>Commit</strong> or propose alternative</li>
-<li>Rule: <strong>no unscored work enters a sprint</strong>, regardless of who asks</li>
-</ul>
-<p><em>→ Sales and CS have a big voice. Here's how we partner.</em></p>`,
-
-  14: `<ul>
-<li>Partner closely with Sales &amp; CS — <strong>not an order-taker</strong></li>
-<li><strong>Advisory Board:</strong> 8–10 enterprise customers, quarterly</li>
-<li><strong>Shared taxonomy:</strong> every request tagged by revenue risk, frequency, segment, effort</li>
-<li><strong>Monthly roadmap review:</strong> what's coming, why, what's deprioritised — with reasoning</li>
-<li><strong>Say no with evidence:</strong> segment fit, strategic alignment, opportunity cost</li>
-</ul>
-<p><em>→ To know if this is working, we need the right metrics.</em></p>`,
-
-  15: `<ul>
-<li><strong>NRR</strong> 115%+ — expansion via data tiers &amp; AI upsell</li>
-<li><strong>DAU/MAU</strong> 40%+ — users returning daily = real value</li>
-<li><strong>TTV</strong> &lt;14 days — signup to first insight</li>
-<li><strong>Churn</strong> &lt;8% — stickiness through embedded workflows</li>
-<li><strong>Cost to Serve</strong> −20% YoY — automation reduces burden</li>
-<li><strong>Feature Value Ratio</strong> — % of features with &gt;10% adoption at 30 days</li>
-<li>Cadence: daily standups → weekly syncs → bi-weekly demos → monthly reviews → quarterly OKRs</li>
-</ul>
-<p><em>→ There are risks we need to be honest about.</em></p>`,
-
-  16: `<ul>
-<li><strong>Speed vs quality</strong> — ship fast with flags, never compromise data integrity</li>
-<li><strong>Platform vs bespoke</strong> — 80%+ engineering on scalable features</li>
-<li><strong>Growth vs margin</strong> — AI improves both; invest self-serve early</li>
-<li><strong>New vs existing</strong> — protect NRR / expansion revenue in Year 1</li>
-<li><strong>Build vs buy</strong> — build intelligence layer (moat), buy commodity</li>
-<li><strong>Migration</strong> — parallel for key accounts, cohort migration, no big bang</li>
-<li>Every trade-off documented, visible, reversible</li>
-</ul>
-<p><em>→ Let me close with a final thought.</em></p>`,
-
-  17: `<ul>
-<li>Build the platform organisations rely on for global mobility in an increasingly complex world</li>
-<li>Thank you — happy to take questions</li>
-</ul>`
-};
-
-const TITLES = {
-  1: 'Title — Dashboard',
-  2: 'Global Complexity',
-  3: 'Customer Insight',
-  4: "ECA's Three Assets",
-  5: 'Platform Vision',
-  6: 'Three Stages',
-  7: 'AI & Embedded Intelligence',
-  8: 'Market Focus',
-  9: 'Differentiation',
-  10: 'Dual-Track Discovery & Delivery',
-  11: '12-Month Roadmap',
-  12: 'Prioritisation',
-  13: 'Handling Urgent Requests',
-  14: 'Partner with Sales & CS',
-  15: 'Measurement — Six Metrics',
-  16: 'PE Risks & Trade-offs',
-  17: 'Close'
-};
+// ═══ NOTES — loaded from shared notes.js, overridden by server-saved edits ═══
+let NOTES = Object.assign({}, DEFAULT_NOTES);
 
 // ═══ BUILD NOTE BLOCKS ═══
 const innerEl = document.getElementById('inner');
 const scrollEl = document.getElementById('scroll');
-
-Object.keys(NOTES).forEach(k => {
-  const div = document.createElement('div');
-  div.className = 'note-block';
-  div.id = 'note-' + k;
-  div.innerHTML = `<div class="note-num">Slide ${k} — ${TITLES[k] || ''}</div><div class="note-body">${NOTES[k]}</div>`;
-  innerEl.appendChild(div);
-});
 
 // ═══ VIEWPORT HIGHLIGHT ═══
 const observer = new IntersectionObserver((entries) => {
@@ -392,7 +229,29 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { root: scrollEl, threshold: 0.3 });
 
-document.querySelectorAll('.note-block').forEach(el => observer.observe(el));
+function buildNoteBlocks() {
+  innerEl.innerHTML = '';
+  Object.keys(NOTES).forEach(k => {
+    const div = document.createElement('div');
+    div.className = 'note-block';
+    div.id = 'note-' + k;
+    div.innerHTML = `<div class="note-num">Slide ${k} — ${TITLES[k] || ''}</div><div class="note-body">${NOTES[k]}</div>`;
+    innerEl.appendChild(div);
+  });
+  // Re-observe for viewport highlighting
+  document.querySelectorAll('.note-block').forEach(el => observer.observe(el));
+}
+
+// Initial build with defaults
+buildNoteBlocks();
+
+// Fetch server-saved notes and rebuild
+fetch('/notes').then(r => r.json()).then(saved => {
+  if (saved && Object.keys(saved).length) {
+    Object.keys(saved).forEach(k => { NOTES[k] = saved[k]; });
+    buildNoteBlocks();
+  }
+}).catch(() => {});
 
 // ═══ STATE ═══
 let currentSlide = 1;
@@ -458,6 +317,7 @@ function connectSSE() {
   es.onmessage = (e) => {
     try {
       const d = JSON.parse(e.data);
+      console.log('[SSE]', d.type, d.action || '', d.value ?? '');
       if (d.type === 'state') {
         const newSlide = (d.current ?? 0) + 1;
         if (newSlide !== currentSlide) {
@@ -466,18 +326,21 @@ function connectSSE() {
           scrollToSlide(currentSlide);
           resetSlideTimer();
         }
+      } else if (d.type === 'notes') {
+        // Live update from presenter.html edits
+        Object.keys(d.notes).forEach(k => { NOTES[k] = d.notes[k]; });
+        buildNoteBlocks();
+        updateActive();
       } else if (d.type === 'cmd') {
         if (d.action === 'goto' && d.index != null) {
           // Ignore echo of our own goto (within 500ms)
           if (Date.now() - _lastGoto < 500) { /* skip own echo */ }
           else {
             const newSlide = d.index + 1;
-            if (newSlide !== currentSlide) {
-              currentSlide = newSlide;
-              updateActive();
-              scrollToSlide(currentSlide);
-              resetSlideTimer();
-            }
+            currentSlide = newSlide;
+            updateActive();
+            scrollToSlide(currentSlide);
+            resetSlideTimer();
           }
         } else if (d.action === 'speed' && d.value != null) {
           _syncing = true;
@@ -485,18 +348,20 @@ function connectSSE() {
           speedEl.value = scrollSpeed;
           speedValEl.textContent = scrollSpeed;
           _syncing = false;
+          console.log('[SSE] speed applied:', scrollSpeed);
         } else if (d.action === 'pause' && d.value != null) {
           _syncing = true;
           paused = d.value;
           updatePauseIcon();
           _syncing = false;
+          console.log('[SSE] pause applied:', paused);
         } else if (d.action === 'scrollpct' && d.value != null) {
           setScrollPct(d.value);
         } else if (d.action === 'resetTimer') {
           resetSlideTimer(false);
         }
       }
-    } catch (_) {}
+    } catch (e) { console.error('[SSE] handler error:', e); }
   };
   es.onerror = () => {
     dotEl.classList.remove('connected');
@@ -512,10 +377,24 @@ function updateActive() {
   titleEl.textContent = TITLES[currentSlide] || '';
 }
 
+let _navJumping = false;
+
 function scrollToSlide(num) {
   const el = document.getElementById('note-' + num);
   if (!el) return;
-  scrollEl.scrollTo({ top: el.offsetTop - 48, behavior: 'smooth' });
+  paused = true;
+  _navJumping = true;
+  // Calculate position relative to scroll container content
+  const scrollRect = scrollEl.getBoundingClientRect();
+  const elRect = el.getBoundingClientRect();
+  const targetScroll = scrollEl.scrollTop + (elRect.top - scrollRect.top) - 16;
+  scrollEl.scrollTop = Math.max(0, targetScroll);
+  broadcastScrollPos();
+  setTimeout(() => {
+    paused = false;
+    updatePauseIcon();
+    _navJumping = false;
+  }, 300);
 }
 
 // ═══ SCROLL POSITION SYNC ═══
@@ -528,6 +407,7 @@ function getScrollPct() {
 }
 
 function setScrollPct(pct) {
+  if (_navJumping) return;  // don't override a nav snap
   const max = scrollEl.scrollHeight - scrollEl.clientHeight;
   _scrollSyncing = true;
   scrollEl.scrollTop = pct * max;
@@ -546,6 +426,8 @@ window.addEventListener('mouseup', () => {
   if (mouseDown) broadcastScrollPos();
   mouseDown = false;
 });
+window.addEventListener('blur', () => { mouseDown = false; });
+document.addEventListener('visibilitychange', () => { if (document.hidden) mouseDown = false; });
 
 scrollEl.addEventListener('scroll', () => {
   if (!mouseDown || _scrollSyncing || _syncing) return;
@@ -569,19 +451,17 @@ scrollEl.addEventListener('wheel', () => {
   }, 150);
 }, { passive: true });
 
+let _autoInterval = null;
 function startAutoScroll() {
+  if (_autoInterval) clearInterval(_autoInterval);
   if (scrollRAF) cancelAnimationFrame(scrollRAF);
-  let lastTime = null;
-  function tick(ts) {
-    if (lastTime === null) lastTime = ts;
-    const dt = ts - lastTime;
-    lastTime = ts;
-    if (!paused && !mouseDown && scrollSpeed > 0) {
-      scrollEl.scrollTop += (10 + 5 * Math.pow(scrollSpeed, 1.7)) * (dt / 1000);
-    }
-    scrollRAF = requestAnimationFrame(tick);
-  }
-  scrollRAF = requestAnimationFrame(tick);
+  // Use setInterval at ~60fps; guarantee ≥1 px per tick at any non-zero speed
+  _autoInterval = setInterval(() => {
+    if (paused || mouseDown || scrollSpeed <= 0) return;
+    // speed 1 → 1 px/tick ≈ 60 px/s, speed 10 → 8 px/tick ≈ 500 px/s
+    const px = Math.max(1, Math.round(scrollSpeed * 0.83));
+    scrollEl.scrollTop += px;
+  }, 16);
 }
 
 // ═══ SPEED CONTROL ═══
@@ -607,11 +487,13 @@ pauseBtn.addEventListener('click', () => {
 
 // ═══ SLIDE CONTROLS ═══
 function sendCmd(action, index, value) {
+  console.log('[sendCmd]', action, index, value);
   fetch(window.location.origin + '/cmd', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ action, index, value }),
-  }).catch(() => {});
+  }).then(r => { if (!r.ok) console.error('[sendCmd] HTTP', r.status); })
+    .catch(e => console.error('[sendCmd] fetch error:', e));
 }
 
 function goToCard(num) {
@@ -625,8 +507,15 @@ function goToCard(num) {
   sendCmd('goto', currentSlide - 1);
 }
 
-document.getElementById('btnPrev').addEventListener('click', () => goToCard(currentSlide - 1));
-document.getElementById('btnNext').addEventListener('click', () => goToCard(currentSlide + 1));
+// Next/Prev send 'next'/'prev' commands so deck.html popup substeps on slide 7 work
+document.getElementById('btnPrev').addEventListener('click', () => {
+  _lastGoto = Date.now();
+  sendCmd('prev');
+});
+document.getElementById('btnNext').addEventListener('click', () => {
+  _lastGoto = Date.now();
+  sendCmd('next');
+});
 document.getElementById('resetTimer').addEventListener('click', () => resetSlideTimer(true));
 
 // ═══ KEYBOARD SHORTCUTS ═══
@@ -658,11 +547,13 @@ window.addEventListener('keydown', (e) => {
       break;
     case 'ArrowLeft':
       e.preventDefault();
-      goToCard(currentSlide - 1);
+      _lastGoto = Date.now();
+      sendCmd('prev');
       break;
     case 'ArrowRight':
       e.preventDefault();
-      goToCard(currentSlide + 1);
+      _lastGoto = Date.now();
+      sendCmd('next');
       break;
   }
 });
